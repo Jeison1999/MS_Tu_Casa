@@ -175,11 +175,12 @@
 
 .image-wrapper {
   position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
   transform: perspective(1000px) rotateY(-5deg);
   transition: transform 0.3s ease;
+  background: transparent;
 }
 
 .image-wrapper:hover {
@@ -190,8 +191,8 @@
   width: 100%;
   height: auto;
   display: block;
-  background: white;
-  padding: 20px;
+  background: transparent;
+  padding: 0;
 }
 
 .image-glow {
