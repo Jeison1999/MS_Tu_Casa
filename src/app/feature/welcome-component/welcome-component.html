@@ -1,1 +1,194 @@
-<p>welcome-component works!</p>
+<div class="welcome-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          <span class="title-line">Bienvenidos a</span>
+          <span class="title-main">Morando en Sion</span>
+        </h1>
+        <p class="hero-subtitle">
+          Una comunidad de fe donde encontrarás 
+          <span class="typewriter-word">{{ currentWord }}</span><span class="typewriter-cursor">|</span>
+          <br>
+          <span class="subtitle-rest">Te esperamos con los brazos abiertos.</span>
+        </p>
+        <div class="hero-buttons">
+          <a href="#" class="btn btn-primary">Conoce más</a>
+          <a href="#" class="btn btn-secondary">Únete a nosotros</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="image-wrapper">
+          <img src="assets/image/logoms2.png" alt="Morando en Sion" />
+          <div class="image-glow"></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-decoration">
+      <div class="decoration-circle"></div>
+      <div class="decoration-circle"></div>
+      <div class="decoration-circle"></div>
+    </div>
+  </section>
+
+  <!-- Horizontal Image Carousel Section -->
+  <section class="horizontal-carousel-section">
+    <div class="horizontal-carousel-wrapper">
+      <div class="horizontal-carousel-track" [style.animation-duration]="horizontalImages.length * 5 + 's'">
+        <div class="horizontal-carousel-item" *ngFor="let img of horizontalImages">
+          <img [src]="img" alt="Comunidad Morando en Sion" />
+        </div>
+        <!-- Duplicar imágenes para scroll infinito -->
+        <div class="horizontal-carousel-item" *ngFor="let img of horizontalImages">
+          <img [src]="img" alt="Comunidad Morando en Sion" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Nuestra Misión</h2>
+        <p class="section-subtitle">
+          Somos una iglesia comprometida con el crecimiento espiritual y el servicio a la comunidad
+        </p>
+      </div>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="card-icon">⛪</div>
+          <h3 class="card-title">Adoración</h3>
+          <p class="card-description">
+            Nos reunimos para adorar a Dios con todo nuestro corazón, 
+            celebrando su bondad y misericordia.
+          </p>
+        </div>
+        <div class="about-card">
+          <div class="card-icon">👥</div>
+          <h3 class="card-title">Comunidad</h3>
+          <p class="card-description">
+            Formamos una familia donde cada persona es valorada y 
+            encuentra un lugar para crecer y servir.
+          </p>
+        </div>
+        <div class="about-card">
+          <div class="card-icon">📖</div>
+          <h3 class="card-title">Enseñanza</h3>
+          <p class="card-description">
+            Estudiamos la Palabra de Dios para crecer en sabiduría 
+            y aplicar sus principios en nuestra vida diaria.
+          </p>
+        </div>
+        <div class="about-card">
+          <div class="card-icon">❤️</div>
+          <h3 class="card-title">Servicio</h3>
+          <p class="card-description">
+            Servimos a nuestra comunidad con amor, compartiendo 
+            el mensaje de esperanza y transformación.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Weekly Services Section -->
+  <section class="services-section">
+    <div class="services-background">
+      <div class="services-overlay"></div>
+    </div>
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">
+          Estos son nuestros <span class="highlight">servicios</span> cada semana
+        </h2>
+        <p class="section-subtitle">
+          Únete a nosotros en estos momentos especiales de adoración, enseñanza y comunión
+        </p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card" *ngFor="let service of weeklyServices">
+          <div class="service-card-inner">
+            <div class="service-icon-wrapper">
+              <div class="service-icon">{{ service.icon }}</div>
+              <div class="icon-glow"></div>
+            </div>
+            <h3 class="service-title">{{ service.title }}</h3>
+            <p class="service-description">{{ service.description }}</p>
+            <div class="service-schedule">
+              <div class="schedule-item" *ngFor="let time of service.schedule">
+                <span class="schedule-badge">{{ time }}</span>
+              </div>
+            </div>
+            <div class="service-decoration"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Carousel Section -->
+  <section class="carousel-section">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Nuestra Comunidad</h2>
+        <p class="section-subtitle">
+          Momentos especiales que compartimos juntos
+        </p>
+      </div>
+      
+      <div class="carousel-wrapper" 
+           (mouseenter)="onCarouselMouseEnter()" 
+           (mouseleave)="onCarouselMouseLeave()">
+        <div class="carousel-container">
+          <div class="carousel-track" [style.transform]="'translateX(-' + (currentSlide * 100) + '%)'">
+            <div class="carousel-slide" *ngFor="let slide of slides">
+              <div class="slide-content">
+                <div class="slide-image">
+                  <img [src]="slide.image" [alt]="slide.title" />
+                  <div class="slide-overlay"></div>
+                </div>
+                <div class="slide-text">
+                  <h3 class="slide-title">{{ slide.title }}</h3>
+                  <p class="slide-description">{{ slide.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Navigation Buttons -->
+        <button class="carousel-btn carousel-btn-prev" (click)="prevSlide()" aria-label="Imagen anterior">
+          <span>‹</span>
+        </button>
+        <button class="carousel-btn carousel-btn-next" (click)="nextSlide()" aria-label="Siguiente imagen">
+          <span>›</span>
+        </button>
+        
+        <!-- Dots Indicator -->
+        <div class="carousel-dots">
+          <button 
+            *ngFor="let slide of slides; let i = index"
+            class="dot" 
+            [class.active]="i === currentSlide"
+            (click)="goToSlide(i)"
+            [attr.aria-label]="'Ir a imagen ' + (i + 1)">
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="cta-section">
+    <div class="cta-container">
+      <div class="cta-content">
+        <h1 class="cta-title">Paz y gozo</h1>
+        <p class="cta-description">
+          En el esperitu santo del señor
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
