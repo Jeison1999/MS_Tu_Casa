@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { ThemeService, AppTheme } from '../../core/theme.service';
 
 @Component({
   selector: 'app-appbar',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './appbar.html',
   styleUrls: ['./appbar.css'],
 })
@@ -12,6 +14,13 @@ export class Appbar {
   logoHover = false;
   mobileOpen = false;
   private closeTimeout: any = null;
+  currentTheme: AppTheme = 'default';
+
+  constructor(private themeService: ThemeService) {
+    this.themeService.theme$.subscribe((theme) => {
+      this.currentTheme = theme;
+    });
+  }
 
   toggleDropdown(name: string, event: Event) {
     event.preventDefault();

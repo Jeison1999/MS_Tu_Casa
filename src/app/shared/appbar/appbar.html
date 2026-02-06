@@ -1,4 +1,4 @@
-<header class="appbar">
+<header [ngClass]="['appbar', currentTheme]">
   <div class="appbar-glow"></div>
   
   <div class="appbar-container">
@@ -107,7 +107,7 @@
                 <span>Kaynos Kids</span>
                 <i class="link-arrow">→</i>
               </a>
-              <a href="#" class="dropdown-link">
+              <a href="ministries/youths.component" class="dropdown-link">
                 <span>Kaynos Generacion</span>
                 <i class="link-arrow">→</i>
               </a>

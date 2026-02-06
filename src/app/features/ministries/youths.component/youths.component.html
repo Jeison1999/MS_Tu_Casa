@@ -1,0 +1,122 @@
+<div class="youths-page">
+  <!-- Hero Section -->
+  <section class="youth-hero">
+    <div class="youth-hero-content">
+      <div class="youth-hero-text">
+        <span class="hero-badge">Ministerio de Jóvenes</span>
+        <h1 class="youth-title">
+          Kaynos <span>Generación</span>
+        </h1>
+        <p class="youth-subtitle">
+          Una generación que ama a Jesús con pasión, vive en santidad y
+          lleva Su luz a cada rincón.
+        </p>
+      </div>
+       
+          <img [src]="logo" alt="Logo Kaynos Generación" />
+       
+      
+    </div>
+  </section>
+
+  <!-- Leaders Section -->
+  <section class="youth-section leaders-section">
+    <div class="section-header">
+      <h2>Líderes</h2>
+      <p>Personas que caminan contigo y te acompañan a crecer en Cristo.</p>
+    </div>
+    <div class="leaders-grid">
+      <article class="leader-card" *ngFor="let leader of leaders">
+        <div class="leader-photo">
+          <img [src]="leader.photo" [alt]="leader.name" />
+        </div>
+        <div class="leader-info">
+          <h3>{{ leader.name }}</h3>
+          <p>{{ leader.role }}</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Highlight Verse -->
+  <section class="youth-section verse-highlight">
+    <div class="verse-card">
+      <div class="verse-label">Versículo lema</div>
+      <p class="verse-text">"{{ highlightVerse.text }}"</p>
+      <p class="verse-ref">{{ highlightVerse.reference }}</p>
+    </div>
+  </section>
+
+  <!-- Verses Grid -->
+  <section class="youth-section verses-section">
+    <div class="section-header">
+      <h2>Palabra para esta generación</h2>
+    </div>
+    <div class="verses-grid">
+      <article class="verse-item" *ngFor="let v of verses">
+        <p class="verse-item-text">"{{ v.text }}"</p>
+        <p class="verse-item-ref">{{ v.reference }}</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Events & Gallery -->
+  <section class="youth-section events-gallery-section">
+    <div class="events-column">
+      <div class="section-header left">
+        <h2>Próximos encuentros</h2>
+        <p>Momentos donde Dios marca nuestras vidas.</p>
+      </div>
+      <div class="events-timeline">
+        <article class="event-card" *ngFor="let e of events">
+          <div class="event-tag">{{ e.tag }}</div>
+          <h3 class="event-title">{{ e.title }}</h3>
+          <p class="event-meta">{{ e.day }} · {{ e.time }}</p>
+          <p class="event-desc">{{ e.description }}</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="gallery-column">
+      <div class="section-header left">
+        <h2>Momentos Kaynos</h2>
+      </div>
+      <div class="gallery-carousel-wrapper"
+           (mouseenter)="onCarouselMouseEnter()"
+           (mouseleave)="onCarouselMouseLeave()">
+        <div class="gallery-carousel-container">
+          <div class="gallery-carousel-track" [style.transform]="'translateX(-' + (currentSlide * 100) + '%)'">
+            <div class="gallery-carousel-slide" *ngFor="let img of gallery">
+              <div class="gallery-slide-image">
+                <img [src]="img" alt="Kaynos Generación" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <button class="gallery-carousel-btn gallery-carousel-btn-prev"
+                (click)="prevSlide()"
+                aria-label="Imagen anterior">
+          <span>‹</span>
+        </button>
+        <button class="gallery-carousel-btn gallery-carousel-btn-next"
+                (click)="nextSlide()"
+                aria-label="Siguiente imagen">
+          <span>›</span>
+        </button>
+
+        <!-- Dots Indicator -->
+        <div class="gallery-carousel-dots">
+          <button
+            *ngFor="let img of gallery; let i = index"
+            class="gallery-dot"
+            [class.active]="i === currentSlide"
+            (click)="goToSlide(i)"
+            [attr.aria-label]="'Ir a imagen ' + (i + 1)">
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

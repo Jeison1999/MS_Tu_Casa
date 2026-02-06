@@ -12,6 +12,40 @@
   overflow: hidden;
 }
 
+/* Tema por defecto (actual) */
+.footer.default {
+  background: linear-gradient(
+    135deg,
+    rgba(189, 129, 31, 0.98) 0%,
+    rgba(212, 160, 73, 0.98) 100%
+  );
+}
+
+/* Tema jóvenes: negro, blanco y dorado */
+.footer.youth {
+  background: radial-gradient(circle at top, #2d3748 0%, #000000 55%, #1a202c 100%);
+}
+
+.footer.youth .footer-logo h3,
+.footer.youth .footer-section h4,
+.footer.youth .footer-bottom p {
+  color: #f7fafc;
+}
+
+.footer.youth .footer-links a,
+.footer.youth .footer-contact span {
+  color: #e2e8f0;
+}
+
+.footer.youth .social-icon:hover {
+  background: #f6e05e;
+  color: #1a202c;
+}
+
+.footer.youth .footer-bottom {
+  background: rgba(0, 0, 0, 0.6);
+}
+
 .footer::before {
   content: '';
   position: absolute;
