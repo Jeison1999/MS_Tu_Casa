@@ -23,17 +23,17 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   // Array de imágenes para el carrusel - puedes reemplazar estas rutas con tus imágenes
   slides = [
     {
-      image: 'assets/image/logoms.png', // Reemplaza con tus imágenes
+      image: 'assets/image/logoms2.png', // Reemplaza con tus imágenes
       title: 'Bienvenidos a Morando en Sion',
       description: 'Una comunidad de fe y amor',
     },
     {
-      image: 'assets/image/logoms2.png', // Reemplaza con tus imágenes
+      image: 'assets/image/foto1.jpg', // Reemplaza con tus imágenes
       title: 'Adoración y Alabanza',
       description: 'Juntos adoramos a nuestro Dios',
     },
     {
-      image: 'assets/image/logoms.png', // Reemplaza con tus imágenes
+      image: 'assets/image/foto4.jpg', // Reemplaza con tus imágenes
       title: 'Comunidad y Crecimiento',
       description: 'Creciendo juntos en la fe',
     },
