@@ -1,0 +1,74 @@
+<div class="contact-container">
+  <section class="contact-hero">
+    <div class="contact-hero-content">
+      <div class="contact-hero-text">
+        <h1 class="contact-title">
+          <span class="title-line">Ponte en contacto con</span>
+          <span class="title-main">{{ churchName }}</span>
+        </h1>
+        <p class="contact-subtitle">
+          Queremos conocerte, orar contigo y acompañarte en tu caminar con Jesús.
+        </p>
+
+        <div class="contact-details">
+          <div class="detail-item">
+            <span class="detail-label">Dirección</span>
+            <span class="detail-value">{{ address }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Teléfono</span>
+            <a class="detail-value" [href]="'tel:' + phone">{{ phone }}</a>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Correo</span>
+            <a class="detail-value" [href]="'mailto:' + email">{{ email }}</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <h2 class="section-title">Redes sociales</h2>
+        <p class="section-subtitle">
+          Síguenos y mantente al tanto de lo que Dios está haciendo en la iglesia.
+        </p>
+        <div class="social-grid">
+          <a
+            class="social-card"
+            *ngFor="let social of socialLinks"
+            [href]="social.url"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="social-avatar">
+              <img [src]="social.avatar" [alt]="social.name" />
+            </div>
+            <div class="social-info">
+              <span class="social-name">{{ social.name }}</span>
+              <span class="social-handle">{{ social.handle }}</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="map-section">
+    <div class="map-card">
+      <div class="map-text">
+        <h2 class="section-title">¿Dónde estamos?</h2>
+        <p class="section-subtitle">
+          Te esperamos en nuestra sede principal. Usa el mapa para encontrar la mejor ruta.
+        </p>
+      </div>
+      <div class="map-wrapper">
+        <!-- Reemplaza el src del iframe por el mapa real de tu iglesia -->
+        <iframe
+          class="map-iframe"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.95565131550463!3d-37.817327742014294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDQ5JzAyLjQiUyAxNDTCsDU3JzIyLjMiRQ!5e0!3m2!1ses-419!2s!4v1700000000000"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+</div>

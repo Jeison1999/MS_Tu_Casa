@@ -16,7 +16,13 @@
     
     <!-- Navigation -->
     <nav class="nav">
-      <a href="#" class="nav-item" [class.active]="activeNav === 'inicio'" (click)="setActive('inicio')">
+      <a
+        routerLink="/"
+        class="nav-item"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="closeAll()"
+      >
         <span class="nav-label">Inicio</span>
         <div class="nav-indicator"></div>
       </a>
@@ -107,7 +113,11 @@
                 <span>Kaynos Kids</span>
                 <i class="link-arrow">→</i>
               </a>
-              <a href="ministries/youths.component" class="dropdown-link">
+              <a
+                routerLink="/ministries/youths.component"
+                class="dropdown-link"
+                (click)="closeAll()"
+              >
                 <span>Kaynos Generacion</span>
                 <i class="link-arrow">→</i>
               </a>
@@ -157,12 +167,17 @@
         </div>
       </div>
       
-      <a href="#" class="nav-item" [class.active]="activeNav === 'eventos'" (click)="setActive('eventos')">
+      <a href="#" class="nav-item">
         <span class="nav-label">Eventos</span>
         <div class="nav-indicator"></div>
       </a>
       
-      <a href="#" class="nav-item" [class.active]="activeNav === 'contacto'" (click)="setActive('contacto')">
+      <a
+        routerLink="/ministries/contact-component"
+        class="nav-item"
+        routerLinkActive="active"
+        (click)="closeAll()"
+      >
         <span class="nav-label">Contacto</span>
         <div class="nav-indicator"></div>
       </a>
@@ -173,11 +188,26 @@
 <!-- Mobile Menu -->
 <div class="mobile-menu" [class.active]="mobileOpen">
   <div class="mobile-content">
-    <a href="#" class="mobile-link">Inicio</a>
+    <a
+      routerLink="/"
+      class="mobile-link"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="closeAll()"
+    >
+      Inicio
+    </a>
     <a href="#" class="mobile-link">Nosotros</a>
     <a href="#" class="mobile-link">Ministerios</a>
     <a href="#" class="mobile-link">Eventos</a>
-    <a href="#" class="mobile-link">Contacto</a>
+    <a
+      routerLink="/ministries/contact-component"
+      class="mobile-link"
+      routerLinkActive="active"
+      (click)="closeAll()"
+    >
+      Contacto
+    </a>
     <button class="mobile-cta">💝 Ofrendar</button>
   </div>
 </div>

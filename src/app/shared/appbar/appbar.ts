@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { NgClass } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { ThemeService, AppTheme } from '../../core/theme.service';
 
 @Component({
   selector: 'app-appbar',
-  imports: [NgClass],
+  imports: [NgClass, RouterModule],
   templateUrl: './appbar.html',
   styleUrls: ['./appbar.css'],
 })
 export class Appbar {
   currentDropdown: string | null = null;
-  activeNav = 'inicio';
   logoHover = false;
   mobileOpen = false;
   private closeTimeout: any = null;
@@ -60,11 +60,6 @@ export class Appbar {
       this.closeTimeout = null;
     }
     this.currentDropdown = null;
-  }
-
-  setActive(nav: string) {
-    this.activeNav = nav;
-    this.hideDropdown();
   }
 
   toggleMobile() {
