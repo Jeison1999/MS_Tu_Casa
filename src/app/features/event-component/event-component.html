@@ -1,0 +1,67 @@
+<div class="events-page">
+  <!-- Hero -->
+  <section class="events-hero">
+    <div class="events-hero-content">
+      <div class="events-hero-text">
+        <h1 class="events-title">Próximos <span>Eventos</span></h1>
+        <p class="events-subtitle">
+          Momentos especiales donde Dios se mueve en medio de su iglesia.
+          Descubre lo que viene y prepárate para ser parte.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming events with hover countdown -->
+  <section class="events-section">
+    <div class="section-header">
+      <h2>Calendario de encuentros</h2>
+      <p>Pasa el cursor sobre cada tarjeta para ver la cuenta regresiva.</p>
+    </div>
+
+    <div class="events-grid">
+      <article
+        class="event-card"
+        *ngFor="let ev of upcomingEvents"
+        [style.--event-image]="'url(' + ev.image + ')'"
+      >
+        <div class="event-image-layer"></div>
+        <div class="event-gradient"></div>
+
+        <div class="event-base">
+          <h3 class="event-name">{{ ev.title }}</h3>
+          <p class="event-location">{{ ev.location }}</p>
+          <p class="event-date">
+            {{ ev.date | date: 'EEEE d \'de\' MMMM, h:mm a' }}
+          </p>
+        </div>
+
+        <div class="event-hover">
+          <p class="countdown-label">Faltan</p>
+          <p class="countdown-value">{{ countdowns[ev.id] }}</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Recent events -->
+  <section class="events-section recent-section">
+    <div class="section-header">
+      <h2>Eventos recientes</h2>
+      <p>Algunos de los últimos momentos que Dios nos ha permitido vivir.</p>
+    </div>
+
+    <div class="recent-grid">
+      <article class="recent-card" *ngFor="let ev of pastEvents">
+        <div class="recent-image">
+          <img [src]="ev.image" [alt]="ev.title" />
+        </div>
+        <div class="recent-body">
+          <span class="recent-date">{{ ev.dateLabel }}</span>
+          <h3 class="recent-title">{{ ev.title }}</h3>
+          <p class="recent-summary">{{ ev.summary }}</p>
+        </div>
+      </article>
+    </div>
+  </section>
+</div>

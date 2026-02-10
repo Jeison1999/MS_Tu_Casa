@@ -7,7 +7,6 @@
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 20px rgba(189, 129, 31, 0.4);
-  position: relative;
   margin: 1rem 1.5rem 0;
   border-radius: 20px;
 }

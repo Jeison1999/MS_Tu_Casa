@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { WelcomeComponent } from './features/welcome-component/welcome-component';
 import { YouthsComponent } from './features/ministries/youths.component/youths.component';
 import { ContactComponent } from './features/contact-component/contact-component';
+import { EventComponent } from './features/event-component/event-component';
 
 export const routes: Routes = [
   {
@@ -13,6 +14,11 @@ export const routes: Routes = [
     path: 'ministerios/kaynosGeneracion',
     component: YouthsComponent,
     data: { theme: 'youth' },
+  },
+  {
+    path: 'eventos',
+    component: EventComponent,
+    data: { theme: 'default' },
   },
   {
     path: 'contacto',

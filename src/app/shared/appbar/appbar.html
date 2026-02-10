@@ -167,7 +167,12 @@
         </div>
       </div>
       
-      <a href="#" class="nav-item">
+      <a
+        routerLink="/eventos"
+        class="nav-item"
+        routerLinkActive="active"
+        (click)="closeAll()"
+      >
         <span class="nav-label">Eventos</span>
         <div class="nav-indicator"></div>
       </a>
@@ -199,7 +204,14 @@
     </a>
     <a href="#" class="mobile-link">Nosotros</a>
     <a href="#" class="mobile-link">Ministerios</a>
-    <a href="#" class="mobile-link">Eventos</a>
+    <a
+      routerLink="/eventos"
+      class="mobile-link"
+      routerLinkActive="active"
+      (click)="closeAll()"
+    >
+      Eventos
+    </a>
     <a
       routerLink="/contacto"
       class="mobile-link"
