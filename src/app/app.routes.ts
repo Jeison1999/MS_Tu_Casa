@@ -10,12 +10,12 @@ export const routes: Routes = [
     data: { theme: 'default' },
   },
   {
-    path: 'ministries/youths.component',
+    path: 'ministerios/kaynosGeneracion',
     component: YouthsComponent,
     data: { theme: 'youth' },
   },
   {
-    path: 'ministries/contact-component',
+    path: 'contacto',
     component: ContactComponent,
     data: { theme: 'default' },
   },
