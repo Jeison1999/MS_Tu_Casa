@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Appbar } from './shared/appbar/appbar';
 import { Footer } from './shared/footer/footer';
-import { SplashScreenComponent } from './shared/splash-screen/splash-screen';
+import { SplashScreenComponent } from './shared/animations/splash-screen/splash-screen';
 import { ThemeService, AppTheme } from './core/theme.service';
 import { routeAnimations } from './shared/animations/route-animations';
 import { filter } from 'rxjs/operators';
