@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ThemeService, AppTheme } from '../../core/theme.service';
+import { ClaudinaryService } from '../../core/claudinary.service';
 
 @Component({
   selector: 'app-appbar',
@@ -10,13 +11,17 @@ import { ThemeService, AppTheme } from '../../core/theme.service';
   styleUrls: ['./appbar.css'],
 })
 export class Appbar {
+  [x: string]: any;
   currentDropdown: string | null = null;
   logoHover = false;
   mobileOpen = false;
   private closeTimeout: any = null;
   currentTheme: AppTheme = 'default';
+  readonly logo1: string;
 
-  constructor(private themeService: ThemeService) {
+  constructor(private themeService: ThemeService, private claudinary: ClaudinaryService) {
+    this.logo1 = this.claudinary.getOptimizedImage('logoms_prnuap');
+    
     this.themeService.theme$.subscribe((theme) => {
       this.currentTheme = theme;
     });

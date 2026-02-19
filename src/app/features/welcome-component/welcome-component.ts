@@ -19,6 +19,9 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   isDeleting = false;
   private typewriterInterval: any;
 
+  // Logo desde Cloudinary
+  logoUrl = '';
+
   // Array de imágenes para el carrusel desde Cloudinary
   slides: any[] = [];
 
@@ -84,8 +87,10 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     this.startTypewriterAnimation();
     
   }
-
+  
   initializeSlides() {
+    this.logoUrl = this.cloudinary.getImage('logoms2_exyhn7'); 
+    
     
     this.slides = [
       {
