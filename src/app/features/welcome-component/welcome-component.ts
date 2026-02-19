@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ClaudinaryService } from '../../core/claudinary.service';
 
 @Component({
   selector: 'app-welcome-component',
@@ -18,26 +19,8 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   isDeleting = false;
   private typewriterInterval: any;
 
-  constructor(private cdr: ChangeDetectorRef) {}
-
-  // Array de imágenes para el carrusel - puedes reemplazar estas rutas con tus imágenes
-  slides = [
-    {
-      image: 'assets/image/logoms2.png', // Reemplaza con tus imágenes
-      title: 'Bienvenidos a Morando en Sion',
-      description: 'Una comunidad de fe y amor',
-    },
-    {
-      image: 'assets/image/foto1.jpg', // Reemplaza con tus imágenes
-      title: 'Adoración y Alabanza',
-      description: 'Juntos adoramos a nuestro Dios',
-    },
-    {
-      image: 'assets/image/foto4.jpg', // Reemplaza con tus imágenes
-      title: 'Comunidad y Crecimiento',
-      description: 'Creciendo juntos en la fe',
-    },
-  ];
+  // Array de imágenes para el carrusel desde Cloudinary
+  slides: any[] = [];
 
   // Servicios semanales
   weeklyServices = [
@@ -85,9 +68,51 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     },
   ];
 
+  // Imágenes para el carrusel horizontal desde Cloudinary
+  horizontalImages: string[] = [];
+
+  constructor(
+    private cdr: ChangeDetectorRef, 
+    private cloudinary: ClaudinaryService
+  ) {}
+
+
   ngOnInit() {
+    this.initializeSlides();
+    this.initializeHorizontalImages();
     this.startAutoSlide();
     this.startTypewriterAnimation();
+    
+  }
+
+  initializeSlides() {
+    
+    this.slides = [
+      {
+        image: this.cloudinary.getOptimizedImage('pastores_ykxdhl', 1200), // Reemplaza 'pastores_ykxdhl' con el ID de tu imagen
+        title: 'Bienvenidos a Morando en Sion',
+        description: 'Una comunidad de fe y amor',
+      },
+      {
+        image: this.cloudinary.getOptimizedImage('foto2_u6lmqh', 1200), // Reemplaza con el ID de Cloudinary
+        title: 'Adoración y Alabanza',
+        description: 'Juntos adoramos a nuestro Dios',
+      },
+      {
+        image: this.cloudinary.getOptimizedImage('foto4_l165ha', 1200), // Reemplaza con el ID de Cloudinary
+        title: 'Comunidad y Crecimiento',
+        description: 'Creciendo juntos en la fe',
+      },
+    ];
+  }
+
+  initializeHorizontalImages() {
+    this.horizontalImages = [
+      this.cloudinary.getOptimizedImage('633167068_1338947984943794_2795937529331384989_n.jpg_eslwjb', 1200),
+      this.cloudinary.getOptimizedImage('630151745_1330991882406071_5872849914101460167_n.jpg_bbu95p', 1200),
+      this.cloudinary.getOptimizedImage('624574352_1324150723090187_5699530119309604273_n.jpg_srlfqi', 1200),
+      this.cloudinary.getOptimizedImage('625369817_1324155006423092_8417031743962407014_n.jpg_njoppq', 1200),
+    ];
   }
 
   startTypewriterAnimation() {
@@ -167,11 +192,4 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     this.startAutoSlide();
   }
 
-  // Imágenes para el carrusel horizontal
-  horizontalImages = [
-    'assets/image/foto1.jpg',
-    'assets/image/foto2.jpg',
-    'assets/image/foto3.jpg',
-    'assets/image/foto4.jpg',
-  ];
 }
