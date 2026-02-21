@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0",
     "build": "ng build",
+    "build:prod": "ng build --configuration production --base-href /MS_Tu_Casa/",
+    "deploy": "ng deploy --base-href=/MS_Tu_Casa/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -37,6 +39,7 @@
     "@angular/build": "^21.1.2",
     "@angular/cli": "^21.1.2",
     "@angular/compiler-cli": "^21.1.0",
+    "angular-cli-ghpages": "^3.0.2",
     "jsdom": "^27.1.0",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
