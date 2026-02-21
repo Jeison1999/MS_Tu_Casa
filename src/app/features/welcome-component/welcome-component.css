@@ -298,16 +298,16 @@
 .horizontal-carousel-track {
   display: flex;
   gap: 20px;
-  animation: scroll-horizontal linear infinite;
+  animation: scroll-horizontal 30s linear infinite;
   will-change: transform;
 }
 
 @keyframes scroll-horizontal {
-  0% {
+  from {
     transform: translateX(0);
   }
-  100% {
-    transform: translateX(-50%);
+  to {
+    transform: translateX(calc(-320px * 4));
   }
 }
 
@@ -840,6 +840,14 @@
     text-align: center;
   }
 
+  .hero-text {
+    order: 2;
+  }
+
+  .hero-image {
+    order: 1;
+  }
+
   .hero-title {
     font-size: 3rem;
   }
@@ -888,11 +896,25 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .welcome-container {
+    padding-top: 80px;
+  }
+
   .hero-section {
-    padding: 100px 20px 60px;
+    margin: 0 1rem 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .welcome-container {
+    padding-top: 80px;
+  }
+
+  .hero-section {
+    padding: 80px 20px 60px;
     min-height: auto;
-    margin: 1rem;
+    margin: 0 1rem 1rem;
   }
 
   .about-section,

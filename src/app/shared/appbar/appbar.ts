@@ -13,6 +13,7 @@ import { ClaudinaryService } from '../../core/claudinary.service';
 export class Appbar {
   [x: string]: any;
   currentDropdown: string | null = null;
+  mobileDropdown: string | null = null;
   logoHover = false;
   mobileOpen = false;
   private closeTimeout: any = null;
@@ -71,8 +72,13 @@ export class Appbar {
     this.mobileOpen = !this.mobileOpen;
   }
 
+  toggleMobileDropdown(name: string) {
+    this.mobileDropdown = this.mobileDropdown === name ? null : name;
+  }
+
   closeAll() {
     this.hideDropdown();
     this.mobileOpen = false;
+    this.mobileDropdown = null;
   }
 }

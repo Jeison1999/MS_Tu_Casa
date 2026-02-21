@@ -14,6 +14,13 @@
       </div>
     </div>
     
+    <!-- Mobile Menu Button -->
+    <input id="mobile-checkbox" type="checkbox" [checked]="mobileOpen" (change)="toggleMobile()">
+    <label class="menu-toggle" for="mobile-checkbox">
+        <div class="cross-line cross-vertical"></div>
+        <div class="cross-line cross-horizontal"></div>
+    </label>
+    
     <!-- Navigation -->
     <nav class="nav">
       <a
@@ -202,8 +209,55 @@
     >
       Inicio
     </a>
-    <a href="#" class="mobile-link">Nosotros</a>
-    <a href="#" class="mobile-link">Ministerios</a>
+    
+    <!-- Nosotros Dropdown -->
+    <div class="mobile-dropdown">
+      <div class="mobile-dropdown-header" (click)="toggleMobileDropdown('nosotros')">
+        <span>Nosotros</span>
+        <i class="mobile-arrow" [class.open]="mobileDropdown === 'nosotros'">❯</i>
+      </div>
+      <div class="mobile-dropdown-content" [class.show]="mobileDropdown === 'nosotros'">
+        <div class="mobile-dropdown-group">
+          <div class="mobile-group-title">⛪ Nuestra Iglesia</div>
+          <a href="#" class="mobile-sublink" (click)="closeAll()">Quiénes somos</a>
+          <a href="#" class="mobile-sublink" (click)="closeAll()">Historia</a>
+          <a href="#" class="mobile-sublink" (click)="closeAll()">Misión y Visión</a>
+          <a href="#" class="mobile-sublink" (click)="closeAll()">Declaración de Fe</a>
+        </div>
+        <div class="mobile-dropdown-group">
+          <div class="mobile-group-title">👥 Liderazgo</div>
+          <a href="#" class="mobile-sublink" (click)="closeAll()">Pastores</a>
+          <a href="#" class="mobile-sublink" (click)="closeAll()">Equipo Pastoral</a>
+          <a href="#" class="mobile-sublink" (click)="closeAll()">Ancianos</a>
+          <a href="#" class="mobile-sublink" (click)="closeAll()">Diáconos</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Ministerios Dropdown -->
+    <div class="mobile-dropdown">
+      <div class="mobile-dropdown-header" (click)="toggleMobileDropdown('ministerios')">
+        <span>Ministerios</span>
+        <i class="mobile-arrow" [class.open]="mobileDropdown === 'ministerios'">❯</i>
+      </div>
+      <div class="mobile-dropdown-content" [class.show]="mobileDropdown === 'ministerios'">
+        <div class="mobile-dropdown-group">
+          <div class="mobile-group-title">👶 Por Edad</div>
+          <a href="#" class="mobile-sublink" (click)="closeAll()">Kaynos Kids</a>
+          <a routerLink="/ministerios/kaynosGeneracion" class="mobile-sublink" (click)="closeAll()">Kaynos Generación</a>
+          <a href="#" class="mobile-sublink" (click)="closeAll()">Escuadrón de Caballeros</a>
+          <a href="#" class="mobile-sublink" (click)="closeAll()">Dunamis</a>
+        </div>
+        <div class="mobile-dropdown-group">
+          <div class="mobile-group-title">✨ Ministerios</div>
+          <a href="#" class="mobile-sublink" (click)="closeAll()">Alabanza</a>
+          <a href="#" class="mobile-sublink" (click)="closeAll()">Intercesión</a>
+          <a href="#" class="mobile-sublink" (click)="closeAll()">Evangelismo</a>
+          <a href="#" class="mobile-sublink" (click)="closeAll()">Grupos Pequeños</a>
+        </div>
+      </div>
+    </div>
+    
     <a
       routerLink="/eventos"
       class="mobile-link"
