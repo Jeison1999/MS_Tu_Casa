@@ -1,0 +1,1367 @@
+.pastoral-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 100px 20px 80px;
+  background: linear-gradient(135deg, #f7f3ed 0%, #ffffff 50%, #faf8f5 100%);
+  position: relative;
+}
+
+.pastoral-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(189, 129, 31, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(212, 160, 73, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.pastoral-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+.pastoral-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title-accent {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #718096;
+  letter-spacing: 0.05em;
+}
+
+.title-main {
+  background: linear-gradient(135deg, #bd811f 0%, #d4a049 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pastoral-subtitle {
+  font-size: 1.1rem;
+  color: #4a5568;
+  line-height: 1.7;
+}
+
+/* Organigrama */
+.org-chart {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Niveles */
+.level {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.level-1 {
+  margin-bottom: 0;
+}
+
+.level-2 {
+  display: flex;
+  gap: 80px;
+  width: 100%;
+  justify-content: center;
+  margin-top: 0;
+}
+
+/* Tarjetas de Pastor */
+.pastor-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 
+    0 8px 32px rgba(189, 129, 31, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(189, 129, 31, 0.15);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 240px;
+  overflow: hidden;
+}
+
+.pastor-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(189, 129, 31, 0.05) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.pastor-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 20px 60px rgba(189, 129, 31, 0.2),
+    0 8px 20px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 0 0 1px rgba(189, 129, 31, 0.3);
+  border-color: rgba(189, 129, 31, 0.4);
+}
+
+.pastor-card:hover::before {
+  opacity: 1;
+}
+
+.pastor-card.small {
+  min-width: 210px;
+  padding: 22px;
+}
+
+.pastor-card.mini {
+  min-width: 190px;
+  padding: 18px;
+}
+
+/* Foto de Pastor */
+.pastor-photo {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid transparent;
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(135deg, #bd811f 0%, #d4a049 100%) border-box;
+  margin-bottom: 18px;
+  position: relative;
+  box-shadow: 
+    0 8px 24px rgba(189, 129, 31, 0.25),
+    0 0 0 8px rgba(189, 129, 31, 0.08),
+    inset 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pastor-card:hover .pastor-photo {
+  box-shadow: 
+    0 12px 32px rgba(189, 129, 31, 0.35),
+    0 0 0 12px rgba(189, 129, 31, 0.12),
+    inset 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05) rotate(2deg);
+}
+
+.pastor-card.small .pastor-photo {
+  width: 110px;
+  height: 110px;
+}
+
+.pastor-card.mini .pastor-photo {
+  width: 90px;
+  height: 90px;
+}
+
+.pastor-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pastor-card:hover .pastor-photo img {
+  transform: scale(1.1);
+}
+
+.pastor-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(189, 129, 31, 0.25) 0%, rgba(212, 160, 73, 0.15) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+.pastor-card:hover .pastor-photo::before {
+  opacity: 1;
+}
+
+.pastor-photo::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(189, 129, 31, 0.4), rgba(212, 160, 73, 0.4));
+  opacity: 0;
+  filter: blur(12px);
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.pastor-card:hover .pastor-photo::after {
+  opacity: 0.6;
+}
+
+/* Información de Pastor */
+.pastor-info {
+  width: 100%;
+}
+
+.pastor-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.pastor-card:hover .pastor-name {
+  color: #bd811f;
+}
+
+.pastor-card.small .pastor-name {
+  font-size: 1.05rem;
+}
+
+.pastor-card.mini .pastor-name {
+  font-size: 0.95rem;
+}
+
+.pastor-role {
+  font-size: 0.9rem;
+  color: #bd811f;
+  font-weight: 600;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pastor-card.small .pastor-role {
+  font-size: 0.85rem;
+}
+
+.pastor-card.mini .pastor-role {
+  font-size: 0.8rem;
+}
+
+/* Líneas Conectoras - OBSOLETAS (reemplazadas por connection-system) */
+/*
+.connector-line {
+  width: 3px;
+  background: linear-gradient(180deg, rgba(189, 129, 31, 0.2) 0%, rgba(189, 129, 31, 0.8) 50%, rgba(189, 129, 31, 0.2) 100%);
+  position: relative;
+  z-index: 1;
+  border-radius: 2px;
+  box-shadow: 0 0 15px rgba(189, 129, 31, 0.4);
+}
+
+.connector-line::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, transparent 0%, rgba(212, 160, 73, 0.8) 50%, transparent 100%);
+  animation: pulse-line 3s ease-in-out infinite;
+}
+
+@keyframes pulse-line {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.main-connector {
+  height: 40px;
+  margin: 0 auto;
+}
+*/
+
+/* Ramas */
+.branch {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.branch-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* ========================================
+   SISTEMA DE CONEXIÓN UNIFICADO
+   ======================================== */
+
+.connection-system {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* Líneas verticales desde nivel 1 */
+.vertical-lines-top {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+  position: relative;
+}
+
+.v-line {
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(189, 129, 31, 0.8) 0%, rgba(189, 129, 31, 0.5) 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(189, 129, 31, 0.3);
+  position: relative;
+}
+
+.v-line.left {
+  margin-left: 25%;
+}
+
+.v-line.right {
+  margin-right: 25%;
+}
+
+/* Línea horizontal puente */
+.horizontal-bridge {
+  position: relative;
+  width: 100%;
+  height: 3px;
+  margin: 0;
+}
+
+.h-line {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(189, 129, 31, 0.3) 15%, 
+    rgba(189, 129, 31, 0.8) 50%, 
+    rgba(189, 129, 31, 0.3) 85%, 
+    transparent 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 12px rgba(189, 129, 31, 0.3);
+  position: relative;
+}
+
+.h-line::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(212, 160, 73, 0.6) 50%, 
+    transparent 100%);
+  animation: slide-glow 3s ease-in-out infinite;
+}
+
+@keyframes slide-glow {
+  0%, 100% {
+    transform: translateX(-50%);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Puntos en el puente */
+.bridge-dot {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, #fff 0%, #f8f4ed 100%);
+  border: 3px solid #bd811f;
+  border-radius: 50%;
+  box-shadow: 
+    0 0 0 4px rgba(189, 129, 31, 0.15),
+    0 3px 8px rgba(189, 129, 31, 0.4),
+    inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 5;
+  animation: pulse-bridge-dot 2s ease-in-out infinite;
+}
+
+.bridge-dot.left {
+  left: 25%;
+}
+
+.bridge-dot.center {
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  height: 18px;
+}
+
+.bridge-dot.right {
+  right: 25%;
+}
+
+@keyframes pulse-bridge-dot {
+  0%, 100% {
+    box-shadow: 
+      0 0 0 4px rgba(189, 129, 31, 0.15),
+      0 3px 8px rgba(189, 129, 31, 0.4),
+      inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 0 7px rgba(189, 129, 31, 0.25),
+      0 5px 15px rgba(189, 129, 31, 0.6),
+      inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Líneas verticales medias hacia nivel 2 */
+.vertical-lines-middle {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 35px;
+  position: relative;
+}
+
+.v-line-m {
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(189, 129, 31, 0.8) 0%, rgba(189, 129, 31, 0.4) 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(189, 129, 31, 0.3);
+  position: relative;
+}
+
+.v-line-m.left {
+  margin-left: 25%;
+}
+
+.v-line-m.right {
+  margin-right: 25%;
+}
+
+.v-line-m::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: rgba(189, 129, 31, 0.9);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 0 2px rgba(255, 255, 255, 0.9),
+    0 0 10px rgba(189, 129, 31, 0.5);
+  animation: pulse-v-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-v-dot {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+}
+
+/* ========================================
+   LÍNEAS DE MINISTERIOS (NIVEL 2)
+   ======================================== */
+
+.ministry-horizontal-line {
+  position: relative;
+  width: calc(100% - 40px);
+  height: 3px;
+  background: linear-gradient(90deg, 
+    rgba(189, 129, 31, 0.3) 0%, 
+    rgba(189, 129, 31, 0.7) 50%, 
+    rgba(189, 129, 31, 0.3) 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(189, 129, 31, 0.25);
+  margin: 0 auto 25px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.mh-dot {
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, #fff 0%, #faf7f2 100%);
+  border: 2px solid #d4a049;
+  border-radius: 50%;
+  box-shadow: 
+    0 0 0 3px rgba(212, 160, 73, 0.15),
+    0 2px 6px rgba(212, 160, 73, 0.3),
+    inset 0 1px 2px rgba(0, 0, 0, 0.08);
+  animation: pulse-mh-dot 1.8s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 0.2s);
+}
+
+.mh-dot:nth-child(1) { --i: 0; }
+.mh-dot:nth-child(2) { --i: 1; }
+.mh-dot:nth-child(3) { --i: 2; }
+.mh-dot:nth-child(4) { --i: 3; }
+
+@keyframes pulse-mh-dot {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 
+      0 0 0 3px rgba(212, 160, 73, 0.15),
+      0 2px 6px rgba(212, 160, 73, 0.3),
+      inset 0 1px 2px rgba(0, 0, 0, 0.08);
+  }
+  50% {
+    transform: scale(1.2);
+    box-shadow: 
+      0 0 0 5px rgba(212, 160, 73, 0.25),
+      0 3px 10px rgba(212, 160, 73, 0.5),
+      inset 0 1px 2px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* Contenedor de ministerio con su conexión */
+.ministry-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.ministry-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.mc-line {
+  width: 3px;
+  height: 25px;
+  background: linear-gradient(180deg, rgba(189, 129, 31, 0.7) 0%, rgba(189, 129, 31, 0.4) 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(189, 129, 31, 0.2);
+}
+
+.mc-dot {
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(135deg, #fff 0%, #faf7f2 100%);
+  border: 2px solid #d4a049;
+  border-radius: 50%;
+  box-shadow: 
+    0 0 0 3px rgba(212, 160, 73, 0.12),
+    0 2px 6px rgba(212, 160, 73, 0.25);
+  margin-top: -2px;
+}
+
+/* ========================================
+   LÍNEAS DE LÍDERES (NIVEL 3)
+   ======================================== */
+
+.team-members {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.team-vertical-line {
+  width: 3px;
+  height: 20px;
+  background: linear-gradient(180deg, rgba(189, 129, 31, 0.6) 0%, rgba(189, 129, 31, 0.3) 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(189, 129, 31, 0.2);
+  margin-bottom: 8px;
+}
+
+.team-horizontal-line {
+  position: relative;
+  width: 80%;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    rgba(189, 129, 31, 0.2) 0%, 
+    rgba(189, 129, 31, 0.6) 50%, 
+    rgba(189, 129, 31, 0.2) 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(189, 129, 31, 0.2);
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.th-dot {
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(135deg, #fff 0%, #faf9f5 100%);
+  border: 2px solid #d4a049;
+  border-radius: 50%;
+  box-shadow: 
+    0 0 0 2px rgba(212, 160, 73, 0.1),
+    0 2px 4px rgba(212, 160, 73, 0.2);
+}
+
+.leader-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.leader-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.lc-line {
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(180deg, rgba(189, 129, 31, 0.5) 0%, rgba(189, 129, 31, 0.2) 100%);
+  border-radius: 1px;
+  box-shadow: 0 0 4px rgba(189, 129, 31, 0.15);
+}
+
+.lc-dot {
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #fff 0%, #faf9f5 100%);
+  border: 2px solid #d4a049;
+  border-radius: 50%;
+  box-shadow: 
+    0 0 0 2px rgba(212, 160, 73, 0.1),
+    0 1px 3px rgba(212, 160, 73, 0.2);
+  margin-top: -2px;
+}
+
+/* Estilos antiguos - OBSOLETOS (reemplazados por nuevo sistema de líneas) */
+/*
+... (contenido antiguo comentado)
+*/
+
+.sub-level {
+  display: flex;
+  gap: 30px;
+  margin-top: 0;
+  position: relative;
+  justify-content: center;
+}
+
+.members-grid {
+  display: flex;
+  gap: 25px;
+  margin-top: 0;
+  position: relative;
+  justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .level-2 {
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+  }
+
+  .branch {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .sub-level {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /* Ajustar sistema de conexión para tablets */
+  .connection-system {
+    max-width: 600px;
+  }
+  
+  .v-line.left,
+  .v-line-m.left {
+    margin-left: 20%;
+  }
+  
+  .v-line.right,
+  .v-line-m.right {
+    margin-right: 20%;
+  }
+  
+  .bridge-dot.left {
+    left: 20%;
+  }
+  
+  .bridge-dot.right {
+    right: 20%;
+  }
+}
+
+@media (max-width: 768px) {
+  .pastoral-container {
+    padding: 80px 16px 60px;
+  }
+
+  .pastoral-title {
+    font-size: 2.2rem;
+  }
+
+  .pastoral-subtitle {
+    font-size: 1rem;
+  }
+
+  .level {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .pastor-card {
+    min-width: 100%;
+    max-width: 320px;
+  }
+
+  .members-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Simplificar líneas en móvil - mostrar solo verticales */
+  .connection-system {
+    max-width: 90%;
+  }
+  
+  .horizontal-bridge,
+  .ministry-horizontal-line,
+  .team-horizontal-line {
+    display: none;
+  }
+  
+  .vertical-lines-top,
+  .vertical-lines-middle {
+    justify-content: center;
+  }
+  
+  .v-line,
+  .v-line-m {
+    margin: 0 !important;
+  }
+  
+  .v-line.left,
+  .v-line-m.left {
+    display: none;
+  }
+  
+  .bridge-dot.left,
+  .bridge-dot.right {
+    display: none;
+  }
+  
+  .ministry-connector,
+  .leader-connector {
+    margin-bottom: 12px;
+  }
+  
+  .mc-line,
+  .lc-line {
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pastoral-title {
+    font-size: 1.9rem;
+  }
+
+  .pastor-photo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .pastor-card.small .pastor-photo,
+  .pastor-card.mini .pastor-photo {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .level-2 {
+    gap: 40px;
+  }
+  
+  .sub-level {
+    gap: 25px;
+  }
+  
+  .members-grid {
+    gap: 20px;
+  }
+}
+
+/* Animaciones de entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.pastoral-header {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.level-1 .pastor-card {
+  animation: fadeInScale 0.8s ease-out 0.2s both;
+}
+
+.level-2 .pastor-card.small {
+  animation: fadeInScale 0.8s ease-out calc(0.4s + var(--delay, 0s)) both;
+}
+
+.level-2 .pastor-card.small:nth-child(1) { --delay: 0s; }
+.level-2 .pastor-card.small:nth-child(2) { --delay: 0.1s; }
+.level-2 .pastor-card.small:nth-child(3) { --delay: 0.2s; }
+.level-2 .pastor-card.small:nth-child(4) { --delay: 0.3s; }
+
+.pastor-card.mini {
+  animation: fadeInScale 0.6s ease-out calc(0.8s + var(--mini-delay, 0s)) both;
+}
+
+.pastor-card.mini:nth-child(1) { --mini-delay: 0s; }
+.pastor-card.mini:nth-child(2) { --mini-delay: 0.1s; }
+.pastor-card.mini:nth-child(3) { --mini-delay: 0.2s; }
+
+/* Efectos adicionales para título */
+.title-main {
+  display: inline-block;
+  position: relative;
+}
+
+.title-main::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent 0%, rgba(189, 129, 31, 0.6) 20%, rgba(212, 160, 73, 0.8) 50%, rgba(189, 129, 31, 0.6) 80%, transparent 100%);
+  border-radius: 2px;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scaleX(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+/* ========================================
+   DECORACIONES Y DETALLES
+   ======================================== */
+
+/* Decoraciones en esquinas de tarjetas principales */
+.card-decoration {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: rgba(189, 129, 31, 0.4);
+  border-style: solid;
+}
+
+.card-decoration.top-left {
+  top: 12px;
+  left: 12px;
+  border-width: 2px 0 0 2px;
+  border-radius: 6px 0 0 0;
+}
+
+.card-decoration.top-right {
+  top: 12px;
+  right: 12px;
+  border-width: 2px 2px 0 0;
+  border-radius: 0 6px 0 0;
+}
+
+.card-decoration.bottom-left {
+  bottom: 12px;
+  left: 12px;
+  border-width: 0 0 2px 2px;
+  border-radius: 0 0 0 6px;
+}
+
+.card-decoration.bottom-right {
+  bottom: 12px;
+  right: 12px;
+  border-width: 0 2px 2px 0;
+  border-radius: 0 0 6px 0;
+}
+
+/* Corona/Estrella en fotos principales */
+.photo-crown {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #bd811f 0%, #d4a049 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 4px 12px rgba(189, 129, 31, 0.4),
+    0 0 0 3px rgba(255, 255, 255, 0.9),
+    0 0 0 5px rgba(189, 129, 31, 0.2);
+  z-index: 10;
+  animation: float 3s ease-in-out infinite;
+}
+
+.photo-crown svg {
+  width: 16px;
+  height: 16px;
+  color: white;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-4px); }
+}
+
+/* Insignia en fotos de nivel 2 */
+.photo-badge {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #d4a049 0%, #bd811f 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 2px 8px rgba(189, 129, 31, 0.4),
+    0 0 0 2px white;
+  z-index: 10;
+}
+
+.photo-badge svg {
+  width: 14px;
+  height: 14px;
+  color: white;
+}
+
+/* Puntos de conexión en tarjetas */
+.connection-point {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle, #fff 0%, #f0e9db 100%);
+  border: 2px solid #bd811f;
+  border-radius: 50%;
+  box-shadow: 
+    0 0 0 3px rgba(189, 129, 31, 0.15),
+    0 2px 6px rgba(189, 129, 31, 0.3),
+    inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  z-index: 5;
+}
+
+.connection-point.bottom {
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.connection-point.middle {
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-width: 3px;
+  box-shadow: 
+    0 0 0 4px rgba(189, 129, 31, 0.2),
+    0 3px 8px rgba(189, 129, 31, 0.35),
+    inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Nodos en línea conectora principal */
+.connector-section {
+  position: relative;
+}
+
+.connector-node {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, #fff 0%, #faf5ed 100%);
+  border: 3px solid #bd811f;
+  border-radius: 50%;
+  box-shadow: 
+    0 0 0 4px rgba(189, 129, 31, 0.15),
+    0 2px 8px rgba(189, 129, 31, 0.35),
+    inset 0 1px 3px rgba(0, 0, 0, 0.08);
+  animation: pulse-node 2s ease-in-out infinite;
+}
+
+.connector-node.top {
+  top: 0;
+}
+
+.connector-node.bottom {
+  bottom: 0;
+}
+
+@keyframes pulse-node {
+  0%, 100% {
+    box-shadow: 
+      0 0 0 4px rgba(189, 129, 31, 0.15),
+      0 2px 8px rgba(189, 129, 31, 0.35),
+      inset 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+  50% {
+    box-shadow: 
+      0 0 0 7px rgba(189, 129, 31, 0.25),
+      0 4px 12px rgba(189, 129, 31, 0.5),
+      inset 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* Línea horizontal principal */
+.main-horizontal-line {
+  position: relative;
+  height: 3px;
+  width: 60%;
+  max-width: 600px;
+  margin: 20px auto;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(189, 129, 31, 0.3) 10%, 
+    rgba(189, 129, 31, 0.8) 50%, 
+    rgba(189, 129, 31, 0.3) 90%, 
+    transparent 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(189, 129, 31, 0.3);
+}
+
+.horizontal-decorator {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(135deg, #bd811f 0%, #d4a049 100%);
+  border: 2px solid white;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  box-shadow: 
+    0 0 0 2px rgba(189, 129, 31, 0.2),
+    0 2px 6px rgba(189, 129, 31, 0.3);
+  animation: rotate-decorator 4s linear infinite;
+}
+
+.horizontal-decorator.left {
+  left: 10%;
+}
+
+.horizontal-decorator.center {
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+}
+
+.horizontal-decorator.right {
+  right: 10%;
+}
+
+@keyframes rotate-decorator {
+  from { transform: translateY(-50%) rotate(0deg); }
+  to { transform: translateY(-50%) rotate(360deg); }
+}
+
+.horizontal-decorator.center {
+  animation: rotate-center 4s linear infinite;
+}
+
+@keyframes rotate-center {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Decorador en líneas verticales */
+.line-decorator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: rgba(189, 129, 31, 0.8);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 0 2px rgba(255, 255, 255, 0.8),
+    0 0 8px rgba(189, 129, 31, 0.4);
+  animation: pulse-decorator 2s ease-in-out infinite;
+}
+
+@keyframes pulse-decorator {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+}
+
+/* Efecto pulso en líneas horizontales */
+.line-pulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(212, 160, 73, 0.6) 50%, 
+    transparent 100%);
+  animation: slide-pulse 2s ease-in-out infinite;
+}
+
+@keyframes slide-pulse {
+  0%, 100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Esquinas en tarjetas pequeñas */
+.card-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: rgba(212, 160, 73, 0.5);
+  border-style: solid;
+}
+
+.card-corner.top-left {
+  top: 8px;
+  left: 8px;
+  border-width: 2px 0 0 2px;
+  border-radius: 4px 0 0 0;
+}
+
+.card-corner.top-right {
+  top: 8px;
+  right: 8px;
+  border-width: 2px 2px 0 0;
+  border-radius: 0 4px 0 0;
+}
+
+/* Efecto interno en puntos conectores */
+.dot-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(135deg, #bd811f 0%, #d4a049 100%);
+  border-radius: 50%;
+  animation: pulse-inner 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-inner {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+/* Puntos decorativos en líneas pequeñas */
+.line-dots {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.line-dots span {
+  width: 4px;
+  height: 4px;
+  background: rgba(189, 129, 31, 0.7);
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(189, 129, 31, 0.4);
+  animation: dot-fade 1.5s ease-in-out infinite;
+}
+
+.line-dots span:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.line-dots span:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes dot-fade {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Efecto shimmer en líneas */
+.line-shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.5) 50%, 
+    transparent 100%);
+  animation: shimmer-line 3s ease-in-out infinite;
+}
+
+@keyframes shimmer-line {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Insignia en tarjetas mini */
+.card-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #d4a049 0%, #bd811f 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 0 2px rgba(255, 255, 255, 0.8),
+    0 0 6px rgba(212, 160, 73, 0.6);
+  animation: glow-badge 2s ease-in-out infinite;
+}
+
+@keyframes glow-badge {
+  0%, 100% {
+    box-shadow: 
+      0 0 0 2px rgba(255, 255, 255, 0.8),
+      0 0 6px rgba(212, 160, 73, 0.6);
+  }
+  50% {
+    box-shadow: 
+      0 0 0 2px rgba(255, 255, 255, 0.9),
+      0 0 10px rgba(212, 160, 73, 0.8);
+  }
+}
+
+/* Pulso en puntos pequeños */
+.dot-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 160, 73, 0.6) 0%, transparent 70%);
+  animation: expand-pulse 2s ease-in-out infinite;
+}
+
+@keyframes expand-pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0.8;
+  }
+}
+
+/* Mejoras en la posición relativa de elementos */
+.vertical-line,
+.vertical-line-small {
+  position: relative;
+}
+
+.horizontal-line,
+.horizontal-line-small {
+  position: relative;
+  overflow: hidden;
+}

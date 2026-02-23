@@ -71,11 +71,11 @@
                 <span class="section-icon">👥</span>
                 <h3>Liderazgo</h3>
               </div>
-              <a href="#" class="dropdown-link">
+              <a routerLink="/nosotros/Pastores" class="dropdown-link" (click)="closeAll()">
                 <span>Pastores</span>
                 <i class="link-arrow">→</i>
               </a>
-              <a href="#" class="dropdown-link">
+              <a routerLink="/nosotros/Equipo-Pastoral" class="dropdown-link" (click)="closeAll()">
                 <span>Equipo Pastoral</span>
                 <i class="link-arrow">→</i>
               </a>
@@ -226,8 +226,8 @@
         </div>
         <div class="mobile-dropdown-group">
           <div class="mobile-group-title">👥 Liderazgo</div>
-          <a href="#" class="mobile-sublink" (click)="closeAll()">Pastores</a>
-          <a href="#" class="mobile-sublink" (click)="closeAll()">Equipo Pastoral</a>
+          <a routerLink="/nosotros/Pastores" class="mobile-sublink" (click)="closeAll()">Pastores</a>
+          <a routerLink="/nosotros/Equipo-Pastoral" class="mobile-sublink" (click)="closeAll()">Equipo Pastoral</a>
           <a href="#" class="mobile-sublink" (click)="closeAll()">Ancianos</a>
           <a href="#" class="mobile-sublink" (click)="closeAll()">Diáconos</a>
         </div>

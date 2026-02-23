@@ -1,0 +1,130 @@
+<div class="pastoral-container">
+  <div class="pastoral-header">
+    <h1 class="pastoral-title">
+      <span class="title-accent">Nuestro</span>
+      <span class="title-main">Equipo Pastoral</span>
+    </h1>
+    <p class="pastoral-subtitle">
+      Conoce a los líderes que Dios ha puesto para guiar y edificar nuestra iglesia.
+    </p>
+  </div>
+
+  <div class="org-chart">
+    <!-- Nivel 1: Pastores Principales -->
+    <div class="level level-1">
+      <div class="pastor-card" *ngFor="let pastor of pastoresPrincipales; let i = index">
+        <div class="card-decoration top-left"></div>
+        <div class="card-decoration top-right"></div>
+        <div class="card-decoration bottom-left"></div>
+        <div class="card-decoration bottom-right"></div>
+        <div class="pastor-photo">
+          <img [src]="pastor.foto" [alt]="pastor.nombre">
+          <div class="photo-crown">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L15 8.5L22 9.5L17 14.5L18.5 21.5L12 18L5.5 21.5L7 14.5L2 9.5L9 8.5L12 2Z" fill="currentColor"/>
+            </svg>
+          </div>
+        </div>
+        <div class="pastor-info">
+          <h3 class="pastor-name">{{ pastor.nombre }}</h3>
+          <p class="pastor-role">{{ pastor.cargo }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sistema de líneas unificado -->
+    <div class="connection-system">
+      <!-- Líneas verticales desde nivel 1 -->
+      <div class="vertical-lines-top">
+        <div class="v-line left"></div>
+        <div class="v-line right"></div>
+      </div>
+      
+      <!-- Línea horizontal superior que une las verticales -->
+      <div class="horizontal-bridge">
+        <div class="h-line"></div>
+        <div class="bridge-dot left"></div>
+        <div class="bridge-dot center"></div>
+        <div class="bridge-dot right"></div>
+      </div>
+      
+      <!-- Líneas verticales hacia nivel 2 -->
+      <div class="vertical-lines-middle">
+        <div class="v-line-m left"></div>
+        <div class="v-line-m right"></div>
+      </div>
+    </div>
+
+    <!-- Nivel 2: Pastores de Ministerios -->
+    <div class="level level-2">
+      <div class="branch" *ngFor="let principal of pastoresPrincipales; let branchIndex = index">
+        <div class="branch-content">
+          <!-- Línea horizontal para distribuir ministerios -->
+          <div class="ministry-horizontal-line" *ngIf="principal.equipo && principal.equipo.length > 1">
+            <div class="mh-dot" *ngFor="let min of principal.equipo; let idx = index"></div>
+          </div>
+          
+          <div class="sub-level">
+            <div class="ministry-wrapper" *ngFor="let ministerio of principal.equipo; let cardIndex = index">
+              <!-- Línea vertical corta desde horizontal hasta tarjeta -->
+              <div class="ministry-connector">
+                <div class="mc-line"></div>
+                <div class="mc-dot"></div>
+              </div>
+              
+              <div class="pastor-card small">
+                <div class="card-corner top-left"></div>
+                <div class="card-corner top-right"></div>
+                <div class="pastor-photo">
+                  <img [src]="ministerio.foto" [alt]="ministerio.nombre">
+                  <div class="photo-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                      <path d="M12 7V13L16 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="pastor-info">
+                  <h4 class="pastor-name">{{ ministerio.nombre }}</h4>
+                  <p class="pastor-role">{{ ministerio.cargo }}</p>
+                </div>
+              </div>
+              
+              <!-- Nivel 3: Líderes de Área -->
+              <div class="team-members" *ngIf="ministerio.equipo && ministerio.equipo.length > 0">
+                <!-- Línea vertical desde tarjeta -->
+                <div class="team-vertical-line"></div>
+                
+                <!-- Línea horizontal para distribución de líderes -->
+                <div class="team-horizontal-line" *ngIf="ministerio.equipo.length > 1">
+                  <div class="th-dot" *ngFor="let lid of ministerio.equipo"></div>
+                </div>
+                
+                <div class="members-grid">
+                  <div class="leader-wrapper" *ngFor="let lider of ministerio.equipo">
+                    <!-- Conexión vertical corta a cada líder -->
+                    <div class="leader-connector">
+                      <div class="lc-line"></div>
+                      <div class="lc-dot"></div>
+                    </div>
+                    
+                    <div class="pastor-card mini">
+                      <div class="card-badge"></div>
+                      <div class="pastor-photo">
+                        <img [src]="lider.foto" [alt]="lider.nombre">
+                      </div>
+                      <div class="pastor-info">
+                        <h5 class="pastor-name">{{ lider.nombre }}</h5>
+                        <p class="pastor-role">{{ lider.cargo }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

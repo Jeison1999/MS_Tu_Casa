@@ -1,0 +1,82 @@
+<div class="shepherds-container">
+  <!-- Header -->
+  <div class="shepherds-header">
+    <h1 class="shepherds-title">
+      <span class="title-accent">Nuestros</span>
+      <span class="title-main">Pastores Principales</span>
+    </h1>
+    <p class="shepherds-subtitle">
+      Conoce a los siervos que Dios ha levantado para guiar nuestra congregación
+    </p>
+  </div>
+
+  <!-- Navegación de Avatares Flotantes -->
+  <nav class="avatars-nav">
+    <div class="avatars-container">
+      <button 
+        *ngFor="let pastor of pastoresPrincipales"
+        class="avatar-button"
+        [class.active]="pastor.id === pastorSeleccionado.id"
+        (click)="seleccionarPastor(pastor)"
+        [attr.aria-label]="'Ver biografía de ' + pastor.nombre">
+        <div class="avatar-wrapper">
+          <div class="avatar-image">
+            <img [src]="pastor.icono" [alt]="pastor.nombre">
+          </div>
+          <div class="avatar-glow"></div>
+          <div class="avatar-ring"></div>
+        </div>
+        <div class="avatar-info">
+          <span class="avatar-name">{{ pastor.nombre }}</span>
+          <span class="avatar-title">{{ pastor.cargo }}</span>
+        </div>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Panel de Biografía -->
+  <div class="biography-panel" [@fadeSlide]="pastorSeleccionado.id">
+    <div class="biography-content">
+      <!-- Sección de Foto -->
+      <div class="biography-photo-section">
+        <div class="photo-frame">
+          <div class="photo-decoration top-left"></div>
+          <div class="photo-decoration top-right"></div>
+          <div class="photo-decoration bottom-left"></div>
+          <div class="photo-decoration bottom-right"></div>
+          <img [src]="pastorSeleccionado.foto" [alt]="pastorSeleccionado.nombre">
+          <div class="photo-overlay"></div>
+        </div>
+      </div>
+
+      <!-- Sección de Texto -->
+      <div class="biography-text-section">
+        <div class="biography-header">
+          <h2 class="pastor-name">{{ pastorSeleccionado.nombre }}</h2>
+          <p class="pastor-role">{{ pastorSeleccionado.cargo }}</p>
+          <div class="pastor-details">
+            <div class="detail-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="currentColor"/>
+              </svg>
+              <span>{{ pastorSeleccionado.ministerio }}</span>
+            </div>
+            <div class="detail-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <span>{{ pastorSeleccionado.anios }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="biography-text">
+          <p *ngFor="let parrafo of pastorSeleccionado.biografia" class="biography-paragraph">
+            {{ parrafo }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
