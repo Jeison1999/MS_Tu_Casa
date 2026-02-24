@@ -98,9 +98,13 @@
           <div class="gallery-carousel-track" 
                [class.dragging]="isDragging"
                [style.transform]="'translateX(calc(-' + (currentSlide * 100) + '% + ' + dragOffset + 'px))'">
-            <div class="gallery-carousel-slide" *ngFor="let img of gallery">
+            <div class="gallery-carousel-slide" *ngFor="let item of gallery">
               <div class="gallery-slide-image">
-                <img [src]="img" alt="Kaynos Generación" [style.pointer-events]="'none'" />
+                @if (item.type === 'image') {
+                  <img [src]="item.url" alt="Kaynos Generación" [style.pointer-events]="'none'" />
+                } @else {
+                  <video [src]="item.url" [style.pointer-events]="'none'" controls playsinline muted loop autoplay></video>
+                }
               </div>
             </div>
           </div>
@@ -121,11 +125,11 @@
         <!-- Dots Indicator -->
         <div class="gallery-carousel-dots">
           <button
-            *ngFor="let img of gallery; let i = index"
+            *ngFor="let item of gallery; let i = index"
             class="gallery-dot"
             [class.active]="i === currentSlide"
             (click)="goToSlide(i)"
-            [attr.aria-label]="'Ir a imagen ' + (i + 1)">
+            [attr.aria-label]="'Ir a ' + (item.type === 'video' ? 'video' : 'imagen') + ' ' + (i + 1)">
           </button>
         </div>
       </div>

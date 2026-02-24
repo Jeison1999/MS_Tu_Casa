@@ -70,7 +70,7 @@ export class YouthsComponent implements OnInit, OnDestroy {
     },
   ];
 
-  gallery: string[] = [];
+  gallery: { url: string; type: 'image' | 'video' }[] = [];
 
   // Redes sociales
   socialMedia: { name: string; icon: SafeHtml; url: string; description: string; color: string; }[] = [];
@@ -122,9 +122,9 @@ export class YouthsComponent implements OnInit, OnDestroy {
 
     // Cargar galería desde Cloudinary
     this.gallery = [
-      this.cloudinary.getOptimizedImage('569881451_18415657786116943_1280062635155265105_n.jpg_bd7xwo', 1200),
-      this.cloudinary.getOptimizedImage('623198584_18428389108116943_3842377834010274228_n.jpg_h2alxh', 1200),
-      this.cloudinary.getOptimizedImage('699460bf-5778-4469-8841-88e89a8976cf_lh5mef', 1200),
+      this.cloudinary.getOptimizedMedia('569881451_18415657786116943_1280062635155265105_n.jpg_bd7xwo', 1200),
+      this.cloudinary.getOptimizedMedia('WhatsApp_Video_2026-02-24_at_3.13.27_PM_npoirf', 1200),
+      this.cloudinary.getOptimizedMedia('699460bf-5778-4469-8841-88e89a8976cf_lh5mef', 1200),
     ];
 
     this.startAutoSlide();
