@@ -74,6 +74,10 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   // Imágenes para el carrusel horizontal desde Cloudinary
   horizontalImages: string[] = [];
 
+  // Variables para controlar la galería horizontal
+  isHorizontalPaused = false;
+  horizontalScrollPosition = 0;
+
   constructor(
     private cdr: ChangeDetectorRef, 
     private cloudinary: ClaudinaryService
@@ -195,6 +199,27 @@ export class WelcomeComponent implements OnInit, OnDestroy {
 
   onCarouselMouseLeave() {
     this.startAutoSlide();
+  }
+
+  // Métodos para la galería horizontal
+  onHorizontalTouchStart(event: TouchEvent) {
+    this.isHorizontalPaused = true;
+  }
+
+  onHorizontalTouchEnd(event: TouchEvent) {
+    // Reanudar animación inmediatamente
+    this.isHorizontalPaused = false;
+  }
+
+  onHorizontalMouseEnter() {
+    // Solo pausar en desktop (no en mobile)
+    if (window.innerWidth > 768) {
+      this.isHorizontalPaused = true;
+    }
+  }
+
+  onHorizontalMouseLeave() {
+    this.isHorizontalPaused = false;
   }
 
 }

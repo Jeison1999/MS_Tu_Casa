@@ -273,6 +273,10 @@
   position: relative;
   background: white;
   border-radius: 20px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .horizontal-carousel-wrapper {
@@ -293,6 +297,12 @@
     black 95%,
     transparent 100%
   );
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.horizontal-carousel-wrapper:active {
+  cursor: grabbing;
 }
 
 .horizontal-carousel-track {
@@ -334,14 +344,26 @@
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
 }
 
 .horizontal-carousel-item:hover img {
   transform: scale(1.1);
 }
 
-/* Pausar animación al hover */
-.horizontal-carousel-wrapper:hover .horizontal-carousel-track {
+/* Pausar animación al hover solo en desktop */
+@media (min-width: 769px) {
+  .horizontal-carousel-wrapper:hover .horizontal-carousel-track {
+    animation-play-state: paused;
+  }
+}
+
+/* Pausar animación con clase JavaScript */
+.horizontal-carousel-track.paused {
   animation-play-state: paused;
 }
 
@@ -928,6 +950,27 @@
   .horizontal-carousel-item {
     width: 300px;
     height: 225px;
+  }
+
+  /* Mejorar comportamiento táctil en móvil */
+  .horizontal-carousel-wrapper {
+    cursor: default;
+  }
+
+  .horizontal-carousel-wrapper:active {
+    cursor: default;
+  }
+
+  .horizontal-carousel-item:hover {
+    transform: none;
+  }
+
+  .horizontal-carousel-item img {
+    transition: none;
+  }
+
+  .horizontal-carousel-item:hover img {
+    transform: none;
   }
 
   .services-section {

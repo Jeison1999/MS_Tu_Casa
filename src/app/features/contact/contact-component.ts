@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-contact-component',
@@ -10,12 +10,33 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 export class ContactComponent {
   churchName = 'Morando en Sion';
-  email = 'contacto@morandoension.org';
+  email = 'morandoension@gmail.com';
   phone = '+57 300 000 0000';
+
+  locations: Array<{title: string; address: string; mapUrl: SafeResourceUrl; status: string; directUrl: string}> = [];
 
   socialLinks: Array<{name: string; handle: string; url: string; icon: SafeHtml}>;
 
   constructor(private sanitizer: DomSanitizer) {
+    // Inicializar ubicaciones con URLs sanitizadas
+    this.locations = [
+      {
+        title: 'Sede Actual',
+        address: 'Cra. 11 #29-29, a 29-1, Soledad, Atlántico',
+        mapUrl: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.3736747562647!2d-74.7989693!3d10.9058645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef5d2646ded01f5%3A0xff8c97ef5549c3c3!2sIglesia%20Cristiana%20Morando%20En%20Sion!5e0!3m2!1ses!2sco!4v1708560000000!5m2!1ses!2sco'),
+        status: 'Templo en funcionamiento',
+        directUrl: 'https://goo.gl/maps/vY5Z8Z8Z8Z8Z8Z8Z8'
+      },
+      {
+        title: 'Nuevo Templo',
+        address: 'Empezando los cultos',
+        mapUrl: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1964.7513534922816!2d-74.79884458461548!3d10.904978616614955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTDCsDU0JzE3LjkiTiA3NMKwNDcnNTQuNiJX!5e0!3m2!1ses!2sco!4v1740428000000!5m2!1ses!2sco'),
+        status: 'Solo los domingos',
+        directUrl: 'https://maps.app.goo.gl/ieaySGc5ndQWPvD38'
+      }
+    ];
+    
+    // Inicializar redes sociales
     this.socialLinks = [
       {
         name: 'Facebook',

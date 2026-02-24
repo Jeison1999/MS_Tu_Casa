@@ -87,11 +87,20 @@
       <div class="gallery-carousel-wrapper"
            (mouseenter)="onCarouselMouseEnter()"
            (mouseleave)="onCarouselMouseLeave()">
-        <div class="gallery-carousel-container">
-          <div class="gallery-carousel-track" [style.transform]="'translateX(-' + (currentSlide * 100) + '%)'">
+        <div class="gallery-carousel-container"
+             (mousedown)="onDragStart($event)"
+             (mousemove)="onDragMove($event)"
+             (mouseup)="onDragEnd()"
+             (mouseleave)="onDragEnd()"
+             (touchstart)="onTouchStart($event)"
+             (touchmove)="onTouchMove($event)"
+             (touchend)="onTouchEnd()">
+          <div class="gallery-carousel-track" 
+               [class.dragging]="isDragging"
+               [style.transform]="'translateX(calc(-' + (currentSlide * 100) + '% + ' + dragOffset + 'px))'">
             <div class="gallery-carousel-slide" *ngFor="let img of gallery">
               <div class="gallery-slide-image">
-                <img [src]="img" alt="Kaynos Generación" />
+                <img [src]="img" alt="Kaynos Generación" [style.pointer-events]="'none'" />
               </div>
             </div>
           </div>
@@ -120,6 +129,26 @@
           </button>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Social Media Section -->
+  <section class="youth-section social-section">
+    <div class="section-header">
+      <h2>Síguenos y conéctate</h2>
+      <p>Mantente al día con todas nuestras actividades y eventos</p>
+    </div>
+    <div class="social-grid">
+      <a *ngFor="let social of socialMedia" 
+         [href]="social.url" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         class="social-card">
+        <div class="social-icon" [innerHTML]="social.icon"></div>
+        <h3 class="social-name">{{ social.name }}</h3>
+        <p class="social-description">{{ social.description }}</p>
+        <div class="social-arrow">→</div>
+      </a>
     </div>
   </section>
 </div>
