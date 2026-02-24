@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { ClaudinaryService } from '../../../core/claudinary.service';
 
 interface Pastor {
   id: number;
@@ -28,13 +29,13 @@ interface Pastor {
     ])
   ]
 })
-export class ShepherdsComponent {
+export class ShepherdsComponent implements OnInit {
   pastoresPrincipales: Pastor[] = [
     {
       id: 1,
       nombre: 'Pedro Ríos',
       cargo: 'Apóstol de la Casa',
-      icono: '/svg/hombre.svg',
+      icono: '',
       foto: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500',
       ministerio: 'Visión y Dirección Apostólica',
       anios: '25 años de ministerio',
@@ -48,7 +49,7 @@ export class ShepherdsComponent {
       id: 2,
       nombre: 'María González',
       cargo: 'Pastora Principal',
-      icono: '/svg/mujer.svg',
+      icono: '',
       foto: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500',
       ministerio: 'Ministerio de Adoración y Familias',
       anios: '20 años de ministerio',
@@ -62,7 +63,7 @@ export class ShepherdsComponent {
       id: 3,
       nombre: 'Juan Martínez',
       cargo: 'Pastor Asociado',
-      icono: '/svg/pareja.svg',
+      icono: '',
       foto: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=500',
       ministerio: 'Evangelismo y Misiones',
       anios: '15 años de ministerio',
@@ -75,6 +76,16 @@ export class ShepherdsComponent {
   ];
 
   pastorSeleccionado: Pastor = this.pastoresPrincipales[0];
+
+  constructor(private cloudinary: ClaudinaryService) {}
+
+  ngOnInit() {
+    // Cargar iconos SVG desde Cloudinary
+    // Nota: Reemplaza estos IDs con los IDs reales de Cloudinary después de subir los archivos
+    this.pastoresPrincipales[0].icono = this.cloudinary.getOptimizedImage('hombre_r2czgv', 200);
+    this.pastoresPrincipales[1].icono = this.cloudinary.getOptimizedImage('mujer_jkximv', 200);
+    this.pastoresPrincipales[2].icono = this.cloudinary.getOptimizedImage('pareja_qqahxz', 200);
+  }
 
   seleccionarPastor(pastor: Pastor): void {
     this.pastorSeleccionado = pastor;
