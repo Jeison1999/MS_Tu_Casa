@@ -12,18 +12,54 @@
     </div>
   </section>
 
+  <!-- Loading State -->
+  <section class="events-section" *ngIf="isLoading">
+    <div class="loading-container">
+      <div class="loader"></div>
+      <p>Cargando eventos...</p>
+    </div>
+  </section>
+
+  <!-- Error State -->
+  <section class="events-section" *ngIf="error && !isLoading">
+    <div class="error-container">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      <h3>No se pudieron cargar los eventos</h3>
+      <p>{{ error }}</p>
+      <button class="btn btn-primary" (click)="retry()">
+        Reintentar
+      </button>
+    </div>
+  </section>
+
   <!-- Upcoming events with hover countdown -->
-  <section class="events-section">
+  <section class="events-section" *ngIf="!isLoading && !error">
     <div class="section-header">
       <h2>Calendario de encuentros</h2>
       <p>Pasa el cursor sobre cada tarjeta para ver la cuenta regresiva.</p>
     </div>
 
-    <div class="events-grid">
+    <!-- No events message -->
+    <div class="no-events" *ngIf="upcomingEvents.length === 0">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+        <line x1="16" y1="2" x2="16" y2="6"/>
+        <line x1="8" y1="2" x2="8" y2="6"/>
+        <line x1="3" y1="10" x2="21" y2="10"/>
+      </svg>
+      <p>No hay eventos próximos en este momento</p>
+    </div>
+
+    <div class="events-grid" *ngIf="upcomingEvents.length > 0">
       <article
         class="event-card"
         *ngFor="let ev of upcomingEvents"
-        [style.--event-image]="'url(' + ev.image + ')'"
+        [style.--event-image]="'url(' + ev.image_url + ')'"
+        (click)="openEventModal(ev)"
       >
         <div class="event-image-layer"></div>
         <div class="event-gradient"></div>
@@ -32,7 +68,7 @@
           <h3 class="event-name">{{ ev.title }}</h3>
           <p class="event-location">{{ ev.location }}</p>
           <p class="event-date">
-            {{ ev.date | date: 'EEEE d \'de\' MMMM, h:mm a' }}
+            {{ ev.event_date | date: 'EEEE d \'de\' MMMM, h:mm a' }}
           </p>
         </div>
 
@@ -45,23 +81,90 @@
   </section>
 
   <!-- Recent events -->
-  <section class="events-section recent-section">
+  <section class="events-section recent-section" *ngIf="!isLoading && !error">
     <div class="section-header">
       <h2>Eventos recientes</h2>
       <p>Algunos de los últimos momentos que Dios nos ha permitido vivir.</p>
     </div>
 
-    <div class="recent-grid">
-      <article class="recent-card" *ngFor="let ev of pastEvents">
+    <!-- No past events message -->
+    <div class="no-events" *ngIf="pastEvents.length === 0">
+      <p>No hay eventos recientes para mostrar</p>
+    </div>
+
+    <div class="recent-grid" *ngIf="pastEvents.length > 0">
+      <article class="recent-card" *ngFor="let ev of pastEvents" (click)="openEventModal(ev)">
         <div class="recent-image">
-          <img [src]="ev.image" [alt]="ev.title" />
+          <img [src]="ev.image_url" [alt]="ev.title" />
         </div>
         <div class="recent-body">
-          <span class="recent-date">{{ ev.dateLabel }}</span>
+          <span class="recent-date">{{ formatEventDate(ev.event_date) }}</span>
           <h3 class="recent-title">{{ ev.title }}</h3>
-          <p class="recent-summary">{{ ev.summary }}</p>
+          <p class="recent-summary">{{ ev.description }}</p>
         </div>
       </article>
     </div>
   </section>
+
+  <!-- Modal de detalles del evento -->
+  <div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="closeModal()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="modal-image" *ngIf="selectedEvent">
+        <img [src]="selectedEvent.image_url" [alt]="selectedEvent.title" />
+      </div>
+
+      <div class="modal-body" *ngIf="selectedEvent">
+        <span class="modal-badge" [class.badge-upcoming]="selectedEvent.is_upcoming" [class.badge-past]="selectedEvent.is_past">
+          {{ selectedEvent.is_upcoming ? 'Próximo evento' : 'Evento pasado' }}
+        </span>
+
+        <h2 class="modal-title">{{ selectedEvent.title }}</h2>
+
+        <div class="modal-info">
+          <div class="info-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>{{ selectedEvent.event_date | date: 'EEEE, d \'de\' MMMM \'de\' yyyy' }}</span>
+          </div>
+
+          <div class="info-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span>{{ selectedEvent.event_date | date: 'h:mm a' }}</span>
+          </div>
+
+          <div class="info-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>{{ selectedEvent.location }}</span>
+          </div>
+        </div>
+
+        <div class="modal-countdown" *ngIf="selectedEvent.is_upcoming && countdowns[selectedEvent.id]">
+          <p class="countdown-text">Faltan</p>
+          <p class="countdown-time">{{ countdowns[selectedEvent.id] }}</p>
+        </div>
+
+        <div class="modal-description">
+          <h3>Acerca del evento</h3>
+          <p>{{ selectedEvent.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
