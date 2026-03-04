@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000/api/v1', // Cambia aquí para desarrollo/producción
+  apiUrl: 'https://ms-backend-r8lr.onrender.com/api/v1', // Cambia aquí para desarrollo/producción
 };
 
 /**
