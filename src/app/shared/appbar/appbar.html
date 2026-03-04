@@ -1,4 +1,4 @@
-<header [ngClass]="['appbar', currentTheme]">
+<header class="appbar" [ngClass]="{'hidden': isHidden, 'default': currentTheme === 'default', 'youth': currentTheme === 'youth'}">
   <div class="appbar-glow"></div>
   
   <div class="appbar-container">

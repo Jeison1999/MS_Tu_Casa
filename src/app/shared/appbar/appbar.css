@@ -11,6 +11,11 @@
   border-radius: 20px;
   opacity: 0;
   animation: appbar-appear 400ms ease-out 2200ms forwards;
+  transition: transform 0.3s ease-in-out;
+}
+
+.appbar.hidden {
+  transform: translateY(-120%);
 }
 
 @keyframes appbar-appear {

@@ -19,6 +19,11 @@ export class Appbar {
   private closeTimeout: any = null;
   currentTheme: AppTheme = 'default';
   readonly logo1: string;
+  
+  // Scroll behavior
+  isHidden = false;
+  private lastScrollTop = 0;
+  private scrollThreshold = 10;
 
   constructor(private themeService: ThemeService, private claudinary: ClaudinaryService) {
     this.logo1 = this.claudinary.getOptimizedImage('logoms_prnuap');
@@ -26,6 +31,37 @@ export class Appbar {
     this.themeService.theme$.subscribe((theme) => {
       this.currentTheme = theme;
     });
+  }
+
+  ngOnInit() {
+    window.addEventListener('scroll', this.handleScroll.bind(this));
+  }
+
+  ngOnDestroy() {
+    window.removeEventListener('scroll', this.handleScroll.bind(this));
+  }
+
+  private handleScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Si estamos en la parte superior, siempre mostrar
+    if (scrollTop <= 100) {
+      this.isHidden = false;
+      this.lastScrollTop = scrollTop;
+      return;
+    }
+    
+    // Detectar dirección del scroll
+    if (Math.abs(scrollTop - this.lastScrollTop) > this.scrollThreshold) {
+      if (scrollTop > this.lastScrollTop) {
+        // Scrolling hacia abajo - ocultar
+        this.isHidden = true;
+      } else {
+        // Scrolling hacia arriba - mostrar
+        this.isHidden = false;
+      }
+      this.lastScrollTop = scrollTop;
+    }
   }
 
   toggleDropdown(name: string, event: Event) {
