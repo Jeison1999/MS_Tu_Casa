@@ -24,30 +24,30 @@ jobs:
     - name: Build Angular project
       run: npm run build -- --configuration production --base-href /
     
-    - name: List build output (for debugging)
+    - name: List build output
       run: |
-        echo "Contents of dist/mscasa/browser:"
+        echo "=== Build complete, checking output ==="
+        ls -la dist/
+        echo "=== Contents of mscasa folder ==="
+        ls -la dist/mscasa/
+        echo "=== Contents of browser folder ==="
         ls -la dist/mscasa/browser/
     
-    - name: Deploy to server via SSH
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USER }}
-        key: ${{ secrets.SERVER_SSH_KEY }}
-        port: 33
-        source: "dist/mscasa/browser/*"
-        target: "/var/www/mstucasa.com/html/"
-        strip_components: 3
-        rm: true
+    - name: Setup SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_ed25519
+        chmod 600 ~/.ssh/id_ed25519
+        ssh-keyscan -p 33 ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+    
+    - name: Deploy to server via rsync
+      run: |
+        rsync -avz --delete -e "ssh -p 33 -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
+          dist/mscasa/browser/ \
+          ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/var/www/mstucasa.com/html/
     
     - name: Set correct permissions
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USER }}
-        key: ${{ secrets.SERVER_SSH_KEY }}
-        port: 33
-        script: |
-          chown -R www-data:www-data /var/www/mstucasa.com/html
-          chmod -R 755 /var/www/mstucasa.com/html
+      run: |
+        ssh -p 33 -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no \
+          ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} \
+          "chown -R www-data:www-data /var/www/mstucasa.com/html && chmod -R 755 /var/www/mstucasa.com/html"
