@@ -24,6 +24,11 @@ jobs:
     - name: Build Angular project
       run: npm run build -- --configuration production --base-href /
     
+    - name: List build output (for debugging)
+      run: |
+        echo "Contents of dist/mscasa/browser:"
+        ls -la dist/mscasa/browser/
+    
     - name: Deploy to server via SSH
       uses: appleboy/scp-action@master
       with:
@@ -31,9 +36,9 @@ jobs:
         username: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SERVER_SSH_KEY }}
         port: 33
-        source: "dist/mscasa/**"
-        target: "/var/www/mstucasa.com/html"
-        strip_components: 2
+        source: "dist/mscasa/browser/*"
+        target: "/var/www/mstucasa.com/html/"
+        strip_components: 3
         rm: true
     
     - name: Set correct permissions
