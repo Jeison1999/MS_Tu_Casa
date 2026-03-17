@@ -14,8 +14,15 @@
           <span class="subtitle-rest">Te esperamos con los brazos abiertos.</span>
         </p>
         <div class="hero-buttons">
-          <a href="#" class="btn btn-primary">Conoce más</a>
-          <a href="#" class="btn btn-secondary">Únete a nosotros</a>
+          <a (click)="scrollToNextSection()" class="btn btn-primary btn-scroll-down" role="button">
+            <span class="btn-text">Conoce más</span>
+            <div class="btn-arrow-wrapper">
+              <span class="btn-arrow">⬇</span>
+            </div>
+          </a>
+          <button class="btn btn-join">
+            <span>Únete a nosotros</span>
+          </button>
         </div>
       </div>
       <div class="hero-image">
@@ -72,7 +79,7 @@
           </p>
         </div>
         <div class="about-card">
-          <div class="card-icon">👥</div>
+          <div class="card-icon">👨‍👩‍👧‍👦</div>
           <h3 class="card-title">Comunidad</h3>
           <p class="card-description">
             Formamos una familia donde cada persona es valorada y 

@@ -28,46 +28,32 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   // Servicios semanales
   weeklyServices = [
     {
-      icon: '⛪',
-      title: 'Servicios Dominicales',
-      schedule: ['7:00 AM', '9:00 AM', '11:00 AM'],
-      description: 'Adoración y enseñanza de la Palabra',
-      color: '#bd811f',
-    },
-    {
-      icon: '🙏',
-      title: 'Lunes de Oración',
-      schedule: ['7:00 PM'],
-      description: 'Tiempo de intercesión y comunión',
-      color: '#d4a049',
-    },
-    {
-      icon: '📖',
-      title: 'Devocionales',
-      schedule: ['Martes, jueves y sábados', '5:00 AM'],
-      description: 'Inicio el día con la Palabra',
+      icon: '✨',
+      title: 'Viernes de gloria',
+      schedule: ['Viernes | 7:00 PM'],
+      description: 'Noche de fe y milagros',
       color: '#bd811f',
     },
     {
       icon: '🌅',
       title: 'Ayunos',
-      schedule: ['Miércoles y viernes', '9:30 AM'],
+      schedule: ['Sabado | 8:30 AM'],
       description: 'Dedicación y consagración',
       color: '#d4a049',
     },
     {
-      icon: '✨',
-      title: 'Viernes de Fe para Milagros',
-      schedule: ['7:00 PM'],
-      description: 'Noche de fe y milagros',
-      color: '#bd811f',
+      icon: '👦🏼',
+      title: 'Culto de jovenes',
+      schedule: ['Sábado | 6:00 PM'],
+      description: 'Juventud en acción y adoración',
+      color: '#d4a049',
     },
     {
-      icon: '🎯',
-      title: 'Sábados Misión Josué',
-      schedule: ['5:00 PM'],
-      description: 'Evangelismo y alcance',
-      color: '#d4a049',
+      icon: '⛪',
+      title: 'Servicios Dominicales',
+      schedule: ['Domingos | 9:00 AM'],
+      description: 'Adoración y enseñanza de la Palabra',
+      color: '#bd811f',
     },
   ];
 
@@ -220,6 +206,14 @@ export class WelcomeComponent implements OnInit, OnDestroy {
 
   onHorizontalMouseLeave() {
     this.isHorizontalPaused = false;
+  }
+
+  // Scroll suave hacia la siguiente sección
+  scrollToNextSection() {
+    const aboutSection = document.querySelector('.about-section');
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
 }
