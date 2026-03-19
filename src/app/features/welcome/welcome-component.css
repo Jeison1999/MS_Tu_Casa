@@ -51,10 +51,17 @@
 }
 
 .title-main {
+  color: #bd811f;
+  display: inline-block;
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .title-main {
   background: linear-gradient(135deg, #bd811f 0%, #d4a049 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  }
 }
 
 .hero-subtitle {
@@ -133,11 +140,13 @@
   font-weight: 700;
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-  background: linear-gradient(135deg, #bd811f 0%, #d4a049 100%);
-  color: white;
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #bd811f 0%, #d4a049 100%);
+    color: white;
+  }
 }
 
 .btn-secondary {
@@ -255,12 +264,6 @@
   opacity: 1;
 }
 
-.btn-scroll-down:hover .btn-text {
-  opacity: 0;
-  transform: translateY(-20px);
-  pointer-events: none;
-}
-
 .btn-arrow-wrapper {
   position: relative;
   width: 24px;
@@ -281,10 +284,45 @@
   color: #fcfbf9;
 }
 
-.btn-scroll-down:hover .btn-arrow {
-  opacity: 1;
-  transform: translateY(0);
-  animation: arrow-bounce-enhanced 0.8s ease-in-out infinite;
+@media (hover: hover) and (pointer: fine) {
+  .btn-scroll-down:hover .btn-text {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+  }
+
+  .btn-scroll-down:hover .btn-arrow {
+    opacity: 1;
+    transform: translateY(0);
+    animation: arrow-bounce-enhanced 0.8s ease-in-out infinite;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .title-main {
+    background: none;
+    -webkit-text-fill-color: #bd811f;
+    color: #bd811f;
+  }
+
+  .btn-text {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .btn-arrow {
+    opacity: 0;
+    transform: translateY(-24px);
+    animation: none;
+  }
+
+  .btn-scroll-down.btn-primary:hover,
+  .btn-scroll-down.btn-primary:focus,
+  .btn-scroll-down.btn-primary:active {
+    background: white;
+    color: #bd811f;
+  }
 }
 
 @keyframes arrow-bounce-enhanced {
