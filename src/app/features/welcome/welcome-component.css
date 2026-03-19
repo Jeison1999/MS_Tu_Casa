@@ -184,6 +184,7 @@
   color: #bd811f;
   border: 2px solid #bd811f;
   transition: all 0.3s ease;
+  isolation: isolate;
 }
 
 .btn-join span {
@@ -196,30 +197,20 @@
   color: white;
 }
 
-.btn-join::before,
-.btn-join::after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
 .btn-join::before {
   content: "";
-  background: #bd811f;
   position: absolute;
-  top: -50%;
-  left: -250%;
-  width: 250%;
-  height: 200%;
-  transform: skew(30deg);
-  transition: left 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+  inset: 0;
+  border-radius: inherit;
+  background: #bd811f;
+  z-index: 0;
+  transform: translateX(-102%);
+  transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+  pointer-events: none;
 }
 
 .btn-join:hover::before {
-  left: 0;
+  transform: translateX(0);
 }
 
 .btn-join:active {
