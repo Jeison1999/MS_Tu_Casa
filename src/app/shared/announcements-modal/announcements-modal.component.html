@@ -1,0 +1,93 @@
+<!-- Modal Overlay -->
+<div
+  class="modal-overlay"
+  *ngIf="showModal"
+  (click)="onOverlayClick($event)"
+>
+  <!-- Modal Content - Solo Imagen/Video -->
+  <div class="modal-content">
+    <!-- Close Button -->
+    <button class="modal-close" (click)="close()" title="Cerrar anuncio">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <!-- Announcement Media (Image or Video) -->
+    <ng-container *ngIf="currentAnnouncement as announcement">
+      <div class="announcement-media">
+        <!-- Image -->
+        <img
+          *ngIf="announcement.media_type === 'image'"
+          [src]="announcement.media_url"
+          [alt]="announcement.title"
+          class="announcement-image"
+        />
+        <!-- Video -->
+        <video
+          *ngIf="announcement.media_type === 'video'"
+          controls
+          class="announcement-video"
+        >
+          <source [src]="announcement.media_url" />
+          Tu navegador no soporta video HTML5
+        </video>
+      </div>
+
+      <!-- Carousel Controls -->
+      <div
+        class="carousel-controls"
+        *ngIf="announcements.length > 1"
+      >
+        <button
+          class="carousel-btn carousel-prev"
+          (click)="prev()"
+          title="Anuncio anterior"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <span class="page-indicator">{{ pageIndicator }}</span>
+
+        <button
+          class="carousel-btn carousel-next"
+          (click)="next()"
+          title="Siguiente anuncio"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </ng-container>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="announcements.length === 0">
+      <p>No hay anuncios disponibles</p>
+    </div>
+  </div>
+</div>
