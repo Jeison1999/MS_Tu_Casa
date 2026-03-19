@@ -1,7 +1,7 @@
 .events-page {
   width: 100%;
   min-height: 100vh;
-  padding: 80px 1.5rem 40px;
+  padding: 130px 1.5rem 40px;
 }
 
 .events-hero {
@@ -217,7 +217,7 @@
 
 @media (max-width: 640px) {
   .events-page {
-    padding: 70px 1rem 32px;
+    padding: 150px 1rem 32px;
   }
 
   .events-hero-content {

@@ -1,7 +1,7 @@
 .pastoral-container {
   width: 100%;
   min-height: 100vh;
-  padding: 100px 20px 80px;
+  padding: 130px 1.5rem 40px;
   background: linear-gradient(135deg, #f7f3ed 0%, #ffffff 50%, #faf8f5 100%);
   position: relative;
 }
@@ -727,7 +727,7 @@
 
 @media (max-width: 768px) {
   .pastoral-container {
-    padding: 80px 16px 60px;
+    padding: 150px 16px 60px;
   }
 
   .pastoral-title {

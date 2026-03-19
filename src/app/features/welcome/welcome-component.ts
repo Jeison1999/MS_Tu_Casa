@@ -28,28 +28,28 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   // Servicios semanales
   weeklyServices = [
     {
-      icon: '✨',
+      iconClass: 'fas fa-fire',
       title: 'Viernes de gloria',
       schedule: ['Viernes | 7:00 PM'],
       description: 'Noche de fe y milagros',
       color: '#bd811f',
     },
     {
-      icon: '🌅',
+      iconClass: 'fas fa-sun',
       title: 'Ayunos',
       schedule: ['Sabado | 8:30 AM'],
       description: 'Dedicación y consagración',
       color: '#d4a049',
     },
     {
-      icon: '👦🏼',
+      iconClass: 'fas fa-users',
       title: 'Culto de jovenes',
       schedule: ['Sábado | 6:00 PM'],
       description: 'Juventud en acción y adoración',
       color: '#d4a049',
     },
     {
-      icon: '⛪',
+      iconClass: 'fas fa-church',
       title: 'Servicios Dominicales',
       schedule: ['Domingos | 9:00 AM'],
       description: 'Adoración y enseñanza de la Palabra',

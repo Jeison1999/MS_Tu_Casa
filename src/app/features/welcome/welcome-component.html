@@ -71,7 +71,7 @@
       </div>
       <div class="about-grid">
         <div class="about-card">
-          <div class="card-icon">⛪</div>
+          <div class="card-icon"><i class="fas fa-church"></i></div>
           <h3 class="card-title">Adoración</h3>
           <p class="card-description">
             Nos reunimos para adorar a Dios con todo nuestro corazón, 
@@ -79,7 +79,7 @@
           </p>
         </div>
         <div class="about-card">
-          <div class="card-icon">👨‍👩‍👧‍👦</div>
+          <div class="card-icon"><i class="fas fa-people-group"></i></div>
           <h3 class="card-title">Comunidad</h3>
           <p class="card-description">
             Formamos una familia donde cada persona es valorada y 
@@ -87,7 +87,7 @@
           </p>
         </div>
         <div class="about-card">
-          <div class="card-icon">📖</div>
+          <div class="card-icon"><i class="fas fa-book"></i></div>
           <h3 class="card-title">Enseñanza</h3>
           <p class="card-description">
             Estudiamos la Palabra de Dios para crecer en sabiduría 
@@ -95,7 +95,7 @@
           </p>
         </div>
         <div class="about-card">
-          <div class="card-icon">❤️</div>
+          <div class="card-icon"><i class="fas fa-heart"></i></div>
           <h3 class="card-title">Servicio</h3>
           <p class="card-description">
             Servimos a nuestra comunidad con amor, compartiendo 
@@ -124,7 +124,9 @@
         <div class="service-card" *ngFor="let service of weeklyServices">
           <div class="service-card-inner">
             <div class="service-icon-wrapper">
-              <div class="service-icon">{{ service.icon }}</div>
+              <div class="service-icon">
+                <i [class]="service.iconClass"></i>
+              </div>
               <div class="icon-glow"></div>
             </div>
             <h3 class="service-title">{{ service.title }}</h3>
