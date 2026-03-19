@@ -49,7 +49,11 @@ export class ApiConfigService {
   };
 
   /**
-   * Agregar aquí más endpoints cuando los necesite
+   * URLs específicas para anuncios (solo lectura)
    */
-  
+  announcements = {
+    // GET /api/v1/content/announcements/active
+    // Solo anuncios activos y publicados listos para mostrar
+    active: () => this.getApiUrl('content/announcements/active')
+  };
 }
