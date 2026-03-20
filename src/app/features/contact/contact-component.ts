@@ -21,14 +21,14 @@ export class ContactComponent {
     // Inicializar ubicaciones con URLs sanitizadas
     this.locations = [
       {
-        title: 'Sede Actual',
+        title: 'Sede Inmaculada',
         address: 'Soledad, Atlántico',
         mapUrl: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.3736747562647!2d-74.7989693!3d10.9058645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef5d2646ded01f5%3A0xff8c97ef5549c3c3!2sIglesia%20Cristiana%20Morando%20En%20Sion!5e0!3m2!1ses!2sco!4v1708560000000!5m2!1ses!2sco'),
         status: 'Lunes a Sabado',
         directUrl: 'https://goo.gl/maps/vY5Z8Z8Z8Z8Z8Z8Z8'
       },
       {
-        title: 'Nuevo Templo',
+        title: 'Sede Malambo',
         address: 'Malambo, Atlántico',
         mapUrl: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.google.com/maps?ll=10.8592317,-74.8069201&q=Iglesia+Cristiana+Morando+En+Sion+malambo&z=19&output=embed'),
         status: 'Solo los domingos',

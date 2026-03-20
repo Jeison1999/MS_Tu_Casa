@@ -45,7 +45,7 @@
           <div class="dropdown-grid">
             <div class="dropdown-section">
               <div class="section-header">
-                <span class="section-icon">⛪</span>
+                <span class="section-icon"><i class="fas fa-church" aria-hidden="true"></i></span>
                 <h3>Nuestra Iglesia</h3>
               </div>
               <a href="#" class="dropdown-link">
@@ -60,7 +60,7 @@
             
             <div class="dropdown-section">
               <div class="section-header">
-                <span class="section-icon">👥</span>
+                <span class="section-icon"><i class="fas fa-people-group" aria-hidden="true"></i></span>
                 <h3>Liderazgo</h3>
               </div>
               <a routerLink="/nosotros/Pastores" class="dropdown-link" (click)="closeAll()">
@@ -89,17 +89,13 @@
       <div class="nav-item dropdown" 
            (mouseleave)="startCloseDropdown()"
            (mouseenter)="cancelCloseDropdown()">
-        <span class="nav-label" (click)="toggleDropdown('ministerios', $event)">Ministerios <i class="arrow">❯</i></span>
+        <span class="nav-label" (click)="toggleDropdown('ministerios', $event)">Ministerios <i class="arrow"></i></span>
         <div class="nav-indicator"></div>
         
         <div class="dropdown-panel" 
              [class.show]="currentDropdown === 'ministerios'">
           <div class="dropdown-grid">
             <div class="dropdown-section">
-              <div class="section-header">
-                <span class="section-icon">👶</span>
-                <h3>Por Edad</h3>
-              </div>
               <a href="#" class="dropdown-link">
                 <span>Kaynos Kids</span>
                 <i class="link-arrow">→</i>
@@ -123,10 +119,6 @@
             </div>
             
             <div class="dropdown-section">
-              <div class="section-header">
-                <span class="section-icon">✨</span>
-                <h3>Ministerios</h3>
-              </div>
               <a href="#" class="dropdown-link">
                 <span>Alabanza</span>
                 <i class="link-arrow">→</i>
@@ -146,13 +138,12 @@
             </div>
             
             <div class="dropdown-featured">
-              <div class="featured-badge">Descubre</div>
-              <h3 class="featured-title">Tu Llamado</h3>
-              <p class="featured-desc">Encuentra el ministerio donde puedes servir y crecer.</p>
-              <a href="#" class="featured-cta">
-                <span>Explorar</span>
-                <i>→</i>
-              </a>
+              <div class="featured-badge">Conoce</div>
+              <h3 class="featured-title">Los Ministerios de MS</h3>
+              <p class="featured-desc">"Cada uno ponga al servicio de los demas el don que haya recibido."</p>
+              <div class="featured-verse" aria-label="Cita biblica">
+                <span class="featured-verse-ref">1 Pedro 4:10</span>
+              </div>
             </div>
           </div>
         </div>
@@ -206,12 +197,12 @@
       </div>
       <div class="mobile-dropdown-content" [class.show]="mobileDropdown === 'nosotros'">
         <div class="mobile-dropdown-group">
-          <div class="mobile-group-title">⛪ Nuestra Iglesia</div>
+          <div class="mobile-group-title">Nuestra Iglesia</div>
           <a href="#" class="mobile-sublink" (click)="closeAll()">Quiénes somos</a>
           <a href="#" class="mobile-sublink" (click)="closeAll()">Historia</a>
         </div>
         <div class="mobile-dropdown-group">
-          <div class="mobile-group-title">👥 Liderazgo</div>
+          <div class="mobile-group-title">Liderazgo</div>
           <a routerLink="/nosotros/Pastores" class="mobile-sublink" (click)="closeAll()">Pastores</a>
           <a routerLink="/nosotros/Equipo-Pastoral" class="mobile-sublink" (click)="closeAll()">Equipo Pastoral</a>
         </div>
@@ -226,14 +217,10 @@
       </div>
       <div class="mobile-dropdown-content" [class.show]="mobileDropdown === 'ministerios'">
         <div class="mobile-dropdown-group">
-          <div class="mobile-group-title">👶 Por Edad</div>
           <a href="#" class="mobile-sublink" (click)="closeAll()">Kaynos Kids</a>
           <a routerLink="/ministerios/kaynosGeneracion" class="mobile-sublink" (click)="closeAll()">Kaynos Generación</a>
           <a href="#" class="mobile-sublink" (click)="closeAll()">Escuadrón de Caballeros</a>
           <a href="#" class="mobile-sublink" (click)="closeAll()">Dunamis</a>
-        </div>
-        <div class="mobile-dropdown-group">
-          <div class="mobile-group-title">✨ Ministerios</div>
           <a href="#" class="mobile-sublink" (click)="closeAll()">Alabanza</a>
           <a href="#" class="mobile-sublink" (click)="closeAll()">Intercesión</a>
           <a href="#" class="mobile-sublink" (click)="closeAll()">Evangelismo</a>
