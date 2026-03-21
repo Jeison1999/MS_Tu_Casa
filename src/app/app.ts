@@ -63,23 +63,20 @@ export class App implements OnInit, OnDestroy {
 
   /**
    * Inicializa el modal de anuncios
-   * - Carga anuncios desde el backend INMEDIATAMENTE (en paralelo)
-   * - Muestra modal después de ~1500ms (cuando splash está casi listo)
-   * - Se ejecuta cada vez que la app carga
+   * - Carga anuncios desde el backend en cuanto arranca la app
+   * - Muestra el modal en cuanto hay datos (delay corto solo para pintar el DOM)
+   * - En recarga completa (F5) vuelve a ejecutarse; no usamos localStorage para ocultarlo
    */
   private initializeAnnouncements() {
-    // INICIAR CARGA INMEDIATAMENTE (sin esperar)
-    // Esto permite que la API fetch ocurra mientras splash screen está visible
     this.announcementsService.getActiveAnnouncements().subscribe({
       next: (announcements) => {
         if (announcements && announcements.length > 0) {
           this.announcements = announcements;
-          
-          // Mostrar modal después de ~1500ms (cuando splash está desapareciendo)
-          // Esto evita choque visual entre splash y modal
+
+          // Más rápido: un tick breve evita parpadeos; el modal (z-index alto) queda usable enseguida
           setTimeout(() => {
             this.showAnnouncementsModal = true;
-          }, 1500);
+          }, 200);
         }
       },
       error: (error) => {
