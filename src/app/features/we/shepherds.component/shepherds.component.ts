@@ -47,7 +47,7 @@ export class ShepherdsComponent implements OnInit {
     },
     {
       id: 2,
-      nombre: 'María González',
+      nombre: 'Doris de Ríos',
       cargo: 'Pastora Principal',
       icono: '',
       foto: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500',
@@ -61,8 +61,8 @@ export class ShepherdsComponent implements OnInit {
     },
     {
       id: 3,
-      nombre: 'Juan Martínez',
-      cargo: 'Pastor Asociado',
+      nombre: 'Pedro y Doris',
+      cargo: 'Pareja pastoral',
       icono: '',
       foto: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=500',
       ministerio: 'Evangelismo y Misiones',
