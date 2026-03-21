@@ -5,6 +5,7 @@ import { ContactComponent } from './features/contact/contact-component';
 import { EventComponent } from './features/event/event-component';
 import { TeamPastoralComponent } from './features/we/team-pastoral.component/team-pastoral-component';
 import { ShepherdsComponent } from './features/we/shepherds.component/shepherds.component';
+import { LadiesComponent } from './features/ministries/ladies.component/ladies.component';
 
 export const routes: Routes = [
   {
@@ -26,6 +27,11 @@ export const routes: Routes = [
     path: 'ministerios/kaynosGeneracion',
     component: YouthsComponent,
     data: { theme: 'youth' },
+  },
+  {
+    path: 'ministerios/dunamis',
+    component: LadiesComponent,
+    data: { theme: 'dunamis' },
   },
   {
     path: 'eventos',

@@ -26,6 +26,32 @@
   background: radial-gradient(circle at top, #2d3748 0%, #000000 55%, #1a202c 100%);
 }
 
+/* Tema Dunamis: rosa dorado, coral y dorado */
+.footer.dunamis {
+  background: linear-gradient(135deg, #E89C8A 0%, #F2A07B 40%, #F28C6B 100%);
+}
+
+.footer.dunamis .footer-logo h3,
+.footer.dunamis .footer-section h4,
+.footer.dunamis .footer-bottom p {
+  color: #FFFFFF;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.footer.dunamis .footer-links a,
+.footer.dunamis .footer-contact span {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.footer.dunamis .social-icon:hover {
+  background: #F6C27A;
+  color: #5a3d3d;
+}
+
+.footer.dunamis .footer-bottom {
+  background: rgba(0, 0, 0, 0.15);
+}
+
 .footer.youth .footer-logo h3,
 .footer.youth .footer-section h4,
 .footer.youth .footer-bottom p {

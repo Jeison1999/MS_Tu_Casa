@@ -1,4 +1,4 @@
-<header class="appbar" [ngClass]="{'hidden': isHidden, 'default': currentTheme === 'default', 'youth': currentTheme === 'youth'}">
+<header class="appbar" [ngClass]="{'hidden': isHidden, 'default': currentTheme === 'default', 'youth': currentTheme === 'youth', 'dunamis': currentTheme === 'dunamis'}">
   <div class="appbar-glow"></div>
   
   <div class="appbar-container">
@@ -112,8 +112,12 @@
                 <span>Escruadron de Fe</span>
                 <i class="link-arrow">→</i>
               </a>
-              <a href="#" class="dropdown-link">
-                <span> Dunamis</span>
+              <a
+                routerLink="/ministerios/dunamis"
+                class="dropdown-link"
+                (click)="closeAll()"
+              >
+                <span>Dunamis</span>
                 <i class="link-arrow">→</i>
               </a>
             </div>
@@ -177,7 +181,7 @@
 </header>
 
 <!-- Mobile Menu -->
-<div class="mobile-menu" [class.active]="mobileOpen">
+<div class="mobile-menu" [ngClass]="{'active': mobileOpen, 'default': currentTheme === 'default', 'youth': currentTheme === 'youth', 'dunamis': currentTheme === 'dunamis'}">
   <div class="mobile-content">
     <a
       routerLink="/"
@@ -220,7 +224,7 @@
           <a href="#" class="mobile-sublink" (click)="closeAll()">Kaynos Kids</a>
           <a routerLink="/ministerios/kaynosGeneracion" class="mobile-sublink" (click)="closeAll()">Kaynos Generación</a>
           <a href="#" class="mobile-sublink" (click)="closeAll()">Escuadrón de Caballeros</a>
-          <a href="#" class="mobile-sublink" (click)="closeAll()">Dunamis</a>
+          <a routerLink="/ministerios/dunamis" class="mobile-sublink" (click)="closeAll()">Dunamis</a>
           <a href="#" class="mobile-sublink" (click)="closeAll()">Alabanza</a>
           <a href="#" class="mobile-sublink" (click)="closeAll()">Intercesión</a>
           <a href="#" class="mobile-sublink" (click)="closeAll()">Evangelismo</a>
