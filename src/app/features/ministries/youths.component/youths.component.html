@@ -81,8 +81,9 @@
     </div>
 
     <div class="gallery-column">
-      <div class="section-header left">
+      <div class="section-header">
         <h2>Momentos Kaynos</h2>
+        <p>Experiencias que fortalecen tu fe y te acercan más a Dios.</p>
       </div>
       <div class="gallery-carousel-wrapper"
            (mouseenter)="onCarouselMouseEnter()"
@@ -105,6 +106,7 @@
                 } @else {
                   <video [src]="item.url" [style.pointer-events]="'none'" controls playsinline muted loop autoplay></video>
                 }
+                <div class="gallery-slide-overlay" aria-hidden="true"></div>
               </div>
             </div>
           </div>
