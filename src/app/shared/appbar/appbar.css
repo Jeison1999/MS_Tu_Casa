@@ -439,6 +439,31 @@
   transform: translateX(4px);
 }
 
+.featured-verse {
+  background: linear-gradient(135deg, #bd811f 0%, #d4a049 100%);
+  color: white;
+  border-radius: 12px;
+  padding: 0.875rem 1rem;
+  box-shadow: 0 4px 12px rgba(189, 129, 31, 0.3);
+}
+
+.featured-verse-text {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.featured-verse-ref {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.95;
+}
+
 /* Actions */
 .actions {
   display: flex;

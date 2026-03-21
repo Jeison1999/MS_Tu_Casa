@@ -91,4 +91,16 @@ export class AnnouncementsModalComponent implements OnInit {
       this.close();
     }
   }
+
+  /**
+   * Asegura reproducción al cargarse el video.
+   * Nota: muchos navegadores bloquean autoplay si no está muted.
+   */
+  onAnnouncementVideoLoaded(event: Event) {
+    const video = event.target as HTMLVideoElement | null;
+    if (!video) return;
+
+    // Intenta reproducir; si el navegador bloquea autoplay, no rompemos la UI.
+    video.play().catch(() => {});
+  }
 }

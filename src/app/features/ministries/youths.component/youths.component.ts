@@ -114,17 +114,18 @@ export class YouthsComponent implements OnInit, OnDestroy {
     ];
 
     // Cargar logo desde Cloudinary
-    this.logo = this.cloudinary.getOptimizedImage('kg_ghg3ii', 400);
+    // Subimos un poco el width y la calidad para que se vea más nítido en pantallas grandes.
+    this.logo = this.cloudinary.getOptimizedImage('kg_ghg3ii', 700, 90);
 
     // Cargar fotos de líderes desde Cloudinary
-    this.leaders[0].photo = this.cloudinary.getOptimizedImage('625474136_18429947809116943_1318878073530733355_n.jpg_g2obu2', 600);
-    this.leaders[1].photo = this.cloudinary.getOptimizedImage('615978729_18426327508116943_8227096426448344424_n.jpg_flkpeo', 600);
+    this.leaders[0].photo = this.cloudinary.getOptimizedImage('625474136_18429947809116943_1318878073530733355_n.jpg_g2obu2', 900, 90);
+    this.leaders[1].photo = this.cloudinary.getOptimizedImage('615978729_18426327508116943_8227096426448344424_n.jpg_flkpeo', 900, 90);
 
     // Cargar galería desde Cloudinary
     this.gallery = [
-      this.cloudinary.getOptimizedMedia('569881451_18415657786116943_1280062635155265105_n.jpg_bd7xwo', 1200),
-      this.cloudinary.getOptimizedMedia('WhatsApp_Video_2026-02-24_at_3.13.27_PM_npoirf', 1200),
-      this.cloudinary.getOptimizedMedia('699460bf-5778-4469-8841-88e89a8976cf_lh5mef', 1200),
+      this.cloudinary.getOptimizedMedia('569881451_18415657786116943_1280062635155265105_n.jpg_bd7xwo', 1600, 90),
+      this.cloudinary.getOptimizedMedia('WhatsApp_Video_2026-02-24_at_3.13.27_PM_npoirf', 1600, 85),
+      this.cloudinary.getOptimizedMedia('699460bf-5778-4469-8841-88e89a8976cf_lh5mef', 1600, 90),
     ];
 
     this.startAutoSlide();

@@ -24,9 +24,13 @@ export class Appbar {
   isHidden = false;
   private lastScrollTop = 0;
   private scrollThreshold = 10;
+  private nextIsHidden: boolean | null = null;
+  private rafId: number | null = null;
+  private readonly handleScrollBound: () => void;
 
   constructor(private themeService: ThemeService, private claudinary: ClaudinaryService) {
     this.logo1 = this.claudinary.getOptimizedImage('logoms_prnuap');
+    this.handleScrollBound = this.handleScroll.bind(this);
     
     this.themeService.theme$.subscribe((theme) => {
       this.currentTheme = theme;
@@ -34,11 +38,16 @@ export class Appbar {
   }
 
   ngOnInit() {
-    window.addEventListener('scroll', this.handleScroll.bind(this));
+    window.addEventListener('scroll', this.handleScrollBound);
   }
 
   ngOnDestroy() {
-    window.removeEventListener('scroll', this.handleScroll.bind(this));
+    window.removeEventListener('scroll', this.handleScrollBound);
+    if (this.rafId !== null) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = null;
+    }
+    this.nextIsHidden = null;
   }
 
   private handleScroll() {
@@ -46,7 +55,7 @@ export class Appbar {
     
     // Si estamos en la parte superior, siempre mostrar
     if (scrollTop <= 100) {
-      this.isHidden = false;
+      this.queueIsHidden(false);
       this.lastScrollTop = scrollTop;
       return;
     }
@@ -55,13 +64,31 @@ export class Appbar {
     if (Math.abs(scrollTop - this.lastScrollTop) > this.scrollThreshold) {
       if (scrollTop > this.lastScrollTop) {
         // Scrolling hacia abajo - ocultar
-        this.isHidden = true;
+        this.queueIsHidden(true);
       } else {
         // Scrolling hacia arriba - mostrar
-        this.isHidden = false;
+        this.queueIsHidden(false);
       }
       this.lastScrollTop = scrollTop;
     }
+  }
+
+  /**
+   * Para evitar NG0100 (ExpressionChangedAfterItHasBeenCheckedError),
+   * no modificamos `isHidden` en el mismo ciclo sincrónico del evento.
+   */
+  private queueIsHidden(value: boolean) {
+    if (this.isHidden === value) return;
+    this.nextIsHidden = value;
+    if (this.rafId !== null) return;
+
+    this.rafId = requestAnimationFrame(() => {
+      if (this.nextIsHidden !== null) {
+        this.isHidden = this.nextIsHidden;
+      }
+      this.nextIsHidden = null;
+      this.rafId = null;
+    });
   }
 
   toggleDropdown(name: string, event: Event) {

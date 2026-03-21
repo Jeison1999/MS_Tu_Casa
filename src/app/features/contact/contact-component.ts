@@ -9,9 +9,6 @@ import { DomSanitizer, SafeHtml, SafeResourceUrl } from '@angular/platform-brows
   styleUrl: './contact-component.css',
 })
 export class ContactComponent {
-  churchName = 'Morando en Sion';
-  email = 'morandoension@gmail.com';
-  phone = '+57 300 000 0000';
 
   locations: Array<{title: string; address: string; mapUrl: SafeResourceUrl; status: string; directUrl: string}> = [];
 
@@ -21,14 +18,14 @@ export class ContactComponent {
     // Inicializar ubicaciones con URLs sanitizadas
     this.locations = [
       {
-        title: 'Sede Actual',
+        title: 'Sede Inmaculada',
         address: 'Soledad, Atlántico',
         mapUrl: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.3736747562647!2d-74.7989693!3d10.9058645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef5d2646ded01f5%3A0xff8c97ef5549c3c3!2sIglesia%20Cristiana%20Morando%20En%20Sion!5e0!3m2!1ses!2sco!4v1708560000000!5m2!1ses!2sco'),
         status: 'Lunes a Sabado',
         directUrl: 'https://goo.gl/maps/vY5Z8Z8Z8Z8Z8Z8Z8'
       },
       {
-        title: 'Nuevo Templo',
+        title: 'Sede Malambo',
         address: 'Malambo, Atlántico',
         mapUrl: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.google.com/maps?ll=10.8592317,-74.8069201&q=Iglesia+Cristiana+Morando+En+Sion+malambo&z=19&output=embed'),
         status: 'Solo los domingos',
@@ -58,14 +55,14 @@ export class ContactComponent {
       },
       {
         name: 'Correo',
-        handle: this.email,
-        url: 'mailto:' + this.email,
+        handle: 'morandoension@gmail.com',
+        url: 'mailto:' + 'morandoension@gmail.com',
         icon: this.sanitizer.bypassSecurityTrustHtml('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>'),
       },
       {
         name: 'Teléfono',
-        handle: this.phone,
-        url: 'tel:' + this.phone,
+        handle: '+57 300 000 0000',
+        url: 'tel:' + '+57 300 000 0000',
         icon: this.sanitizer.bypassSecurityTrustHtml('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>'),
       },
     ];

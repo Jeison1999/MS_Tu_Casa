@@ -43,7 +43,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     },
     {
       iconClass: 'fas fa-users',
-      title: 'Culto de jovenes',
+      title: 'Reunion Juvenil',
       schedule: ['Sábado | 6:00 PM'],
       description: 'Juventud en acción y adoración',
       color: '#d4a049',

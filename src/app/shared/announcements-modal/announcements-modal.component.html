@@ -35,7 +35,12 @@
         <video
           *ngIf="announcement.media_type === 'video'"
           controls
+          muted
+          playsinline
+          webkit-playsinline
+          preload="metadata"
           class="announcement-video"
+          (loadeddata)="onAnnouncementVideoLoaded($event)"
         >
           <source [src]="announcement.media_url" />
           Tu navegador no soporta video HTML5
