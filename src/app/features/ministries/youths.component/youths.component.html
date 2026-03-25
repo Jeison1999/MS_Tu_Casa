@@ -138,23 +138,9 @@
     </div>
   </section>
 
-  <!-- Social Media Section -->
-  <section class="youth-section social-section">
-    <div class="section-header">
-      <h2>Síguenos y conéctate</h2>
-      <p>Mantente al día con todas nuestras actividades y eventos</p>
-    </div>
-    <div class="social-grid">
-      <a *ngFor="let social of socialMedia" 
-         [href]="social.url" 
-         target="_blank" 
-         rel="noopener noreferrer"
-         class="social-card">
-        <div class="social-icon" [innerHTML]="social.icon"></div>
-        <h3 class="social-name">{{ social.name }}</h3>
-        <p class="social-description">{{ social.description }}</p>
-        <div class="social-arrow">→</div>
-      </a>
-    </div>
-  </section>
+  <app-ministry-social-section
+    theme="kaynos"
+    sectionClass="youth-section"
+    [links]="socialLinks"
+  />
 </div>

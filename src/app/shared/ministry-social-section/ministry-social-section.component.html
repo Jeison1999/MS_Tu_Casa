@@ -1,0 +1,20 @@
+<section [attr.class]="hostClass()">
+  <div class="mss__header section-header">
+    <h2>{{ title() }}</h2>
+    <p>{{ subtitle() }}</p>
+  </div>
+  <div class="mss__grid">
+    <a
+      *ngFor="let link of links()"
+      [href]="link.url"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mss__card"
+    >
+      <div class="mss__icon" [innerHTML]="link.icon"></div>
+      <h3 class="mss__name">{{ link.name }}</h3>
+      <p class="mss__description">{{ link.description }}</p>
+      <div class="mss__arrow" aria-hidden="true">→</div>
+    </a>
+  </div>
+</section>

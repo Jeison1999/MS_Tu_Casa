@@ -1,11 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgFor } from '@angular/common';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ClaudinaryService } from '../../../core/claudinary.service';
+import { MinistrySocialSectionComponent } from '../../../shared/ministry-social-section/ministry-social-section.component';
+import { MinistrySocialLink } from '../../../shared/ministry-social-section/ministry-social-link.model';
 
 @Component({
   selector: 'app-ladies',
-  imports: [NgFor],
+  imports: [NgFor, MinistrySocialSectionComponent],
   templateUrl: './ladies.component.html',
   styleUrl: './ladies.component.css',
 })
@@ -69,7 +71,7 @@ export class LadiesComponent implements OnInit, OnDestroy {
 
   gallery: { url: string; type: 'image' | 'video' }[] = [];
 
-  socialMedia: { name: string; icon: SafeHtml; url: string; description: string; color: string }[] = [];
+  socialLinks: MinistrySocialLink[] = [];
 
   currentSlide = 0;
   private autoSlideInterval: any;
@@ -86,7 +88,7 @@ export class LadiesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.socialMedia = [
+    this.socialLinks = [
       {
         name: 'Instagram',
         icon: this.sanitizer.bypassSecurityTrustHtml(
@@ -94,7 +96,6 @@ export class LadiesComponent implements OnInit, OnDestroy {
         ),
         url: 'https://instagram.com/tudunamis',
         description: 'Síguenos en Instagram',
-        color: '#fbf7f8',
       },
       {
         name: 'Facebook',
@@ -103,7 +104,6 @@ export class LadiesComponent implements OnInit, OnDestroy {
         ),
         url: 'https://facebook.com/tudunamis',
         description: 'Encuéntranos en Facebook',
-        color: '#f3f4f5',
       },
       {
         name: 'WhatsApp',
@@ -112,7 +112,6 @@ export class LadiesComponent implements OnInit, OnDestroy {
         ),
         url: 'https://wa.me/tunumero',
         description: 'Contáctanos por WhatsApp',
-        color: '#fbfdfc',
       },
     ];
 

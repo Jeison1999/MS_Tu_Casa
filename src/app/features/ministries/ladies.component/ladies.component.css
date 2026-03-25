@@ -608,119 +608,6 @@
   border-radius: 6px;
 }
 
-/* Social Media Section - Sección personalidad */
-.social-section {
-  padding: 32px 24px;
-  border-radius: 24px;
-  background: linear-gradient(135deg, #E89C8A 0%, #F2A07B 40%, #F28C6B 100%);
-  box-shadow: 0 20px 45px rgba(232, 156, 138, 0.35);
-}
-
-.social-section .section-header h2 {
-  color: #FFFFFF;
-}
-
-.social-section .section-header p {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.social-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
-  margin-top: 24px;
-}
-
-.social-card {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 18px;
-  padding: 28px 24px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 12px;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-}
-
-.social-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(246, 194, 122, 0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.social-card:hover::before {
-  left: 100%;
-}
-
-.social-card:hover {
-  transform: translateY(-8px);
-  border-color: #F6C27A;
-  box-shadow: 0 12px 30px rgba(232, 156, 138, 0.35);
-}
-
-.social-icon {
-  width: 64px;
-  height: 64px;
-  transition: transform 0.3s ease;
-  filter: drop-shadow(0 4px 12px rgba(232, 156, 138, 0.4));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.social-icon svg {
-  width: 100%;
-  height: 100%;
-  color: #E89C8A;
-}
-
-.social-card:hover .social-icon {
-  transform: scale(1.15) rotate(5deg);
-}
-
-.social-name {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #5a3d3d;
-  margin: 0;
-  transition: color 0.3s ease;
-}
-
-.social-card:hover .social-name {
-  color: #E89C8A;
-}
-
-.social-description {
-  font-size: 0.9rem;
-  color: #8b5a4f;
-  margin: 0;
-}
-
-.social-arrow {
-  font-size: 1.5rem;
-  color: #E89C8A;
-  margin-top: 8px;
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: all 0.3s ease;
-}
-
-.social-card:hover .social-arrow {
-  opacity: 1;
-  transform: translateX(0);
-}
-
 /* Responsive */
 @media (max-width: 968px) {
   .dunamis-hero-content {
@@ -768,10 +655,6 @@
 
   .logo-card img {
     max-width: 240px;
-  }
-
-  .social-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 
   .flame-deco {
@@ -852,15 +735,6 @@
   .events-gallery-section {
     gap: 24px;
   }
-
-  .social-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  .social-card {
-    padding: 24px 20px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -874,21 +748,3 @@
   }
 }
 
-@media (max-width: 480px) {
-  .social-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .social-card {
-    padding: 20px 18px;
-  }
-
-  .social-name {
-    font-size: 1.1rem;
-  }
-
-  .social-description {
-    font-size: 0.85rem;
-  }
-}

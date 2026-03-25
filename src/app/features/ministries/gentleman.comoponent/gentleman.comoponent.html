@@ -29,8 +29,8 @@
 
   <section class="escuadron-section leaders-section">
     <div class="section-header">
-      <h2>Líderes</h2>
-      <p>Hombres que caminan contigo y te impulsan a crecer en Cristo.</p>
+      <h2>Líder</h2>
+      <p>Hombre que camina contigo y te impulsa a crecer en Cristo.</p>
     </div>
     <article class="leader-feature">
       <div class="leader-feature-media">
@@ -158,22 +158,9 @@
     </div>
   </section>
 
-  <section class="escuadron-section social-section">
-    <div class="section-header">
-      <h2>Síguenos y conéctate</h2>
-      <p>Mantente al día con nuestras actividades</p>
-    </div>
-    <div class="social-grid">
-      <a *ngFor="let social of socialMedia"
-         [href]="social.url"
-         target="_blank"
-         rel="noopener noreferrer"
-         class="social-card">
-        <div class="social-icon" [innerHTML]="social.icon"></div>
-        <h3 class="social-name">{{ social.name }}</h3>
-        <p class="social-description">{{ social.description }}</p>
-        <div class="social-arrow">→</div>
-      </a>
-    </div>
-  </section>
+  <app-ministry-social-section
+    theme="escuadron"
+    sectionClass="escuadron-section"
+    [links]="socialLinks"
+  />
 </div>

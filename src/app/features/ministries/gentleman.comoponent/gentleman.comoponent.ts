@@ -1,11 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgFor } from '@angular/common';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ClaudinaryService } from '../../../core/claudinary.service';
+import { MinistrySocialSectionComponent } from '../../../shared/ministry-social-section/ministry-social-section.component';
+import { MinistrySocialLink } from '../../../shared/ministry-social-section/ministry-social-link.model';
 
 @Component({
   selector: 'app-escuadron',
-  imports: [NgFor],
+  imports: [NgFor, MinistrySocialSectionComponent],
   templateUrl: './gentleman.comoponent.html',
   styleUrl: './gentleman.comoponent.css',
 })
@@ -19,7 +21,7 @@ export class GentlemanComoponent implements OnInit, OnDestroy {
     photo: '',
     age: 0,
     yearsLeading: 0,
-    bio: '',
+    bio: 'El líder de caballeros del ministerio Escuadrones de Fe es un hombre comprometido con Dios, llamado a guiar, formar y fortalecer espiritualmente a otros hombres en su caminar cristiano. Su rol es levantar una generación de caballeros con carácter, disciplina y fe, capaces de enfrentar los desafíos de la vida con principios bíblicos.',
   };
 
   highlightVerse = {
@@ -68,8 +70,7 @@ export class GentlemanComoponent implements OnInit, OnDestroy {
 
   gallery: { url: string; type: 'image' | 'video' }[] = [];
 
-  socialMedia: { name: string; icon: SafeHtml; url: string; description: string; color: string }[] =
-    [];
+  socialLinks: MinistrySocialLink[] = [];
 
   currentSlide = 0;
   private autoSlideInterval: ReturnType<typeof setInterval> | null = null;
@@ -86,7 +87,7 @@ export class GentlemanComoponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.socialMedia = [
+    this.socialLinks = [
       {
         name: 'Instagram',
         icon: this.sanitizer.bypassSecurityTrustHtml(
@@ -94,7 +95,6 @@ export class GentlemanComoponent implements OnInit, OnDestroy {
         ),
         url: 'https://instagram.com/tu_escuadron',
         description: 'Síguenos en Instagram',
-        color: '#121212',
       },
       {
         name: 'Facebook',
@@ -103,7 +103,6 @@ export class GentlemanComoponent implements OnInit, OnDestroy {
         ),
         url: 'https://facebook.com/tu_escuadron',
         description: 'Encuéntranos en Facebook',
-        color: '#121212',
       },
       {
         name: 'WhatsApp',
@@ -112,7 +111,6 @@ export class GentlemanComoponent implements OnInit, OnDestroy {
         ),
         url: 'https://wa.me/tunumero',
         description: 'Contáctanos por WhatsApp',
-        color: '#121212',
       },
     ];
 
