@@ -50,18 +50,13 @@
     </div>
   </section>
 
-  <!-- Verses Grid -->
-  <section class="youth-section verses-section">
-    <div class="section-header">
-      <h2>Palabra para esta generación</h2>
-    </div>
-    <div class="verses-grid">
-      <article class="verse-item" *ngFor="let v of verses">
-        <p class="verse-item-text">"{{ v.text }}"</p>
-        <p class="verse-item-ref">{{ v.reference }}</p>
-      </article>
-    </div>
-  </section>
+  <app-ministry-word-section
+    theme="kaynos"
+    sectionClass="youth-section"
+    title="Palabra para esta generación"
+    description="Versículos que fortalecen tu identidad y te impulsan a vivir con propósito en Cristo."
+    [verses]="verses"
+  ></app-ministry-word-section>
 
   <!-- Events & Gallery -->
   <section class="youth-section events-gallery-section">
@@ -80,62 +75,13 @@
       </div>
     </div>
 
-    <div class="gallery-column">
-      <div class="section-header">
-        <h2>Momentos Kaynos</h2>
-        <p>Experiencias que fortalecen tu fe y te acercan más a Dios.</p>
-      </div>
-      <div class="gallery-carousel-wrapper"
-           (mouseenter)="onCarouselMouseEnter()"
-           (mouseleave)="onCarouselMouseLeave()">
-        <div class="gallery-carousel-container"
-             (mousedown)="onDragStart($event)"
-             (mousemove)="onDragMove($event)"
-             (mouseup)="onDragEnd()"
-             (mouseleave)="onDragEnd()"
-             (touchstart)="onTouchStart($event)"
-             (touchmove)="onTouchMove($event)"
-             (touchend)="onTouchEnd()">
-          <div class="gallery-carousel-track" 
-               [class.dragging]="isDragging"
-               [style.transform]="'translateX(calc(-' + (currentSlide * 100) + '% + ' + dragOffset + 'px))'">
-            <div class="gallery-carousel-slide" *ngFor="let item of gallery">
-              <div class="gallery-slide-image">
-                @if (item.type === 'image') {
-                  <img [src]="item.url" alt="Kaynos Generación" [style.pointer-events]="'none'" />
-                } @else {
-                  <video [src]="item.url" [style.pointer-events]="'none'" controls playsinline muted loop autoplay></video>
-                }
-                <div class="gallery-slide-overlay" aria-hidden="true"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Navigation Buttons -->
-        <button class="gallery-carousel-btn gallery-carousel-btn-prev"
-                (click)="prevSlide()"
-                aria-label="Imagen anterior">
-          <span>‹</span>
-        </button>
-        <button class="gallery-carousel-btn gallery-carousel-btn-next"
-                (click)="nextSlide()"
-                aria-label="Siguiente imagen">
-          <span>›</span>
-        </button>
-
-        <!-- Dots Indicator -->
-        <div class="gallery-carousel-dots">
-          <button
-            *ngFor="let item of gallery; let i = index"
-            class="gallery-dot"
-            [class.active]="i === currentSlide"
-            (click)="goToSlide(i)"
-            [attr.aria-label]="'Ir a ' + (item.type === 'video' ? 'video' : 'imagen') + ' ' + (i + 1)">
-          </button>
-        </div>
-      </div>
-    </div>
+    <app-ministry-moments-section
+      theme="kaynos"
+      sectionClass="gallery-column"
+      title="Momentos Kaynos"
+      description="Experiencias que fortalecen tu fe y te acercan más a Dios."
+      [assets]="momentAssets"
+    ></app-ministry-moments-section>
   </section>
 
   <app-ministry-social-section

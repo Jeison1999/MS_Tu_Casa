@@ -1,17 +1,21 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ClaudinaryService } from '../../../core/claudinary.service';
 import { MinistrySocialSectionComponent } from '../../../shared/ministry-social-section/ministry-social-section.component';
 import { MinistrySocialLink } from '../../../shared/ministry-social-section/ministry-social-link.model';
+import { MinistryMomentsSectionComponent } from '../../../shared/ministry-moments-section/ministry-moments-section.component';
+import { MinistryMomentAsset } from '../../../shared/ministry-moments-section/ministry-moments-section.model';
+import { MinistryWordSectionComponent } from '../../../shared/ministry-word-section/ministry-word-section.component';
+import { MinistryWordVerse } from '../../../shared/ministry-word-section/ministry-word-section.model';
 
 @Component({
   selector: 'app-escuadron',
-  imports: [NgFor, MinistrySocialSectionComponent],
+  imports: [NgFor, MinistrySocialSectionComponent, MinistryMomentsSectionComponent, MinistryWordSectionComponent],
   templateUrl: './gentleman.comoponent.html',
   styleUrl: './gentleman.comoponent.css',
 })
-export class GentlemanComoponent implements OnInit, OnDestroy {
+export class GentlemanComoponent implements OnInit {
   /** Reemplaza el publicId cuando subas el logo a Cloudinary */
   logo = '';
 
@@ -29,7 +33,7 @@ export class GentlemanComoponent implements OnInit, OnDestroy {
     text: 'Pelea la buena batalla de la fe; echa mano de la vida eterna a la cual fuiste llamado.',
   };
 
-  verses = [
+  verses: MinistryWordVerse[] = [
     {
       reference: 'Proverbios 27:17',
       text: 'Hierro con hierro se afila; y así el hombre afila el rostro de su amigo.',
@@ -68,18 +72,13 @@ export class GentlemanComoponent implements OnInit, OnDestroy {
     },
   ];
 
-  gallery: { url: string; type: 'image' | 'video' }[] = [];
+  momentAssets: MinistryMomentAsset[] = [
+    { publicId: 'escuadron_gallery_1', alt: 'Encuentro Escuadrón de fe' },
+    { publicId: 'escuadron_gallery_2', alt: 'Momento de comunión Escuadrón de fe' },
+    { publicId: 'escuadron_gallery_3', alt: 'Tiempo de adoración Escuadrón de fe' },
+  ];
 
   socialLinks: MinistrySocialLink[] = [];
-
-  currentSlide = 0;
-  private autoSlideInterval: ReturnType<typeof setInterval> | null = null;
-
-  isDragging = false;
-  private startX = 0;
-  private currentX = 0;
-  dragOffset = 0;
-  private threshold = 50;
 
   constructor(
     private cloudinary: ClaudinaryService,
@@ -118,101 +117,5 @@ export class GentlemanComoponent implements OnInit, OnDestroy {
 
     this.leader.photo = this.cloudinary.getOptimizedImage('CVM_0367_h7lxob', 1100, 90);
 
-    this.gallery = [
-      this.cloudinary.getOptimizedMedia('escuadron_gallery_1', 1600, 90),
-      this.cloudinary.getOptimizedMedia('escuadron_gallery_2', 1600, 90),
-      this.cloudinary.getOptimizedMedia('escuadron_gallery_3', 1600, 90),
-    ];
-
-    this.startAutoSlide();
-  }
-
-  ngOnDestroy() {
-    this.stopAutoSlide();
-  }
-
-  private startAutoSlide() {
-    if (!this.gallery?.length) return;
-    this.autoSlideInterval = setInterval(() => this.nextSlide(), 5000);
-  }
-
-  private stopAutoSlide() {
-    if (this.autoSlideInterval) {
-      clearInterval(this.autoSlideInterval);
-      this.autoSlideInterval = null;
-    }
-  }
-
-  nextSlide() {
-    if (!this.gallery?.length) return;
-    this.currentSlide = (this.currentSlide + 1) % this.gallery.length;
-  }
-
-  prevSlide() {
-    if (!this.gallery?.length) return;
-    this.currentSlide =
-      (this.currentSlide - 1 + this.gallery.length) % this.gallery.length;
-  }
-
-  goToSlide(index: number) {
-    if (!this.gallery?.length) return;
-    this.currentSlide = index;
-    this.stopAutoSlide();
-    this.startAutoSlide();
-  }
-
-  onCarouselMouseEnter() {
-    this.stopAutoSlide();
-  }
-
-  onCarouselMouseLeave() {
-    this.startAutoSlide();
-  }
-
-  onDragStart(event: MouseEvent) {
-    this.isDragging = true;
-    this.startX = event.clientX;
-    this.currentX = event.clientX;
-    this.stopAutoSlide();
-    event.preventDefault();
-  }
-
-  onDragMove(event: MouseEvent) {
-    if (!this.isDragging) return;
-    this.currentX = event.clientX;
-    this.dragOffset = this.currentX - this.startX;
-  }
-
-  onDragEnd() {
-    if (!this.isDragging) return;
-    const distance = this.currentX - this.startX;
-    if (distance < -this.threshold) this.nextSlide();
-    else if (distance > this.threshold) this.prevSlide();
-    this.isDragging = false;
-    this.dragOffset = 0;
-    this.startAutoSlide();
-  }
-
-  onTouchStart(event: TouchEvent) {
-    this.isDragging = true;
-    this.startX = event.touches[0].clientX;
-    this.currentX = event.touches[0].clientX;
-    this.stopAutoSlide();
-  }
-
-  onTouchMove(event: TouchEvent) {
-    if (!this.isDragging) return;
-    this.currentX = event.touches[0].clientX;
-    this.dragOffset = this.currentX - this.startX;
-  }
-
-  onTouchEnd() {
-    if (!this.isDragging) return;
-    const distance = this.currentX - this.startX;
-    if (distance < -this.threshold) this.nextSlide();
-    else if (distance > this.threshold) this.prevSlide();
-    this.isDragging = false;
-    this.dragOffset = 0;
-    this.startAutoSlide();
   }
 }

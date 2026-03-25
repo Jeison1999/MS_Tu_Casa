@@ -1,17 +1,21 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ClaudinaryService } from '../../../core/claudinary.service';
 import { MinistrySocialSectionComponent } from '../../../shared/ministry-social-section/ministry-social-section.component';
 import { MinistrySocialLink } from '../../../shared/ministry-social-section/ministry-social-link.model';
+import { MinistryMomentsSectionComponent } from '../../../shared/ministry-moments-section/ministry-moments-section.component';
+import { MinistryMomentAsset } from '../../../shared/ministry-moments-section/ministry-moments-section.model';
+import { MinistryWordSectionComponent } from '../../../shared/ministry-word-section/ministry-word-section.component';
+import { MinistryWordVerse } from '../../../shared/ministry-word-section/ministry-word-section.model';
 
 @Component({
   selector: 'app-youths.component',
-  imports: [NgFor, MinistrySocialSectionComponent],
+  imports: [NgFor, MinistrySocialSectionComponent, MinistryMomentsSectionComponent, MinistryWordSectionComponent],
   templateUrl: './youths.component.html',
   styleUrl: './youths.component.css',
 })
-export class YouthsComponent implements OnInit, OnDestroy {
+export class YouthsComponent implements OnInit {
   // Logo del ministerio desde Cloudinary
   logo = '';
 
@@ -33,7 +37,7 @@ export class YouthsComponent implements OnInit, OnDestroy {
     text: 'Ninguno tenga en poco tu juventud, sino sé ejemplo de los creyentes en palabra, conducta, amor, espíritu, fe y pureza.',
   };
 
-  verses = [
+  verses: MinistryWordVerse[] = [
     {
       reference: 'Salmo 119:9',
       text: '¿Con qué limpiará el joven su camino? Con guardar tu palabra.',
@@ -72,19 +76,23 @@ export class YouthsComponent implements OnInit, OnDestroy {
     },
   ];
 
-  gallery: { url: string; type: 'image' | 'video' }[] = [];
+  momentAssets: MinistryMomentAsset[] = [
+    {
+      publicId: '569881451_18415657786116943_1280062635155265105_n.jpg_bd7xwo',
+      alt: 'Encuentro de Kaynos',
+    },
+    {
+      publicId: 'WhatsApp_Video_2026-02-24_at_3.13.27_PM_npoirf',
+      alt: 'Video de reunión Kaynos',
+      quality: 85,
+    },
+    {
+      publicId: '699460bf-5778-4469-8841-88e89a8976cf_lh5mef',
+      alt: 'Momento especial de Kaynos',
+    },
+  ];
 
   socialLinks: MinistrySocialLink[] = [];
-
-  currentSlide = 0;
-  private autoSlideInterval: any;
-
-  // Variables para arrastre
-  isDragging = false;
-  private startX = 0;
-  private currentX = 0;
-  dragOffset = 0;
-  private threshold = 50; // Píxeles mínimos para cambiar de slide
 
   constructor(private cloudinary: ClaudinaryService, private sanitizer: DomSanitizer) {}
 
@@ -119,133 +127,5 @@ export class YouthsComponent implements OnInit, OnDestroy {
     this.leaders[0].photo = this.cloudinary.getOptimizedImage('625474136_18429947809116943_1318878073530733355_n.jpg_g2obu2', 900, 90);
     this.leaders[1].photo = this.cloudinary.getOptimizedImage('CVM_0370_maeebn', 900, 90);
 
-    // Cargar galería desde Cloudinary
-    this.gallery = [
-      this.cloudinary.getOptimizedMedia('569881451_18415657786116943_1280062635155265105_n.jpg_bd7xwo', 1600, 90),
-      this.cloudinary.getOptimizedMedia('WhatsApp_Video_2026-02-24_at_3.13.27_PM_npoirf', 1600, 85),
-      this.cloudinary.getOptimizedMedia('699460bf-5778-4469-8841-88e89a8976cf_lh5mef', 1600, 90),
-    ];
-
-    this.startAutoSlide();
-  }
-
-  ngOnDestroy() {
-    this.stopAutoSlide();
-  }
-
-  private startAutoSlide() {
-    if (!this.gallery || this.gallery.length === 0) {
-      return;
-    }
-
-    this.autoSlideInterval = setInterval(() => {
-      this.nextSlide();
-    }, 5000);
-  }
-
-  private stopAutoSlide() {
-    if (this.autoSlideInterval) {
-      clearInterval(this.autoSlideInterval);
-      this.autoSlideInterval = null;
-    }
-  }
-
-  nextSlide() {
-    if (!this.gallery || this.gallery.length === 0) {
-      return;
-    }
-    this.currentSlide = (this.currentSlide + 1) % this.gallery.length;
-  }
-
-  prevSlide() {
-    if (!this.gallery || this.gallery.length === 0) {
-      return;
-    }
-    this.currentSlide =
-      (this.currentSlide - 1 + this.gallery.length) % this.gallery.length;
-  }
-
-  goToSlide(index: number) {
-    if (!this.gallery || this.gallery.length === 0) {
-      return;
-    }
-    this.currentSlide = index;
-    this.stopAutoSlide();
-    this.startAutoSlide();
-  }
-
-  onCarouselMouseEnter() {
-    this.stopAutoSlide();
-  }
-
-  onCarouselMouseLeave() {
-    this.startAutoSlide();
-  }
-
-  // Métodos para arrastre con mouse
-  onDragStart(event: MouseEvent) {
-    this.isDragging = true;
-    this.startX = event.clientX;
-    this.currentX = event.clientX;
-    this.stopAutoSlide();
-    event.preventDefault();
-  }
-
-  onDragMove(event: MouseEvent) {
-    if (!this.isDragging) return;
-    this.currentX = event.clientX;
-    this.dragOffset = this.currentX - this.startX;
-  }
-
-  onDragEnd() {
-    if (!this.isDragging) return;
-    
-    const distance = this.currentX - this.startX;
-    
-    // Si se arrastró suficiente hacia la izquierda, ir al siguiente
-    if (distance < -this.threshold) {
-      this.nextSlide();
-    }
-    // Si se arrastró suficiente hacia la derecha, ir al anterior
-    else if (distance > this.threshold) {
-      this.prevSlide();
-    }
-    
-    this.isDragging = false;
-    this.dragOffset = 0;
-    this.startAutoSlide();
-  }
-
-  // Métodos para arrastre táctil
-  onTouchStart(event: TouchEvent) {
-    this.isDragging = true;
-    this.startX = event.touches[0].clientX;
-    this.currentX = event.touches[0].clientX;
-    this.stopAutoSlide();
-  }
-
-  onTouchMove(event: TouchEvent) {
-    if (!this.isDragging) return;
-    this.currentX = event.touches[0].clientX;
-    this.dragOffset = this.currentX - this.startX;
-  }
-
-  onTouchEnd() {
-    if (!this.isDragging) return;
-    
-    const distance = this.currentX - this.startX;
-    
-    // Si se arrastró suficiente hacia la izquierda, ir al siguiente
-    if (distance < -this.threshold) {
-      this.nextSlide();
-    }
-    // Si se arrastró suficiente hacia la derecha, ir al anterior
-    else if (distance > this.threshold) {
-      this.prevSlide();
-    }
-    
-    this.isDragging = false;
-    this.dragOffset = 0;
-    this.startAutoSlide();
   }
 }

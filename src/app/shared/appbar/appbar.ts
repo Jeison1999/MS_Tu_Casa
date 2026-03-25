@@ -31,6 +31,7 @@ export class Appbar {
   constructor(private themeService: ThemeService, private claudinary: ClaudinaryService) {
     this.logo1 = this.claudinary.getOptimizedImage('logoms_prnuap');
     this.handleScrollBound = this.handleScroll.bind(this);
+    this.currentTheme = this.themeService.currentTheme;
     
     this.themeService.theme$.subscribe((theme) => {
       this.currentTheme = theme;

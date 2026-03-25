@@ -1,0 +1,64 @@
+<section [attr.class]="hostClass()">
+  <div class="mms__header section-header">
+    <h1>{{ title() }}</h1>
+    <p>{{ description() }}</p>
+  </div>
+
+  @if (gallery().length > 0) {
+    <div class="mms__carousel-wrapper" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+      <div
+        class="mms__carousel-container"
+        (mousedown)="onDragStart($event)"
+        (mousemove)="onDragMove($event)"
+        (mouseup)="onDragEnd()"
+        (mouseleave)="onDragEnd()"
+        (touchstart)="onTouchStart($event)"
+        (touchmove)="onTouchMove($event)"
+        (touchend)="onTouchEnd()"
+      >
+        <div
+          class="mms__carousel-track"
+          [class.mms__carousel-track--dragging]="isDragging()"
+          [style.transform]="transformValue()"
+        >
+          @for (item of gallery(); track item.url) {
+            <div class="mms__carousel-slide">
+              @if (item.type === 'image') {
+                <img [src]="item.url" [alt]="item.alt" [style.pointer-events]="'none'" />
+              } @else {
+                <video
+                  [src]="item.url"
+                  [style.pointer-events]="'none'"
+                  controls
+                  playsinline
+                  muted
+                  loop
+                  autoplay
+                  [attr.aria-label]="item.alt"
+                ></video>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <button class="mms__btn mms__btn--prev" (click)="prevSlide()" aria-label="Elemento anterior">
+        <span>‹</span>
+      </button>
+      <button class="mms__btn mms__btn--next" (click)="nextSlide()" aria-label="Siguiente elemento">
+        <span>›</span>
+      </button>
+
+      <div class="mms__dots" aria-label="Indicadores del carrusel">
+        @for (item of gallery(); track item.url; let i = $index) {
+          <button
+            class="mms__dot"
+            [class.mms__dot--active]="i === currentSlide()"
+            (click)="goToSlide(i)"
+            [attr.aria-label]="'Ir a elemento ' + (i + 1)"
+          ></button>
+        }
+      </div>
+    </div>
+  }
+</section>

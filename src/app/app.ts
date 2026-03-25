@@ -42,6 +42,9 @@ export class App implements OnInit, OnDestroy {
     private themeService: ThemeService,
     private announcementsService: AnnouncementsService
   ) {
+    // Aplica el tema inicial antes del primer render para evitar NG0100.
+    this.applyThemeFromRoute();
+
     this.themeService.theme$.subscribe((t) => {
       this.currentTheme = t;
     });
@@ -49,17 +52,11 @@ export class App implements OnInit, OnDestroy {
     this.router.events
       .pipe(filter((e) => e instanceof NavigationEnd))
       .subscribe(() => {
-        let route = this.activatedRoute.firstChild;
-        while (route?.firstChild) {
-          route = route.firstChild;
-        }
-        const theme = (route?.snapshot.data['theme'] as AppTheme) ?? 'default';
-        this.themeService.setTheme(theme);
+        this.applyThemeFromRoute();
       });
   }
 
   ngOnInit() {
-    this.applyThemeFromRoute();
     // Cargar anuncios inmediatamente en paralelo (mientras splash está visible)
     // Timing: splash termina en ~1700ms, mostramos anuncios cuando estén listos o pasen ~1500ms
     this.initializeAnnouncements();

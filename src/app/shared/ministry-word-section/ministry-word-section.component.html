@@ -1,0 +1,17 @@
+<section [attr.class]="hostClass()">
+  <div class="mws__header">
+    <h2>{{ title() }}</h2>
+    @if (description().trim()) {
+      <p>{{ description() }}</p>
+    }
+  </div>
+
+  <div class="mws__grid">
+    @for (verse of verses(); track verse.reference + verse.text) {
+      <article class="mws__card">
+        <p class="mws__text">"{{ verse.text }}"</p>
+        <p class="mws__ref">{{ verse.reference }}</p>
+      </article>
+    }
+  </div>
+</section>

@@ -1,17 +1,21 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ClaudinaryService } from '../../../core/claudinary.service';
 import { MinistrySocialSectionComponent } from '../../../shared/ministry-social-section/ministry-social-section.component';
 import { MinistrySocialLink } from '../../../shared/ministry-social-section/ministry-social-link.model';
+import { MinistryMomentsSectionComponent } from '../../../shared/ministry-moments-section/ministry-moments-section.component';
+import { MinistryMomentAsset } from '../../../shared/ministry-moments-section/ministry-moments-section.model';
+import { MinistryWordSectionComponent } from '../../../shared/ministry-word-section/ministry-word-section.component';
+import { MinistryWordVerse } from '../../../shared/ministry-word-section/ministry-word-section.model';
 
 @Component({
   selector: 'app-ladies',
-  imports: [NgFor, MinistrySocialSectionComponent],
+  imports: [NgFor, MinistrySocialSectionComponent, MinistryMomentsSectionComponent, MinistryWordSectionComponent],
   templateUrl: './ladies.component.html',
   styleUrl: './ladies.component.css',
 })
-export class LadiesComponent implements OnInit, OnDestroy {
+export class LadiesComponent implements OnInit {
   // Logo Dunamis desde Cloudinary - reemplaza 'dunamis_logo' con tu publicId cuando lo subas
   logo = '';
 
@@ -30,7 +34,7 @@ export class LadiesComponent implements OnInit, OnDestroy {
     text: 'Fuerza y honor son su vestidura; y se ríe de lo porvenir.',
   };
 
-  verses = [
+  verses: MinistryWordVerse[] = [
     {
       reference: 'Proverbios 31:30',
       text: 'Engañosa es la gracia y vana la hermosura; la mujer que teme a Jehová, esa será alabada.',
@@ -69,18 +73,13 @@ export class LadiesComponent implements OnInit, OnDestroy {
     },
   ];
 
-  gallery: { url: string; type: 'image' | 'video' }[] = [];
+  momentAssets: MinistryMomentAsset[] = [
+    { publicId: 'dunamis_gallery1', alt: 'Encuentro de Dunamis' },
+    { publicId: 'dunamis_gallery2', alt: 'Momento especial de Dunamis' },
+    { publicId: 'dunamis_gallery3', alt: 'Tiempo de oración de Dunamis' },
+  ];
 
   socialLinks: MinistrySocialLink[] = [];
-
-  currentSlide = 0;
-  private autoSlideInterval: any;
-
-  isDragging = false;
-  private startX = 0;
-  private currentX = 0;
-  dragOffset = 0;
-  private threshold = 50;
 
   constructor(
     private cloudinary: ClaudinaryService,
@@ -122,102 +121,5 @@ export class LadiesComponent implements OnInit, OnDestroy {
     // Foto de líder - reemplaza con tu publicId de Cloudinary
     this.leader.photo = this.cloudinary.getOptimizedImage('CVM_0383_wyansd', 1100, 90);
 
-    // Galería - reemplaza con tus publicIds de Cloudinary
-    this.gallery = [
-      this.cloudinary.getOptimizedMedia('dunamis_gallery1', 1600, 90),
-      this.cloudinary.getOptimizedMedia('dunamis_gallery2', 1600, 90),
-      this.cloudinary.getOptimizedMedia('dunamis_gallery3', 1600, 90),
-    ];
-
-    this.startAutoSlide();
-  }
-
-  ngOnDestroy() {
-    this.stopAutoSlide();
-  }
-
-  private startAutoSlide() {
-    if (!this.gallery || this.gallery.length === 0) return;
-    this.autoSlideInterval = setInterval(() => this.nextSlide(), 5000);
-  }
-
-  private stopAutoSlide() {
-    if (this.autoSlideInterval) {
-      clearInterval(this.autoSlideInterval);
-      this.autoSlideInterval = null;
-    }
-  }
-
-  nextSlide() {
-    if (!this.gallery || this.gallery.length === 0) return;
-    this.currentSlide = (this.currentSlide + 1) % this.gallery.length;
-  }
-
-  prevSlide() {
-    if (!this.gallery || this.gallery.length === 0) return;
-    this.currentSlide =
-      (this.currentSlide - 1 + this.gallery.length) % this.gallery.length;
-  }
-
-  goToSlide(index: number) {
-    if (!this.gallery || this.gallery.length === 0) return;
-    this.currentSlide = index;
-    this.stopAutoSlide();
-    this.startAutoSlide();
-  }
-
-  onCarouselMouseEnter() {
-    this.stopAutoSlide();
-  }
-
-  onCarouselMouseLeave() {
-    this.startAutoSlide();
-  }
-
-  onDragStart(event: MouseEvent) {
-    this.isDragging = true;
-    this.startX = event.clientX;
-    this.currentX = event.clientX;
-    this.stopAutoSlide();
-    event.preventDefault();
-  }
-
-  onDragMove(event: MouseEvent) {
-    if (!this.isDragging) return;
-    this.currentX = event.clientX;
-    this.dragOffset = this.currentX - this.startX;
-  }
-
-  onDragEnd() {
-    if (!this.isDragging) return;
-    const distance = this.currentX - this.startX;
-    if (distance < -this.threshold) this.nextSlide();
-    else if (distance > this.threshold) this.prevSlide();
-    this.isDragging = false;
-    this.dragOffset = 0;
-    this.startAutoSlide();
-  }
-
-  onTouchStart(event: TouchEvent) {
-    this.isDragging = true;
-    this.startX = event.touches[0].clientX;
-    this.currentX = event.touches[0].clientX;
-    this.stopAutoSlide();
-  }
-
-  onTouchMove(event: TouchEvent) {
-    if (!this.isDragging) return;
-    this.currentX = event.touches[0].clientX;
-    this.dragOffset = this.currentX - this.startX;
-  }
-
-  onTouchEnd() {
-    if (!this.isDragging) return;
-    const distance = this.currentX - this.startX;
-    if (distance < -this.threshold) this.nextSlide();
-    else if (distance > this.threshold) this.prevSlide();
-    this.isDragging = false;
-    this.dragOffset = 0;
-    this.startAutoSlide();
   }
 }

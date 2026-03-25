@@ -1,0 +1,140 @@
+.mws {
+  display: block;
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  margin-bottom: 60px;
+}
+
+.mws__header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.mws__header h2 {
+  margin: 0 0 8px;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.mws__header p {
+  margin: 0;
+  font-size: 0.98rem;
+}
+
+.mws__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 18px;
+}
+
+.mws__card {
+  padding: 18px 18px 20px;
+  border-radius: 18px;
+}
+
+.mws__text {
+  margin: 0 0 8px;
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+
+.mws__ref {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.mws--kaynos {
+  padding: 0 8px;
+}
+
+.mws--kaynos .mws__header h2 {
+  color: #f1b942;
+}
+
+.mws--kaynos .mws__header p {
+  color: #090909;
+}
+
+.mws--kaynos .mws__card {
+  background: #000000;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.mws--kaynos .mws__text {
+  color: #e5e7eb;
+}
+
+.mws--kaynos .mws__ref {
+  color: #f1b942;
+}
+
+.mws--dunamis {
+  padding: 0 8px;
+}
+
+.mws--dunamis .mws__header h2 {
+  color: #e89c8a;
+}
+
+.mws--dunamis .mws__header p {
+  color: #6b5b58;
+}
+
+.mws--dunamis .mws__card {
+  background: #f5f5f5;
+  border: 1px solid rgba(232, 156, 138, 0.25);
+  transition: all 0.3s ease;
+}
+
+.mws--dunamis .mws__card:hover {
+  border-color: rgba(232, 156, 138, 0.5);
+  box-shadow: 0 8px 25px rgba(232, 156, 138, 0.15);
+}
+
+.mws--dunamis .mws__text {
+  color: #5a4d4a;
+}
+
+.mws--dunamis .mws__ref {
+  color: #e89c8a;
+}
+
+.mws--escuadron {
+  padding: 0 4px;
+}
+
+.mws--escuadron .mws__grid {
+  gap: 16px;
+}
+
+.mws--escuadron .mws__header h2 {
+  color: #d4af37;
+}
+
+.mws--escuadron .mws__header p {
+  color: #bfbfbf;
+}
+
+.mws--escuadron .mws__card {
+  background: #121212;
+  border: 1px solid rgba(191, 191, 191, 0.12);
+  border-radius: 12px;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.mws--escuadron .mws__card:hover {
+  border-color: rgba(212, 175, 55, 0.35);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+.mws--escuadron .mws__text {
+  color: #bfbfbf;
+  margin: 0 0 10px;
+}
+
+.mws--escuadron .mws__ref {
+  color: #d4af37;
+  font-size: 0.88rem;
+}
