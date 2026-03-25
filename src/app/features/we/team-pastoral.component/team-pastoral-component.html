@@ -30,11 +30,6 @@
               <span class="photo-placeholder-initials">{{ iniciales(pastor.nombre) }}</span>
               <span class="photo-placeholder-hint">Foto Cloudinary</span>
             </div>
-            <div class="photo-crown" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L15 8.5L22 9.5L17 14.5L18.5 21.5L12 18L5.5 21.5L7 14.5L2 9.5L9 8.5L12 2Z" fill="currentColor"/>
-              </svg>
-            </div>
           </div>
           <div class="pastor-info">
             <h3 class="pastor-name">{{ pastor.nombre }}</h3>
@@ -83,12 +78,6 @@
             <div *ngIf="!pastor.foto" class="photo-placeholder photo-placeholder--small" aria-hidden="true">
               <span class="photo-placeholder-initials">{{ iniciales(pastor.nombre) }}</span>
               <span class="photo-placeholder-hint">Cloudinary</span>
-            </div>
-            <div class="photo-badge" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
-                <path d="M12 7V13L16 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
             </div>
           </div>
           <div class="pastor-info">

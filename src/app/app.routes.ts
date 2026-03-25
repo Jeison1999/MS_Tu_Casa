@@ -6,6 +6,7 @@ import { EventComponent } from './features/event/event-component';
 import { TeamPastoralComponent } from './features/we/team-pastoral.component/team-pastoral-component';
 import { ShepherdsComponent } from './features/we/shepherds.component/shepherds.component';
 import { LadiesComponent } from './features/ministries/ladies.component/ladies.component';
+import { GentlemanComoponent } from './features/ministries/gentleman.comoponent/gentleman.comoponent';
 
 export const routes: Routes = [
   {
@@ -32,6 +33,11 @@ export const routes: Routes = [
     path: 'ministerios/dunamis',
     component: LadiesComponent,
     data: { theme: 'dunamis' },
+  },
+  {
+    path: 'ministerios/escuadronDeFe',
+    component: GentlemanComoponent,
+    data: { theme: 'escuadron' },
   },
   {
     path: 'eventos',

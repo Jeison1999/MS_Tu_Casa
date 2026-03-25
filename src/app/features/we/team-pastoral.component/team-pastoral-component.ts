@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ClaudinaryService } from '../../../core/claudinary.service';
 
-/** Foto: URL completa de Cloudinary cuando esté disponible (ej. https://res.cloudinary.com/.../image/upload/...). Dejar vacío para ver placeholder con iniciales. */
+/** Foto: URL optimizada desde Cloudinary. Dejar vacío para ver placeholder con iniciales. */
 export interface MiembroPastoral {
   nombre: string;
   cargo: string;
@@ -15,10 +16,9 @@ export interface MiembroPastoral {
   templateUrl: './team-pastoral-component.html',
   styleUrl: './team-pastoral-component.css',
 })
-export class TeamPastoralComponent {
+export class TeamPastoralComponent implements OnInit {
   /**
-   * Sustituye cada cadena vacía por la URL de Cloudinary de esa persona.
-   * Ejemplo: 'https://res.cloudinary.com/TU_CLOUD/image/upload/v1/carpeta/pedro-rios.jpg'
+   * Sustituye cada `public_id` por el definitivo luego de subir las fotos a Cloudinary.
    */
   pastoresPrincipales: MiembroPastoral[] = [
     {
@@ -40,6 +40,22 @@ export class TeamPastoralComponent {
     { nombre: 'Pr. Jaime Fernández', cargo: 'Pastor asociado', foto: '' },
     { nombre: 'Pra. Susan Rios', cargo: 'Pastora asociada', foto: '' },
   ];
+
+  constructor(private cloudinary: ClaudinaryService) {}
+
+  ngOnInit(): void {
+    // Fotos (Cloudinary). Reemplaza los public_id por los definitivos.
+    // Principales
+    this.pastoresPrincipales[0].foto = this.cloudinary.getOptimizedImage('CVM_0400_ndglfu', 1000, 90);
+    this.pastoresPrincipales[1].foto = this.cloudinary.getOptimizedImage('CVM_0393_hcsaf0', 1000, 90);
+
+    // Asociados
+    this.pastoresAsociados[0].foto = this.cloudinary.getOptimizedImage('CVM_0405_e6osps', 900, 90);
+    this.pastoresAsociados[1].foto = this.cloudinary.getOptimizedImage('IMG_0712_xkl1i5', 900, 90);
+    this.pastoresAsociados[2].foto = this.cloudinary.getOptimizedImage('CVM_0355_p8bpc9', 900, 90);
+    this.pastoresAsociados[3].foto = this.cloudinary.getOptimizedImage('CVM_0359_cq2wkb', 900, 90);
+    this.pastoresAsociados[4].foto = this.cloudinary.getOptimizedImage('pastora_susan_rios', 900, 90);
+  }
 
   /** Iniciales para placeholder cuando aún no hay imagen */
   iniciales(nombre: string): string {

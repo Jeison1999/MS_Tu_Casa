@@ -29,6 +29,9 @@ import { filter } from 'rxjs/operators';
 export class App implements OnInit, OnDestroy {
   protected readonly title = signal('mscasa');
 
+  /** Sincroniza fondo global (evita “bordes blancos” junto al footer) y utilidades de tema */
+  currentTheme: AppTheme = 'default';
+
   // Announcements Modal
   showAnnouncementsModal = false;
   announcements: Announcement[] = [];
@@ -39,6 +42,10 @@ export class App implements OnInit, OnDestroy {
     private themeService: ThemeService,
     private announcementsService: AnnouncementsService
   ) {
+    this.themeService.theme$.subscribe((t) => {
+      this.currentTheme = t;
+    });
+
     this.router.events
       .pipe(filter((e) => e instanceof NavigationEnd))
       .subscribe(() => {
@@ -52,9 +59,20 @@ export class App implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.applyThemeFromRoute();
     // Cargar anuncios inmediatamente en paralelo (mientras splash está visible)
     // Timing: splash termina en ~1700ms, mostramos anuncios cuando estén listos o pasen ~1500ms
     this.initializeAnnouncements();
+  }
+
+  /** Tema correcto en la primera pintada (antes del primer NavigationEnd). */
+  private applyThemeFromRoute() {
+    let route = this.activatedRoute.firstChild;
+    while (route?.firstChild) {
+      route = route.firstChild;
+    }
+    const theme = (route?.snapshot.data['theme'] as AppTheme) ?? 'default';
+    this.themeService.setTheme(theme);
   }
 
   ngOnDestroy() {

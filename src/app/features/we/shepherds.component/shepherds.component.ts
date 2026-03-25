@@ -36,7 +36,7 @@ export class ShepherdsComponent implements OnInit {
       nombre: 'Pedro Ríos',
       cargo: 'Apóstol de la Casa',
       icono: '',
-      foto: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500',
+      foto: '',
       ministerio: 'Visión y Dirección Apostólica',
       anios: '25 años de ministerio',
       biografia: [
@@ -50,7 +50,7 @@ export class ShepherdsComponent implements OnInit {
       nombre: 'Doris de Ríos',
       cargo: 'Pastora Principal',
       icono: '',
-      foto: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500',
+      foto: '',
       ministerio: 'Ministerio de Adoración y Familias',
       anios: '20 años de ministerio',
       biografia: [
@@ -64,7 +64,7 @@ export class ShepherdsComponent implements OnInit {
       nombre: 'Pedro y Doris',
       cargo: 'Pareja pastoral',
       icono: '',
-      foto: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=500',
+      foto: '',
       ministerio: 'Evangelismo y Misiones',
       anios: '15 años de ministerio',
       biografia: [
@@ -85,6 +85,12 @@ export class ShepherdsComponent implements OnInit {
     this.pastoresPrincipales[0].icono = this.cloudinary.getOptimizedImage('hombre_r2czgv', 200);
     this.pastoresPrincipales[1].icono = this.cloudinary.getOptimizedImage('mujer_jkximv', 200);
     this.pastoresPrincipales[2].icono = this.cloudinary.getOptimizedImage('pareja_qqahxz', 200);
+
+    // Fotos de biografía (Cloudinary). Reemplaza los public_id por los definitivos.
+    // Tip: sube estas fotos como image y usa el mismo public_id aquí.
+    this.pastoresPrincipales[0].foto = this.cloudinary.getOptimizedImage('CVM_0400_ndglfu.jpg', 1100, 90);
+    this.pastoresPrincipales[1].foto = this.cloudinary.getOptimizedImage('CVM_0393_hcsaf0', 1100, 90);
+    this.pastoresPrincipales[2].foto = this.cloudinary.getOptimizedImage('CVM_0384_rwjber', 1100, 90);
   }
 
   seleccionarPastor(pastor: Pastor): void {

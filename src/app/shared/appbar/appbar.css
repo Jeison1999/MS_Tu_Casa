@@ -13,6 +13,8 @@
   opacity: 0;
   animation: appbar-appear 400ms ease-out 2200ms forwards;
   transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  /* Contexto de apilamiento: contenido y dropdowns por encima del brillo */
+  isolation: isolate;
 }
 
 .appbar.hidden {
@@ -71,6 +73,16 @@
   color: #5a3d3d;
 }
 
+/* Recorta la animación glow al mismo radio que el header (evita fugas en las esquinas) */
+.appbar-glow-clip {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .appbar-glow {
   position: absolute;
   top: 0;
@@ -91,6 +103,8 @@
 }
 
 .appbar-container {
+  position: relative;
+  z-index: 1;
   max-width: 1400px;
   margin: 0 auto;
   padding: 0.75rem 2rem;
@@ -356,6 +370,150 @@
 .appbar.dunamis .dropdown-panel .featured-verse {
   background: linear-gradient(135deg, #F6C27A 0%, #F2A07B 100%);
   color: #5a3d3d;
+}
+
+/* Tema Escuadrón de fe: negro profundo + dorado clásico (#D4AF37) */
+.appbar.escuadron {
+  background: linear-gradient(145deg, #0a0a0a 0%, #141414 45%, #0b0b0b 100%);
+  box-shadow:
+    0 4px 28px rgba(0, 0, 0, 0.88),
+    0 0 0 1px rgba(212, 175, 55, 0.22),
+    0 0 32px rgba(166, 124, 46, 0.12),
+    inset 0 1px 0 rgba(242, 209, 107, 0.1);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.28);
+}
+
+.appbar.escuadron .appbar-glow {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.12) 40%,
+    rgba(242, 209, 107, 0.18) 50%,
+    rgba(212, 175, 55, 0.12) 60%,
+    transparent 100%
+  );
+}
+
+.appbar.escuadron .logo-ring {
+  border-color: rgba(212, 175, 55, 0.42);
+}
+
+.appbar.escuadron .logo-ring.hover {
+  border-color: rgba(242, 209, 107, 0.9);
+  box-shadow: 0 0 26px rgba(212, 175, 55, 0.45);
+}
+
+.appbar.escuadron .brand-title {
+  letter-spacing: -0.01em;
+  text-shadow: 0 0 28px rgba(212, 175, 55, 0.12), 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.appbar.escuadron .brand-title,
+.appbar.escuadron .brand-subtitle,
+.appbar.escuadron .nav-item {
+  color: #f5f5f5;
+}
+
+.appbar.escuadron .nav-item.active,
+.appbar.escuadron .nav-item:hover {
+  background: rgba(212, 175, 55, 0.12);
+  box-shadow: 0 0 20px rgba(242, 209, 107, 0.08);
+}
+
+.appbar.escuadron .nav-indicator {
+  background: #d4af37;
+  box-shadow: 0 0 12px rgba(242, 209, 107, 0.35);
+}
+
+.appbar.escuadron .featured-badge,
+.appbar.escuadron .featured-cta {
+  background: linear-gradient(135deg, #d4af37 0%, #a67c2e 100%);
+  color: #0b0b0b;
+}
+
+.appbar.escuadron .dropdown-panel {
+  background: linear-gradient(145deg, #121212 0%, #0b0b0b 100%);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.75),
+    0 0 40px rgba(166, 124, 46, 0.12);
+}
+
+.appbar.escuadron .dropdown-panel .section-header h3 {
+  color: #d4af37;
+}
+
+.appbar.escuadron .dropdown-panel .dropdown-link {
+  color: rgba(245, 245, 245, 0.92);
+}
+
+.appbar.escuadron .dropdown-panel .dropdown-link:hover {
+  background: rgba(212, 175, 55, 0.14);
+  color: #f2d16b;
+}
+
+.appbar.escuadron .dropdown-panel .dropdown-link::before {
+  background: #d4af37;
+}
+
+.appbar.escuadron .dropdown-panel .dropdown-featured {
+  background: linear-gradient(160deg, #1a1a1a 0%, #121212 100%);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.appbar.escuadron .dropdown-panel .dropdown-featured::before {
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.18), transparent);
+}
+
+.appbar.escuadron .dropdown-panel .featured-title {
+  color: #f2d16b;
+}
+
+.appbar.escuadron .dropdown-panel .featured-desc {
+  color: #bfbfbf;
+}
+
+.appbar.escuadron .dropdown-panel .featured-verse {
+  background: linear-gradient(135deg, #d4af37 0%, #a67c2e 100%);
+  color: #0b0b0b;
+}
+
+.mobile-menu.escuadron {
+  background: linear-gradient(145deg, #121212 0%, #0b0b0b 100%);
+  border: 2px solid rgba(212, 175, 55, 0.35);
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.8),
+    0 0 28px rgba(212, 175, 55, 0.1);
+}
+
+.mobile-menu.escuadron .mobile-link,
+.mobile-menu.escuadron .mobile-dropdown-header {
+  color: #f5f5f5;
+}
+
+.mobile-menu.escuadron .mobile-link:hover,
+.mobile-menu.escuadron .mobile-dropdown-header:hover {
+  background: rgba(212, 175, 55, 0.12);
+}
+
+.mobile-menu.escuadron .mobile-sublink {
+  color: rgba(245, 245, 245, 0.9);
+}
+
+.mobile-menu.escuadron .mobile-sublink:hover {
+  background: rgba(212, 175, 55, 0.12);
+  color: #f2d16b;
+}
+
+.mobile-menu.escuadron .mobile-group-title {
+  color: #d4af37;
+  border-left-color: rgba(212, 175, 55, 0.55);
+}
+
+.mobile-menu.escuadron .mobile-cta {
+  background: linear-gradient(135deg, #d4af37 0%, #a67c2e 100%);
+  color: #0b0b0b;
+  border-color: rgba(212, 175, 55, 0.5);
 }
 
 .nav-item:hover .nav-indicator,

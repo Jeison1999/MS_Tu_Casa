@@ -1,36 +1,36 @@
-<div class="dunamis-page">
-  <!-- Decoraciones tipo llama (flame-like) -->
-  <div class="flame-deco flame-deco-1" aria-hidden="true"></div>
-  <div class="flame-deco flame-deco-2" aria-hidden="true"></div>
-  <div class="flame-deco flame-deco-3" aria-hidden="true"></div>
-  <div class="flame-deco flame-deco-4" aria-hidden="true"></div>
+<div class="escuadron-page">
+  <!-- Acentos geométricos / brillo dorado -->
+  <div class="escuadron-deco escuadron-deco-1" aria-hidden="true"></div>
+  <div class="escuadron-deco escuadron-deco-2" aria-hidden="true"></div>
+  <div class="escuadron-deco escuadron-deco-3" aria-hidden="true"></div>
+  <div class="escuadron-corner escuadron-corner-tr" aria-hidden="true"></div>
+  <div class="escuadron-corner escuadron-corner-bl" aria-hidden="true"></div>
 
-  <!-- Hero Section -->
-  <section class="dunamis-hero">
-    <div class="dunamis-hero-content">
-      <div class="dunamis-hero-text">
-        <span class="hero-badge">Ministerio de Damas</span>
-        <h1 class="dunamis-title">
-          <span>Dunamis</span>
+  <section class="escuadron-hero">
+    <div class="escuadron-hero-content">
+      <div class="escuadron-hero-text">
+        <span class="hero-badge">Ministerio de caballeros</span>
+        <h1 class="escuadron-title">
+          <span class="escuadron-title-line">Escuadrón</span>
+          <span class="escuadron-title-accent">de fe</span>
         </h1>
-        <p class="dunamis-subtitle">
-          Mujeres que viven en el poder de Dios, edificándose mutuamente y
-          brillando con la luz de Cristo en cada área de sus vidas.
+        <p class="escuadron-subtitle">
+          Hombres firmes en la fe, que se levantan con valor, integridad y
+          servicio, para extender el reino de Dios en sus hogares y en la iglesia.
         </p>
       </div>
-      <div class="dunamis-hero-logo">
-        <div class="logo-card">
-          <img [src]="logo" alt="Logo Dunamis" />
+      <div class="escuadron-hero-logo">
+        <div class="escuadron-logo-wrap">
+          <img [src]="logo" alt="Logo Escuadrón de fe" />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Leaders Section -->
-  <section class="dunamis-section leaders-section">
+  <section class="escuadron-section leaders-section">
     <div class="section-header">
       <h2>Líderes</h2>
-      <p>Mujeres que caminan contigo y te acompañan a crecer en Cristo.</p>
+      <p>Hombres que caminan contigo y te impulsan a crecer en Cristo.</p>
     </div>
     <article class="leader-feature">
       <div class="leader-feature-media">
@@ -44,7 +44,7 @@
           <p class="leader-feature-role">{{ leader.role }}</p>
         </div>
 
-        <div class="leader-feature-stats" aria-label="Datos de la líder">
+        <div class="leader-feature-stats" aria-label="Datos del líder">
           @if (leader.age) {
             <div class="leader-chip">
               <span class="leader-chip-label">Edad</span>
@@ -66,8 +66,7 @@
     </article>
   </section>
 
-  <!-- Highlight Verse -->
-  <section class="dunamis-section verse-highlight">
+  <section class="escuadron-section verse-highlight">
     <div class="verse-card">
       <div class="verse-label">Versículo lema</div>
       <p class="verse-text">"{{ highlightVerse.text }}"</p>
@@ -75,10 +74,9 @@
     </div>
   </section>
 
-  <!-- Verses Grid -->
-  <section class="dunamis-section verses-section">
+  <section class="escuadron-section verses-section">
     <div class="section-header">
-      <h2>Palabra para la mujer virtuosa</h2>
+      <h2>Palabra para el hombre de Dios</h2>
     </div>
     <div class="verses-grid">
       <article class="verse-item" *ngFor="let v of verses">
@@ -88,12 +86,11 @@
     </div>
   </section>
 
-  <!-- Events & Gallery -->
-  <section class="dunamis-section events-gallery-section">
+  <section class="escuadron-section events-gallery-section">
     <div class="events-column">
       <div class="section-header left">
         <h2>Próximos encuentros</h2>
-        <p>Momentos donde Dios marca nuestras vidas.</p>
+        <p>Momentos donde Dios afirma nuestra fe.</p>
       </div>
       <div class="events-timeline">
         <article class="event-card" *ngFor="let e of events">
@@ -107,8 +104,8 @@
 
     <div class="gallery-column">
       <div class="section-header">
-        <h2>Momentos Dunamis</h2>
-        <p>Experiencias que fortalecen tu fe y te acercan más a Dios.</p>
+        <h2>Momentos Escuadrón de fe</h2>
+        <p>Experiencias que fortalecen tu corazón y tu compromiso con Cristo.</p>
       </div>
       <div class="gallery-carousel-wrapper"
            (mouseenter)="onCarouselMouseEnter()"
@@ -127,7 +124,7 @@
             <div class="gallery-carousel-slide" *ngFor="let item of gallery">
               <div class="gallery-slide-image">
                 @if (item.type === 'image') {
-                  <img [src]="item.url" alt="Dunamis" [style.pointer-events]="'none'" />
+                  <img [src]="item.url" alt="Escuadrón de fe" [style.pointer-events]="'none'" />
                 } @else {
                   <video [src]="item.url" [style.pointer-events]="'none'" controls playsinline muted loop autoplay></video>
                 }
@@ -161,11 +158,10 @@
     </div>
   </section>
 
-  <!-- Social Media Section -->
-  <section class="dunamis-section social-section">
+  <section class="escuadron-section social-section">
     <div class="section-header">
       <h2>Síguenos y conéctate</h2>
-      <p>Mantente al día con todas nuestras actividades y eventos</p>
+      <p>Mantente al día con nuestras actividades</p>
     </div>
     <div class="social-grid">
       <a *ngFor="let social of socialMedia"

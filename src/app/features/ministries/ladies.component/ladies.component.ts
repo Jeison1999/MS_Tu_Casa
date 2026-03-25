@@ -13,18 +13,15 @@ export class LadiesComponent implements OnInit, OnDestroy {
   // Logo Dunamis desde Cloudinary - reemplaza 'dunamis_logo' con tu publicId cuando lo subas
   logo = '';
 
-  leaders = [
-    {
-      name: 'Nombre Líder',
-      role: 'Líder de Dunamis',
-      photo: '',
-    },
-    {
-      name: 'Nombre Líder',
-      role: 'Líder de Dunamis',
-      photo: '',
-    },
-  ];
+  leader = {
+    name: 'Nombre Líder',
+    role: 'Líder de Dunamis',
+    photo: '',
+    age: 0,
+    yearsLeading: 0,
+    bio:
+      'Reemplaza este texto con una breve descripción de la líder. Aquí puedes contar su corazón de servicio, su llamado y cómo acompaña a las mujeres de la casa a crecer en Cristo.',
+  };
 
   highlightVerse = {
     reference: 'Proverbios 31:25',
@@ -123,9 +120,8 @@ export class LadiesComponent implements OnInit, OnDestroy {
     // this.logo = '/assets/dunamis-logo.png';
     this.logo = this.cloudinary.getOptimizedImage('Dunamis_logo_mrnwzt.png', 700, 90);
 
-    // Fotos de líderes - reemplaza con tus publicIds de Cloudinary
-    this.leaders[0].photo = this.cloudinary.getOptimizedImage('dunamis_leader1', 900, 90);
-    this.leaders[1].photo = this.cloudinary.getOptimizedImage('dunamis_leader2', 900, 90);
+    // Foto de líder - reemplaza con tu publicId de Cloudinary
+    this.leader.photo = this.cloudinary.getOptimizedImage('CVM_0383_wyansd', 1100, 90);
 
     // Galería - reemplaza con tus publicIds de Cloudinary
     this.gallery = [

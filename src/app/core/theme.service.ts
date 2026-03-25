@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-export type AppTheme = 'default' | 'youth' | 'dunamis';
+export type AppTheme = 'default' | 'youth' | 'dunamis' | 'escuadron';
 
 @Injectable({
   providedIn: 'root',

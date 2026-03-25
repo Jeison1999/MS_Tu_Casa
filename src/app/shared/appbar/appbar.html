@@ -1,6 +1,9 @@
-<header class="appbar" [ngClass]="{'hidden': isHidden, 'default': currentTheme === 'default', 'youth': currentTheme === 'youth', 'dunamis': currentTheme === 'dunamis'}">
-  <div class="appbar-glow"></div>
-  
+<header class="appbar" [ngClass]="{'hidden': isHidden, 'default': currentTheme === 'default', 'youth': currentTheme === 'youth', 'dunamis': currentTheme === 'dunamis', 'escuadron': currentTheme === 'escuadron'}">
+  <!-- Capa que recorta el brillo animado a los bordes redondeados (sin recortar los dropdowns) -->
+  <div class="appbar-glow-clip" aria-hidden="true">
+    <div class="appbar-glow"></div>
+  </div>
+
   <div class="appbar-container">
     <!-- Logo & Brand -->
     <div class="brand" (mouseenter)="logoHover = true" (mouseleave)="logoHover = false">
@@ -108,8 +111,12 @@
                 <span>Kaynos Generacion</span>
                 <i class="link-arrow">→</i>
               </a>
-              <a href="#" class="dropdown-link">
-                <span>Escruadron de Fe</span>
+              <a
+                routerLink="/ministerios/escuadronDeFe"
+                class="dropdown-link"
+                (click)="closeAll()"
+              >
+                <span>Escuadrón de fe</span>
                 <i class="link-arrow">→</i>
               </a>
               <a
@@ -181,7 +188,7 @@
 </header>
 
 <!-- Mobile Menu -->
-<div class="mobile-menu" [ngClass]="{'active': mobileOpen, 'default': currentTheme === 'default', 'youth': currentTheme === 'youth', 'dunamis': currentTheme === 'dunamis'}">
+<div class="mobile-menu" [ngClass]="{'active': mobileOpen, 'default': currentTheme === 'default', 'youth': currentTheme === 'youth', 'dunamis': currentTheme === 'dunamis', 'escuadron': currentTheme === 'escuadron'}">
   <div class="mobile-content">
     <a
       routerLink="/"
@@ -223,7 +230,7 @@
         <div class="mobile-dropdown-group">
           <a href="#" class="mobile-sublink" (click)="closeAll()">Kaynos Kids</a>
           <a routerLink="/ministerios/kaynosGeneracion" class="mobile-sublink" (click)="closeAll()">Kaynos Generación</a>
-          <a href="#" class="mobile-sublink" (click)="closeAll()">Escuadrón de Caballeros</a>
+          <a routerLink="/ministerios/escuadronDeFe" class="mobile-sublink" (click)="closeAll()">Escuadrón de fe</a>
           <a routerLink="/ministerios/dunamis" class="mobile-sublink" (click)="closeAll()">Dunamis</a>
           <a href="#" class="mobile-sublink" (click)="closeAll()">Alabanza</a>
           <a href="#" class="mobile-sublink" (click)="closeAll()">Intercesión</a>

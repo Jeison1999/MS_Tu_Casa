@@ -1,14 +1,16 @@
-<app-splash-screen></app-splash-screen>
+<div class="site-wrap" [ngClass]="'theme-' + currentTheme">
+  <app-splash-screen></app-splash-screen>
 
-<!-- Announcements Modal -->
-<app-announcements-modal
-  [showModal]="showAnnouncementsModal"
-  [announcements]="announcements"
-  (closeModal)="onAnnouncementsModalClose()"
-></app-announcements-modal>
+  <!-- Announcements Modal -->
+  <app-announcements-modal
+    [showModal]="showAnnouncementsModal"
+    [announcements]="announcements"
+    (closeModal)="onAnnouncementsModalClose()"
+  ></app-announcements-modal>
 
-<app-appbar/>
-<div [@routeAnimations]="prepareRoute(outlet)">
-  <router-outlet #outlet="outlet" />
+  <app-appbar/>
+  <div [@routeAnimations]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet" />
+  </div>
+  <app-footer/>
 </div>
-<app-footer/>

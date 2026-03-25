@@ -19,3 +19,15 @@ html {
   overflow-x: hidden;
   scrollbar-gutter: stable;
 }
+
+/* Solo Escuadrón: fondo del contenedor = página (evita huecos claros junto al footer redondeado).
+   Jóvenes y Dunamis siguen con lienzo claro como antes. */
+.site-wrap {
+  display: block;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+.site-wrap.theme-escuadron {
+  background: #0b0b0b;
+}
