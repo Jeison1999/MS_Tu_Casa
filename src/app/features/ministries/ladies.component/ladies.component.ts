@@ -20,13 +20,12 @@ export class LadiesComponent implements OnInit {
   logo = '';
 
   leader = {
-    name: 'Nombre Líder',
+    name: 'Sindy Castillo',
     role: 'Líder de Dunamis',
     photo: '',
     age: 0,
     yearsLeading: 0,
-    bio:
-      'Reemplaza este texto con una breve descripción de la líder. Aquí puedes contar su corazón de servicio, su llamado y cómo acompaña a las mujeres de la casa a crecer en Cristo.',
+    bio: 'La líder de damas de Dunamitas es una mujer guiada por el Espíritu Santo, llamada a edificar, fortalecer y levantar a otras mujeres en su identidad y propósito en Dios. Su liderazgo se basa en el amor, la sabiduría y el ejemplo, formando mujeres firmes, valientes y llenas del poder de Dios.'
   };
 
   highlightVerse = {
