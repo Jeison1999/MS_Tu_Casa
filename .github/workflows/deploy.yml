@@ -27,7 +27,7 @@ jobs:
     - name: List build output
       run: |
         echo "=== Build complete, checking output ==="
-        ls -la dist/mscasa/
+        ls -la dist/mscasa/browser/
     
     - name: Setup SSH key
       run: |
@@ -39,7 +39,7 @@ jobs:
     - name: Deploy to server via rsync
       run: |
         rsync -avz --delete -e "ssh -p 22 -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
-          dist/mscasa/ \
+          dist/mscasa/browser/ \
           ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/var/www/mstucasa_com_usr/data/www/mstucasa.com/
     
     - name: Set correct permissions
