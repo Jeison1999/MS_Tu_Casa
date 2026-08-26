@@ -40,6 +40,7 @@
       <ul class="footer-links">
         <li><a href="#">Inicio</a></li>
         <li><a routerLink="/en-vivo">En vivo</a></li>
+        <li *ngIf="portalEnabled()"><a routerLink="/datos">Mis datos</a></li>
         <li><a href="#">Nuestra Historia</a></li>
         <li><a href="#">Ministerios</a></li>
         <li><a href="#">Eventos</a></li>

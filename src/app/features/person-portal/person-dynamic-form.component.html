@@ -1,0 +1,108 @@
+<form class="person-form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <fieldset class="form-fieldset" *ngIf="coreFields.length" formGroupName="person">
+    <legend>Datos personales</legend>
+    <div class="fields-grid">
+      <label
+        class="field"
+        *ngFor="let field of coreFields"
+        [class.field-boolean]="fieldType(field) === 'boolean'"
+        [class.field-wide]="fieldType(field) === 'textarea'"
+        [class.field-invalid]="controlInvalid(personGroup, field.key)"
+      >
+        <span class="field-label" *ngIf="fieldType(field) !== 'boolean'">
+          {{ fieldLabel(field) }}
+          <em *ngIf="field.required">*</em>
+        </span>
+
+        <input
+          *ngIf="fieldType(field) === 'text' || fieldType(field) === 'email' || fieldType(field) === 'tel' || fieldType(field) === 'number' || fieldType(field) === 'date'"
+          [type]="inputType(field)"
+          [formControlName]="field.key"
+          [attr.inputmode]="inputMode(field)"
+          [attr.autocomplete]="field.key"
+          [attr.max]="field.key === 'birth_date' ? maxBirthDate : null"
+        />
+
+        <textarea
+          *ngIf="fieldType(field) === 'textarea'"
+          [formControlName]="field.key"
+          rows="3"
+        ></textarea>
+
+        <select *ngIf="fieldType(field) === 'select'" [formControlName]="field.key">
+          <option value="">Selecciona...</option>
+          <option *ngFor="let option of fieldOptions(field)" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+
+        <span class="checkbox-row" *ngIf="fieldType(field) === 'boolean'">
+          <input type="checkbox" [formControlName]="field.key" />
+          <span>
+            {{ fieldLabel(field) }}
+            <em *ngIf="field.required">*</em>
+          </span>
+        </span>
+
+        <small class="field-error" *ngIf="controlInvalid(personGroup, field.key)">
+          {{ fieldError(personGroup, field.key, field) }}
+        </small>
+      </label>
+    </div>
+  </fieldset>
+
+  <fieldset class="form-fieldset" *ngIf="customFields.length" formGroupName="custom">
+    <legend>Información adicional</legend>
+    <div class="fields-grid">
+      <label
+        class="field"
+        *ngFor="let field of customFields"
+        [class.field-boolean]="fieldType(field) === 'boolean'"
+        [class.field-wide]="fieldType(field) === 'textarea'"
+        [class.field-invalid]="controlInvalid(customGroup, '' + field.id)"
+      >
+        <span class="field-label" *ngIf="fieldType(field) !== 'boolean'">
+          {{ fieldLabel(field) }}
+          <em *ngIf="field.required">*</em>
+        </span>
+
+        <input
+          *ngIf="fieldType(field) === 'text' || fieldType(field) === 'email' || fieldType(field) === 'tel' || fieldType(field) === 'number' || fieldType(field) === 'date'"
+          [type]="inputType(field)"
+          [formControlName]="'' + field.id"
+          [attr.inputmode]="inputMode(field)"
+        />
+
+        <textarea
+          *ngIf="fieldType(field) === 'textarea'"
+          [formControlName]="'' + field.id"
+          rows="3"
+        ></textarea>
+
+        <select *ngIf="fieldType(field) === 'select'" [formControlName]="'' + field.id">
+          <option value="">Selecciona...</option>
+          <option *ngFor="let option of fieldOptions(field)" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+
+        <span class="checkbox-row" *ngIf="fieldType(field) === 'boolean'">
+          <input type="checkbox" [formControlName]="'' + field.id" />
+          <span>
+            {{ fieldLabel(field) }}
+            <em *ngIf="field.required">*</em>
+          </span>
+        </span>
+
+        <small class="field-error" *ngIf="controlInvalid(customGroup, '' + field.id)">
+          {{ fieldError(customGroup, '' + field.id, field) }}
+        </small>
+      </label>
+    </div>
+  </fieldset>
+
+  <button class="submit-btn" type="submit" [disabled]="submitting">
+    <span class="spinner spinner-sm" *ngIf="submitting"></span>
+    {{ submitting ? 'Enviando...' : submitLabel }}
+  </button>
+</form>

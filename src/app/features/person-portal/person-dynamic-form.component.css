@@ -1,0 +1,133 @@
+.person-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-fieldset {
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 20px 18px 8px;
+  background: #f8f9fa;
+}
+
+.form-fieldset legend {
+  padding: 0 8px;
+  color: #bd811f;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.fields-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #2d3748;
+  font-size: 0.92rem;
+}
+
+.field-wide {
+  grid-column: 1 / -1;
+}
+
+.field-label em {
+  color: #c53030;
+  font-style: normal;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 11px 12px;
+  font: inherit;
+  background: white;
+  color: #1a202c;
+}
+
+.field-invalid input,
+.field-invalid select,
+.field-invalid textarea {
+  border-color: #c53030;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: #bd811f;
+  box-shadow: 0 0 0 3px rgba(189, 129, 31, 0.15);
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+}
+
+.checkbox-row input {
+  width: 18px;
+  height: 18px;
+  accent-color: #bd811f;
+}
+
+.field-error {
+  color: #c53030;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  max-width: 100%;
+}
+
+.submit-btn {
+  align-self: flex-start;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 22px;
+  background: linear-gradient(135deg, #bd811f 0%, #d4a049 100%);
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.submit-btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: form-spin 0.7s linear infinite;
+}
+
+@keyframes form-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 720px) {
+  .fields-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+}

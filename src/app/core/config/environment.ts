@@ -13,8 +13,8 @@
  * Descomenta y usa cuando despliegues a producción
  */
 export const environment = {
-  production: true,
-  apiUrl: 'https://api.mstucasa.com/api/v1',
+  production: false,
+  apiUrl: 'http://localhost:3000/api/v1',
   /**
    * Canal de YouTube para el culto en vivo (gratis).
    * El ID empieza por "UC". YouTube Studio → Canal → Configuración avanzada.

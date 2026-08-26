@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { EventsService } from '../../core/services/events.service';
 import { ApiConfigService } from '../../core/services/api-config.service';
 import { Event, EventWithCountdown } from '../../core/models/event.model';
@@ -8,7 +7,7 @@ import { Event, EventWithCountdown } from '../../core/models/event.model';
 @Component({
   selector: 'app-event-component',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule],
   providers: [EventsService, ApiConfigService],
   templateUrl: './event-component.html',
   styleUrl: './event-component.css',
