@@ -7,6 +7,7 @@ import { TeamPastoralComponent } from './features/we/team-pastoral.component/tea
 import { ShepherdsComponent } from './features/we/shepherds.component/shepherds.component';
 import { LadiesComponent } from './features/ministries/ladies.component/ladies.component';
 import { GentlemanComoponent } from './features/ministries/gentleman.comoponent/gentleman.comoponent';
+import { LiveComponent } from './features/live/live-component';
 
 export const routes: Routes = [
   {
@@ -38,6 +39,11 @@ export const routes: Routes = [
     path: 'ministerios/escuadronDeFe',
     component: GentlemanComoponent,
     data: { theme: 'escuadron' },
+  },
+  {
+    path: 'en-vivo',
+    component: LiveComponent,
+    data: { theme: 'default' },
   },
   {
     path: 'eventos',

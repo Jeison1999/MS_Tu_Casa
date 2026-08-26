@@ -1,0 +1,68 @@
+<div class="live-container">
+  <section class="live-hero">
+    <p class="live-kicker">Morando en Sion</p>
+    <h1 class="live-title">
+      <span class="title-line">Cultos en vivo</span>
+      <span class="title-main">Transmisión en directo</span>
+    </h1>
+    <p class="live-subtitle">
+      Síguenos desde casa. Conectamos cámara y audio en el templo y lo ves aquí, en mstucasa.com.
+    </p>
+
+    <div class="live-badge" [class.on-air]="isLive">
+      <span class="live-dot" aria-hidden="true"></span>
+      <span *ngIf="isLive && currentService">En vivo · {{ currentService.title }}</span>
+      <span *ngIf="!isLive && nextService">Próximo: {{ nextService.title }} · {{ nextService.scheduleLabel }}</span>
+      <span *ngIf="!isLive && !nextService">Consulta los horarios de esta semana</span>
+    </div>
+  </section>
+
+  <section class="player-card">
+    <div class="player-frame">
+      <iframe
+        *ngIf="hasPlayer"
+        [src]="playerUrl"
+        title="Culto en vivo de Morando en Sion"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin"
+      ></iframe>
+
+      <div class="player-placeholder" *ngIf="!hasPlayer">
+        <i class="fas fa-video" aria-hidden="true"></i>
+        <h2 *ngIf="isLive">Estamos reunidos en el templo</h2>
+        <h2 *ngIf="!isLive">Aún no hay transmisión</h2>
+        <p *ngIf="isLive">
+          El culto ya comenzó. Si no ves imagen, espera unos segundos o recarga la página.
+        </p>
+        <p *ngIf="!isLive && nextService">
+          El próximo encuentro es <strong>{{ nextService.title }}</strong> ({{ nextService.scheduleLabel }}).
+        </p>
+      </div>
+    </div>
+    <p class="player-note" *ngIf="hasPlayer && !isLive">
+      El reproductor se activa cuando iniciamos el culto. Mientras tanto puedes ver el canal o volver en el horario de servicio.
+    </p>
+    <a
+      *ngIf="channelUrl"
+      class="channel-link"
+      [href]="channelUrl"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Ver canal en YouTube
+    </a>
+  </section>
+
+  <section class="schedule-card">
+    <h2 class="section-title">Horarios de esta semana</h2>
+    <p class="section-subtitle">Estos son los momentos en los que normalmente transmitimos.</p>
+    <div class="schedule-grid">
+      <article class="schedule-item" *ngFor="let service of services" [class.active]="currentService?.id === service.id">
+        <h3>{{ service.title }}</h3>
+        <p class="schedule-time">{{ service.scheduleLabel }}</p>
+        <p class="schedule-desc">{{ service.description }}</p>
+      </article>
+    </div>
+  </section>
+</div>

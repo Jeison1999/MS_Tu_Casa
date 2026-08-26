@@ -3,6 +3,7 @@ import { NgClass } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ThemeService, AppTheme } from '../../core/theme.service';
 import { ClaudinaryService } from '../../core/claudinary.service';
+import { getLiveStatus } from '../../core/live-schedule';
 
 @Component({
   selector: 'app-appbar',
@@ -19,6 +20,8 @@ export class Appbar {
   private closeTimeout: any = null;
   currentTheme: AppTheme = 'default';
   readonly logo1: string;
+  isWorshipLive = false;
+  private liveTimerId: ReturnType<typeof setInterval> | null = null;
   
   // Scroll behavior
   isHidden = false;
@@ -40,10 +43,15 @@ export class Appbar {
 
   ngOnInit() {
     window.addEventListener('scroll', this.handleScrollBound);
+    this.refreshLiveStatus();
+    this.liveTimerId = setInterval(() => this.refreshLiveStatus(), 30_000);
   }
 
   ngOnDestroy() {
     window.removeEventListener('scroll', this.handleScrollBound);
+    if (this.liveTimerId) {
+      clearInterval(this.liveTimerId);
+    }
     if (this.rafId !== null) {
       cancelAnimationFrame(this.rafId);
       this.rafId = null;
@@ -144,5 +152,9 @@ export class Appbar {
     this.hideDropdown();
     this.mobileOpen = false;
     this.mobileDropdown = null;
+  }
+
+  private refreshLiveStatus() {
+    this.isWorshipLive = getLiveStatus().isLive;
   }
 }

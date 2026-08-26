@@ -161,6 +161,19 @@
       </div>
       
       <a
+        routerLink="/en-vivo"
+        class="nav-item nav-live"
+        routerLinkActive="active"
+        (click)="closeAll()"
+      >
+        <span class="nav-label">
+          <span class="live-dot" [class.on-air]="isWorshipLive" aria-hidden="true"></span>
+          En vivo
+        </span>
+        <div class="nav-indicator"></div>
+      </a>
+
+      <a
         routerLink="/eventos"
         class="nav-item"
         routerLinkActive="active"
@@ -240,6 +253,15 @@
       </div>
     </div>
     
+    <a
+      routerLink="/en-vivo"
+      class="mobile-link"
+      routerLinkActive="active"
+      (click)="closeAll()"
+    >
+      <span class="live-dot" [class.on-air]="isWorshipLive" aria-hidden="true"></span>
+      En vivo
+    </a>
     <a
       routerLink="/eventos"
       class="mobile-link"

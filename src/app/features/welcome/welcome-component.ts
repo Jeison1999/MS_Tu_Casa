@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { ClaudinaryService } from '../../core/claudinary.service';
 
 @Component({
   selector: 'app-welcome-component',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './welcome-component.html',
   styleUrl: './welcome-component.css',
 })

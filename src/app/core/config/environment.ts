@@ -13,6 +13,14 @@
  * Descomenta y usa cuando despliegues a producción
  */
 export const environment = {
-   production: true,
+  production: true,
   apiUrl: 'https://api.mstucasa.com/api/v1',
+  /**
+   * Canal de YouTube para el culto en vivo (gratis).
+   * El ID empieza por "UC". YouTube Studio → Canal → Configuración avanzada.
+   */
+  youtubeChannelId: 'UCmoKp2GAoNCF-F1nETcJXVw',
+  youtubeChannelUrl: 'https://www.youtube.com/@Mstucasa-n4l',
+  /** Si hay un live concreto, tiene prioridad sobre el canal. */
+  youtubeLiveVideoId: '',
 };
