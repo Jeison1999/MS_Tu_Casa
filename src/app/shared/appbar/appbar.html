@@ -167,7 +167,7 @@
         (click)="closeAll()"
       >
         <span class="nav-label">
-          <span class="live-dot" [class.on-air]="isWorshipLive" aria-hidden="true"></span>
+          <span class="live-dot" [class.on-air]="isWorshipLive()" aria-hidden="true"></span>
           En vivo
         </span>
         <div class="nav-indicator"></div>
@@ -270,7 +270,7 @@
       routerLinkActive="active"
       (click)="closeAll()"
     >
-      <span class="live-dot" [class.on-air]="isWorshipLive" aria-hidden="true"></span>
+      <span class="live-dot" [class.on-air]="isWorshipLive()" aria-hidden="true"></span>
       En vivo
     </a>
     <a

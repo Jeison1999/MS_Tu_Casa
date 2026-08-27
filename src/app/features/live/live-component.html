@@ -11,7 +11,7 @@
 
     <div class="live-badge" [class.on-air]="isLive">
       <span class="live-dot" aria-hidden="true"></span>
-      <span *ngIf="isLive && currentService">En vivo · {{ currentService.title }}</span>
+      <span *ngIf="isLive">En vivo{{ currentService ? ' · ' + currentService.title : '' }}</span>
       <span *ngIf="!isLive && nextService">Próximo: {{ nextService.title }} · {{ nextService.scheduleLabel }}</span>
       <span *ngIf="!isLive && !nextService">Consulta los horarios de esta semana</span>
     </div>
@@ -43,14 +43,18 @@
     <p class="player-note" *ngIf="hasPlayer && !isLive">
       El reproductor se activa cuando iniciamos el culto. Mientras tanto puedes ver el canal o volver en el horario de servicio.
     </p>
+    <p class="player-note" *ngIf="hasPlayer && isLive">
+      Si el video no carga aquí, ábrelo directo en YouTube. En YouTube Studio el live debe tener
+      <strong>Permitir inserción</strong> activado.
+    </p>
     <a
-      *ngIf="channelUrl"
+      *ngIf="watchUrl"
       class="channel-link"
-      [href]="channelUrl"
+      [href]="watchUrl"
       target="_blank"
       rel="noopener noreferrer"
     >
-      Ver canal en YouTube
+      Ver transmisión en YouTube
     </a>
   </section>
 

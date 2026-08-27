@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ThemeService, AppTheme } from '../../core/theme.service';
 import { ClaudinaryService } from '../../core/claudinary.service';
-import { getLiveStatus } from '../../core/live-schedule';
+import { isBroadcastLive } from '../../core/live-schedule';
 import { PersonPortalService } from '../../core/services/person-portal.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class Appbar {
   private closeTimeout: any = null;
   currentTheme: AppTheme = 'default';
   readonly logo1: string;
-  isWorshipLive = false;
+  isWorshipLive = signal(false);
   portalEnabled = signal(false);
   private liveTimerId: ReturnType<typeof setInterval> | null = null;
   
@@ -165,6 +165,6 @@ export class Appbar {
   }
 
   private refreshLiveStatus() {
-    this.isWorshipLive = getLiveStatus().isLive;
+    this.isWorshipLive.set(isBroadcastLive());
   }
 }
