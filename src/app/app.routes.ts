@@ -8,6 +8,7 @@ import { ShepherdsComponent } from './features/we/shepherds.component/shepherds.
 import { LadiesComponent } from './features/ministries/ladies.component/ladies.component';
 import { GentlemanComoponent } from './features/ministries/gentleman.comoponent/gentleman.comoponent';
 import { LiveComponent } from './features/live/live-component';
+import { PersonPortalComponent } from './features/person-portal/person-portal.component';
 
 export const routes: Routes = [
   {
@@ -44,6 +45,16 @@ export const routes: Routes = [
     path: 'en-vivo',
     component: LiveComponent,
     data: { theme: 'default' },
+  },
+  {
+    path: 'datos',
+    component: PersonPortalComponent,
+    data: { theme: 'default' },
+  },
+  {
+    path: 'actualizacion-datos',
+    redirectTo: 'datos',
+    pathMatch: 'full',
   },
   {
     path: 'eventos',

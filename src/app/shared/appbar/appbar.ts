@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { Component, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ThemeService, AppTheme } from '../../core/theme.service';
 import { ClaudinaryService } from '../../core/claudinary.service';
-import { getLiveStatus } from '../../core/live-schedule';
+import { isBroadcastLive } from '../../core/live-schedule';
+import { PersonPortalService } from '../../core/services/person-portal.service';
 
 @Component({
   selector: 'app-appbar',
-  imports: [NgClass, RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './appbar.html',
   styleUrls: ['./appbar.css'],
 })
@@ -20,7 +21,8 @@ export class Appbar {
   private closeTimeout: any = null;
   currentTheme: AppTheme = 'default';
   readonly logo1: string;
-  isWorshipLive = false;
+  isWorshipLive = signal(false);
+  portalEnabled = signal(false);
   private liveTimerId: ReturnType<typeof setInterval> | null = null;
   
   // Scroll behavior
@@ -31,7 +33,11 @@ export class Appbar {
   private rafId: number | null = null;
   private readonly handleScrollBound: () => void;
 
-  constructor(private themeService: ThemeService, private claudinary: ClaudinaryService) {
+  constructor(
+    private themeService: ThemeService,
+    private claudinary: ClaudinaryService,
+    private personPortal: PersonPortalService
+  ) {
     this.logo1 = this.claudinary.getOptimizedImage('logoms_prnuap');
     this.handleScrollBound = this.handleScroll.bind(this);
     this.currentTheme = this.themeService.currentTheme;
@@ -45,6 +51,10 @@ export class Appbar {
     window.addEventListener('scroll', this.handleScrollBound);
     this.refreshLiveStatus();
     this.liveTimerId = setInterval(() => this.refreshLiveStatus(), 30_000);
+    this.personPortal.portal$.subscribe((portal) => {
+      this.portalEnabled.set(!!portal?.enabled);
+    });
+    this.personPortal.loadPortal().subscribe();
   }
 
   ngOnDestroy() {
@@ -155,6 +165,6 @@ export class Appbar {
   }
 
   private refreshLiveStatus() {
-    this.isWorshipLive = getLiveStatus().isLive;
+    this.isWorshipLive.set(isBroadcastLive());
   }
 }

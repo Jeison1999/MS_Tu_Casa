@@ -167,9 +167,20 @@
         (click)="closeAll()"
       >
         <span class="nav-label">
-          <span class="live-dot" [class.on-air]="isWorshipLive" aria-hidden="true"></span>
+          <span class="live-dot" [class.on-air]="isWorshipLive()" aria-hidden="true"></span>
           En vivo
         </span>
+        <div class="nav-indicator"></div>
+      </a>
+
+      <a
+        routerLink="/datos"
+        class="nav-item"
+        routerLinkActive="active"
+        (click)="closeAll()"
+        *ngIf="portalEnabled()"
+      >
+        <span class="nav-label">Mis datos</span>
         <div class="nav-indicator"></div>
       </a>
 
@@ -259,8 +270,17 @@
       routerLinkActive="active"
       (click)="closeAll()"
     >
-      <span class="live-dot" [class.on-air]="isWorshipLive" aria-hidden="true"></span>
+      <span class="live-dot" [class.on-air]="isWorshipLive()" aria-hidden="true"></span>
       En vivo
+    </a>
+    <a
+      routerLink="/datos"
+      class="mobile-link"
+      routerLinkActive="active"
+      (click)="closeAll()"
+      *ngIf="portalEnabled()"
+    >
+      Mis datos
     </a>
     <a
       routerLink="/eventos"

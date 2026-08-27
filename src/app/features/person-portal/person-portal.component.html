@@ -1,0 +1,178 @@
+<div class="portal-container">
+  <section class="portal-hero">
+    <p class="portal-kicker">Morando en Sion</p>
+    <h1 class="portal-title">
+      <span class="title-line">Portal de personas</span>
+      <span class="title-main">{{ title() }}</span>
+    </h1>
+    <p class="portal-subtitle">{{ description() }}</p>
+  </section>
+
+  <section class="portal-card loading-card" *ngIf="view() === 'loading'" aria-busy="true">
+    <div class="portal-spinner" role="status" aria-live="polite">
+      <span class="spinner spinner-lg"></span>
+      <p>Cargando formulario...</p>
+    </div>
+  </section>
+
+  <section class="portal-card" *ngIf="view() === 'unavailable'">
+    <h2>Sección no disponible</h2>
+    <p class="muted">
+      Este formulario se abre cuando la iglesia lo activa. Vuelve más tarde o escríbenos por Contacto.
+    </p>
+    <a routerLink="/contacto" class="text-link">Ir a contacto</a>
+  </section>
+
+  <section class="portal-card" *ngIf="view() === 'choice'">
+    <h2>¿Cómo quieres continuar?</h2>
+    <p class="muted">
+      Elige un camino. No hay un listado público de personas: si ya estás en la iglesia, te identificas
+      con tus datos. Toda solicitud queda pendiente hasta que un consolidador la apruebe.
+    </p>
+    <div class="choice-grid">
+      <button type="button" class="choice-card" *ngIf="allowRegister()" (click)="startRegister()">
+        <span class="choice-kicker">Camino 1</span>
+        <strong>Soy nuevo</strong>
+        <span>Aún no estoy en el registro de la iglesia. Quiero darme de alta.</span>
+      </button>
+      <button type="button" class="choice-card" *ngIf="allowUpdate()" (click)="startClaim()">
+        <span class="choice-kicker">Camino 2</span>
+        <strong>Ya estoy registrado</strong>
+        <span>La iglesia ya tiene mis datos. Quiero actualizarlos.</span>
+      </button>
+    </div>
+    <p class="muted" *ngIf="!allowRegister() && !allowUpdate()">
+      El portal está visible, pero los formularios no están habilitados en este momento.
+    </p>
+  </section>
+
+  <section class="portal-card" *ngIf="view() === 'register'">
+    <button type="button" class="back-btn" (click)="backToChoice()">← Volver</button>
+    <h2>Registro</h2>
+    <p class="muted">Completa tus datos. La solicitud queda pendiente de aprobación; todavía no se crea tu ficha.</p>
+    <div class="toast" *ngIf="toastMessage()" role="status">{{ toastMessage() }}</div>
+    <p class="form-error" *ngIf="errorMessage()">{{ errorMessage() }}</p>
+    <div class="busy-wrap" [attr.aria-busy]="submitting()">
+      <div class="busy-overlay" *ngIf="submitting()" role="status" aria-live="polite">
+        <span class="spinner"></span>
+        <span>Enviando registro...</span>
+      </div>
+      <app-person-dynamic-form
+        [coreFields]="coreFields()"
+        [customFields]="customFields()"
+        [initialPerson]="initialPerson()"
+        [initialCustomValues]="initialCustomValues()"
+        [serverDetails]="serverDetails()"
+        [submitting]="submitting()"
+        submitLabel="Enviar registro"
+        (submitted)="submitCreate($event)"
+      ></app-person-dynamic-form>
+    </div>
+  </section>
+
+  <section class="portal-card" *ngIf="view() === 'claim'" [class.is-busy]="submitting()" [attr.aria-busy]="submitting()">
+    <button type="button" class="back-btn" (click)="backToChoice()">← Volver</button>
+    <h2>Identifícate</h2>
+    <p class="muted">
+      Usa tu documento y fecha de nacimiento, o el código que te dio la iglesia.
+      Solo si hay coincidencia exacta podrás actualizar.
+    </p>
+
+    <div class="claim-tabs">
+      <button type="button" [class.active]="claimMode() === 'document'" (click)="setClaimMode('document')">
+        Documento
+      </button>
+      <button type="button" [class.active]="claimMode() === 'code'" (click)="setClaimMode('code')">
+        Código
+      </button>
+    </div>
+
+    <form class="claim-form" [formGroup]="claimForm" (ngSubmit)="identify()" novalidate>
+      <div class="fields-grid" *ngIf="claimMode() === 'document'">
+        <label class="field" [class.field-invalid]="!!claimFieldError('document_type')">
+          <span>Tipo de documento</span>
+          <select formControlName="document_type">
+            <option *ngFor="let option of documentTypes" [value]="option.value">{{ option.label }}</option>
+          </select>
+          <small class="field-error" *ngIf="claimFieldError('document_type')">{{ claimFieldError('document_type') }}</small>
+        </label>
+        <label class="field" [class.field-invalid]="!!claimFieldError('document_number')">
+          <span>Número de documento</span>
+          <input
+            type="text"
+            formControlName="document_number"
+            autocomplete="off"
+            [attr.inputmode]="claimForm.get('document_type')?.value === 'PA' ? 'text' : 'numeric'"
+          />
+          <small class="field-error" *ngIf="claimFieldError('document_number')">{{ claimFieldError('document_number') }}</small>
+        </label>
+        <label class="field" [class.field-invalid]="!!claimFieldError('birth_date')">
+          <span>Fecha de nacimiento</span>
+          <input type="date" formControlName="birth_date" />
+          <small class="field-error" *ngIf="claimFieldError('birth_date')">{{ claimFieldError('birth_date') }}</small>
+        </label>
+      </div>
+
+      <label class="field" *ngIf="claimMode() === 'code'" [class.field-invalid]="!!claimFieldError('code')">
+        <span>Código</span>
+        <input type="text" formControlName="code" autocomplete="off" />
+        <small class="field-error" *ngIf="claimFieldError('code')">{{ claimFieldError('code') }}</small>
+      </label>
+
+      <div class="claim-empty" *ngIf="claimNotFound()">
+        <p>
+          No se encontró un registro con esos datos. Revisa el documento y la fecha
+          (o el código). Si eres nuevo en la iglesia, regístrate.
+        </p>
+        <button type="button" class="submit-btn" *ngIf="allowRegister()" (click)="startRegister()">
+          Registrarme como nuevo
+        </button>
+      </div>
+
+      <div class="toast" *ngIf="toastMessage()" role="status">{{ toastMessage() }}</div>
+      <p class="form-error" *ngIf="errorMessage()">{{ errorMessage() }}</p>
+      <button class="submit-btn" type="submit" [disabled]="submitting()">
+        <span class="spinner spinner-sm" *ngIf="submitting()"></span>
+        {{ submitting() ? 'Buscando...' : 'Continuar' }}
+      </button>
+    </form>
+    <div class="busy-overlay" *ngIf="submitting()" role="status" aria-live="polite">
+      <span class="spinner"></span>
+      <span>Buscando tu registro...</span>
+    </div>
+  </section>
+
+  <section class="portal-card" *ngIf="view() === 'update'">
+    <button type="button" class="back-btn" (click)="startClaim()">← Volver a identificarme</button>
+    <h2>Actualizar mis datos</h2>
+    <p class="muted">Revisa la información y envía los cambios. Un consolidador los aprobará; aún no se aplican a tu ficha.</p>
+    <div class="toast" *ngIf="toastMessage()" role="status">{{ toastMessage() }}</div>
+    <p class="form-error" *ngIf="errorMessage()">{{ errorMessage() }}</p>
+    <div class="busy-wrap" [attr.aria-busy]="submitting()">
+      <div class="busy-overlay" *ngIf="submitting()" role="status" aria-live="polite">
+        <span class="spinner"></span>
+        <span>Enviando actualización...</span>
+      </div>
+      <app-person-dynamic-form
+        [coreFields]="coreFields()"
+        [customFields]="customFields()"
+        [initialPerson]="initialPerson()"
+        [initialCustomValues]="initialCustomValues()"
+        [serverDetails]="serverDetails()"
+        [submitting]="submitting()"
+        submitLabel="Enviar actualización"
+        (submitted)="submitUpdate($event)"
+      ></app-person-dynamic-form>
+    </div>
+  </section>
+
+  <section class="portal-card success-card" *ngIf="view() === 'success'">
+    <h2>Solicitud pendiente de aprobación</h2>
+    <p>
+      Recibimos tu {{ successKind() === 'update' ? 'actualización' : 'registro' }}.
+      Quedó <strong>pendiente de aprobación</strong>: todavía no se crea ni se cambia tu ficha.
+      El equipo de la iglesia la revisará pronto.
+    </p>
+    <button type="button" class="submit-btn" (click)="backToChoice()">Volver al inicio</button>
+  </section>
+</div>

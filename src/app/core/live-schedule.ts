@@ -1,3 +1,5 @@
+import { environment } from './config/environment';
+
 export interface WorshipService {
   id: string;
   title: string;
@@ -83,6 +85,19 @@ function serviceStartOnWeek(reference: Date, service: WorshipService, weekOffset
   start.setDate(start.getDate() + delta);
   start.setHours(service.hour, service.minute, 0, 0);
   return start;
+}
+
+export function extractYoutubeVideoId(raw = environment.youtubeLiveVideoId ?? ''): string {
+  const value = raw.trim();
+  if (!value) return '';
+  if (/^[a-zA-Z0-9_-]{11}$/.test(value)) return value;
+  const match = value.match(/(?:youtu\.be\/|v=|embed\/)([a-zA-Z0-9_-]{11})/);
+  return match?.[1] ?? '';
+}
+
+/** Horario de culto o un live de YouTube configurado. */
+export function isBroadcastLive(now = new Date()): boolean {
+  return getLiveStatus(now).isLive || !!extractYoutubeVideoId();
 }
 
 export function getLiveStatus(now = new Date()): LiveStatus {

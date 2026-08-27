@@ -56,4 +56,14 @@ export class ApiConfigService {
     // Solo anuncios activos y publicados listos para mostrar
     active: () => this.getApiUrl('content/announcements/active')
   };
+
+  /**
+   * Portal público de personas (sin JWT).
+   * Angular nunca usa /person_portal ni /person_registrations admin.
+   */
+  personPortal = {
+    schema: () => this.getApiUrl('public/person_portal'),
+    claim: () => this.getApiUrl('public/people/claim'),
+    registrations: () => this.getApiUrl('public/registrations'),
+  };
 }

@@ -1,7 +1,6 @@
 import { Component, signal, OnInit, OnDestroy } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { Appbar } from './shared/appbar/appbar';
 import { Footer } from './shared/footer/footer';
 import { SplashScreenComponent } from './shared/animations/splash-screen/splash-screen';
@@ -16,7 +15,6 @@ import { filter } from 'rxjs/operators';
   selector: 'app-root',
   imports: [
     CommonModule,
-    HttpClientModule,
     RouterOutlet,
     Appbar,
     Footer,

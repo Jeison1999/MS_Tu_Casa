@@ -98,7 +98,10 @@
 .player-frame {
   position: relative;
   width: 100%;
-  padding-top: 56.25%;
+  max-width: min(100%, 960px, calc((100dvh - 13rem) * 16 / 9));
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  height: auto;
   background: #111;
   border-radius: 16px;
   overflow: hidden;
@@ -250,5 +253,34 @@
 
   .schedule-grid {
     grid-template-columns: 1fr;
+  }
+
+  .player-frame {
+    max-width: 100%;
+  }
+}
+
+@media (max-height: 820px) {
+  .live-container {
+    padding: 88px 16px 40px;
+  }
+
+  .live-hero {
+    padding: 20px 20px 16px;
+    margin-bottom: 16px;
+  }
+
+  .title-main {
+    font-size: 1.65rem;
+  }
+
+  .live-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+
+  .player-card {
+    padding: 14px;
+    margin-bottom: 16px;
   }
 }
